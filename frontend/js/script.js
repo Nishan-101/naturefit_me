@@ -6,7 +6,7 @@
 // Set this to your deployed backend API base URL (Render), e.g. "https://naturefit-api.onrender.com"
 // Left as "" it will call a relative "/api" path (useful if frontend and backend share a domain).
 const API_BASE_URL = window.NATURE_FIT_API_URL || "https://naturefit-me.onrender.com";
-
+// const API_BASE_URL = window.NATURE_FIT_API_URL || "https://naturefit-api.onrender.com";
 document.addEventListener("DOMContentLoaded", () => {
   initTheme();
   initHeader();
