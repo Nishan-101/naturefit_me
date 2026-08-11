@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nature Fit Restaurant | Eat Healthy, Live Better — Al Safa, Dubai</title>
+<meta name="description" content="Nature Fit Restaurant in Al Safa Complex, Dubai serves fresh, healthy, nutritious meals prepared daily. Order online via Talabat, Careem Food, Noon Food or Keeta.">
+<script>
+  (function () {
+    var stored = localStorage.getItem("nature-fit-theme");
+    var prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    document.documentElement.setAttribute("data-theme", stored || (prefersDark ? "dark" : "light"));
+  })();
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<!-- ===== HEADER / NAV ===== -->
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="#home" class="brand">
+      <img src="images/logo.png" alt="Nature Fit Restaurant logo" class="brand-logo">
+    </a>
+
+    <nav class="main-nav" id="mainNav">
+      <a href="#about">About</a>
+      <a href="#why-us">Why Us</a>
+      <a href="#menu">Menu</a>
+       <a href="#meal-plans">Meal Plans</a>
+      <a href="#order">Order Online</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#faq">FAQs</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="#order" class="btn btn-primary btn-small">Order Now</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <i class="fa-solid fa-moon icon-moon"></i>
+        <i class="fa-solid fa-sun icon-sun"></i>
+      </button>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <div class="container hero-grid">
+
+    <div class="hero-copy">
+      <p class="eyebrow reveal">Al Safa Complex, Dubai · Fresh Daily</p>
+      <h1 class="reveal">Eat Healthy,<br><span>Live Better</span></h1>
+      <p class="hero-sub reveal">Nature Fit Restaurant prepares fresh, wholesome, nutrient-packed meals every single day — real food, made to fuel your lifestyle, not slow it down.</p>
+      <div class="hero-cta reveal">
+        <a href="#order" class="btn btn-primary">Order Online</a>
+        <a href="#menu" class="btn btn-outline">Explore the Menu</a>
+      </div>
+      <div class="hero-stats reveal">
+        <div><strong>100%</strong><span>Fresh, made daily</span></div>
+        <div><strong>4.8/5</strong><span>Customer rating</span></div>
+        <div><strong>4</strong><span>Delivery platforms</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="hero-blob" aria-hidden="true"></div>
+      <div class="hero-image-wrap">
+        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1000&q=80" alt="Fresh healthy grain bowl with avocado, greens and roasted vegetables" loading="eager">
+        <div class="hero-badge hero-badge-top">
+          <i class="fa-solid fa-leaf"></i>
+          <div><strong>100% Fresh</strong><span>Prepared daily</span></div>
+        </div>
+        <div class="hero-badge hero-badge-bottom">
+          <i class="fa-solid fa-star"></i>
+          <div><strong>4.8 / 5</strong><span>Customer rating</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <a href="#about" class="scroll-cue" aria-label="Scroll to About section">
+    <span></span>
+  </a>
+</section>
+
+<!-- signature leaf divider -->
+<div class="leaf-divider" aria-hidden="true"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C150,60 300,0 450,30 C600,60 750,0 900,30 C1050,60 1150,10 1200,30 L1200,60 L0,60 Z"></path></svg></div>
+
+<!-- ===== ABOUT ===== -->
+<section class="section about" id="about">
+  <div class="container about-grid">
+    <div class="about-media reveal">
+      <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=900&q=80" alt="Chef preparing a fresh healthy salad in the kitchen">
+      <div class="badge-float">
+        <i class="fa-solid fa-leaf"></i>
+        <div><strong>Prepared Daily</strong><span>Never frozen, never reheated</span></div>
+      </div>
+    </div>
+    <div class="about-copy reveal">
+      <p class="eyebrow">About Nature Fit</p>
+      <h2>Real food, cooked with purpose — every single day</h2>
+      <p>Tucked inside Al Safa Complex, Nature Fit Restaurant was built around a simple idea: healthy food should taste incredible and fit real life. Every dish on our menu is <strong>freshly prepared each morning</strong> using clean, whole ingredients — lean proteins, seasonal vegetables, ancient grains, and heart-healthy fats — with nothing artificial hiding in the mix.</p>
+      <p>Whether you're training for a goal, managing your nutrition, or simply choosing to eat better, our kitchen is designed to support a genuinely healthy lifestyle without compromising on flavour.</p>
+      <ul class="check-list">
+        <li><i class="fa-solid fa-circle-check"></i> Fresh, nutritious meals made from scratch daily</li>
+        <li><i class="fa-solid fa-circle-check"></i> Balanced macros — protein, fibre and good fats in every plate</li>
+        <li><i class="fa-solid fa-circle-check"></i> No preservatives, no shortcuts</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== WHY CHOOSE US ===== -->
+<section class="section why-us alt-bg" id="why-us">
+  <div class="container">
+    <p class="eyebrow center reveal">Why Choose Us</p>
+    <h2 class="center reveal">Healthy eating, made effortless</h2>
+    <p class="section-sub center reveal">Everything about Nature Fit is built to make the healthy choice the easy choice.</p>
+
+    <div class="feature-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fa-solid fa-seedling"></i></div>
+        <h3>Fresh Ingredients Daily</h3>
+        <p>We source and prep produce every morning so every bite is at its peak — nothing sits in storage.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+        <h3>Nutrition-First Menu</h3>
+        <p>Every dish is portioned and balanced to support real health goals, not just calorie counts.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+        <h3>Fast, Reliable Delivery</h3>
+        <p>Order through Talabat, Careem, Noon Food or Keeta and get it fresh, fast, and hot.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fa-solid fa-award"></i></div>
+        <h3>Trusted in Al Safa</h3>
+        <p>A neighbourhood favourite for locals and fitness communities across Dubai.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fa-solid fa-wheat-awn-circle-exclamation"></i></div>
+        <h3>Dietary Options</h3>
+        <p>High-protein, low-carb, vegan and gluten-conscious choices clearly marked on every menu item.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fa-solid fa-hand-holding-heart"></i></div>
+        <h3>Made With Care</h3>
+        <p>Small-batch cooking by a team that genuinely believes in food as fuel for a better life.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="leaf-divider flip" aria-hidden="true"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C150,60 300,0 450,30 C600,60 750,0 900,30 C1050,60 1150,10 1200,30 L1200,60 L0,60 Z"></path></svg></div>
+
+<!-- ===== MENU ===== -->
+<section class="section menu" id="menu">
+  <div class="container">
+    <p class="eyebrow center reveal">Healthy Food Menu</p>
+    <h2 class="center reveal">Fresh, nutritious meals — prepared daily</h2>
+    <p class="section-sub center reveal">A snapshot of our most-loved dishes. Full menu available for order through our delivery partners.</p>
+
+    <div class="menu-tabs reveal" role="tablist">
+      <button class="tab-btn active" data-tab="bowls">Bowls</button>
+      <button class="tab-btn" data-tab="salads">Salads</button>
+      <button class="tab-btn" data-tab="protein">Protein Plates</button>
+      <button class="tab-btn" data-tab="drinks">Juices & Smoothies</button>
+    </div>
+
+    <div class="menu-grid" id="menuGrid">
+      <!-- Bowls -->
+      <article class="menu-card" data-cat="bowls">
+        <div class="menu-card-media">
+          <img src="./images/RAF02846.jpg" alt="Quinoa power bowl with vegetables and avocado">
+          <span class="tag">320 kcal · High Protein</span>
+        </div>
+        <div class="menu-card-body">
+          <h3>Quinoa Power Bowl</h3>
+          <p>Quinoa, grilled chicken, avocado, roasted veg, tahini drizzle.</p>
+          <span class="price">AED 39</span>
+        </div>
+      </article>
+      <article class="menu-card" data-cat="bowls">
+        <div class="menu-card-media">
+          <img src="./images/RAF02764.jpg" alt="Quinoa power bowl with vegetables and avocado">
+          <span class="tag">320 kcal · High Protein</span>
+        </div>
+        <div class="menu-card-body">
+          <h3>Quinoa Power Bowl</h3>
+          <p>Quinoa, grilled chicken, avocado, roasted veg, tahini drizzle.</p>
+          <span class="price">AED 39</span>
+        </div>
+      </article>
+      <article class="menu-card" data-cat="bowls">
+        <div class="menu-card-media">
+          <img src="./images/RAF02807.jpg" alt="Quinoa power bowl with vegetables and avocado">
+          <span class="tag">320 kcal · High Protein</span>
+        </div>
+        <div class="menu-card-body">
+          <h3>Quinoa Power Bowl</h3>
+          <p>Quinoa, grilled chicken, avocado, roasted veg, tahini drizzle.</p>
+          <span class="price">AED 39</span>
+        </div>
+      </article>
+      <article class="menu-card" data-cat="bowls">
+        <div class="menu-card-media">
+          <img src="../images/RAF02807.jpg" alt="Quinoa power bowl with vegetables and avocado">
+          <span class="tag">320 kcal · High Protein</span>
+        </div>
+        <div class="menu-card-body">
+          <h3>Quinoa Power Bowl</h3>
+          <p>Quinoa, grilled chicken, avocado, roasted veg, tahini drizzle.</p>
+          <span class="price">AED 39</span>
+        </div>
+      </article>
+      <article class="menu-card" data-cat="bowls">
+        <div class="menu-card-media">
+          <img src="./images/RAF02807.jpg" alt="Salmon rice bowl with vegetables">
+          <span class="tag">410 kcal · Omega-3</span>
+        </div>
+        <div class="menu-card-body">
+          <h3>Salmon & Brown Rice Bowl</h3>
+          <p>Grilled salmon, brown rice, edamame, cucumber, sesame dressing.</p>
+          <span class="price">AED 48</span>
+        </div>
+        
+      </article>
+
+      <!-- Salads -->
+      <article class="menu-card" data-cat="salads">
+        <div class="menu-card-media">
+          <img src="./images/RAF02853.jpg" alt="Fresh green salad bowl">
+          <span class="tag">210 kcal · Vegan</span>
+        </div>
+        <div class="menu-card-body">
+          <h3>Garden Greens Salad</h3>
+          <p>Baby spinach, kale, cherry tomato, cucumber, citrus vinaigrette.</p>
+          <span class="price">AED 29</span>
+        </div>
+      </article>
+      <article class="menu-card" data-cat="salads">
+        <div class="menu-card-media">
+          <img src="./images/RAF02853.jpg" alt="Chickpea and vegetable salad">
+          <span class="tag">260 kcal · Fibre Rich</span>
+        </div>
+        <div class="menu-card-body">
+          <h3>Mediterranean Chickpea Salad</h3>
+          <p>Chickpeas, feta, olives, peppers, oregano lemon dressing.</p>
+          <span class="price">AED 32</span>
+        </div>
+      </article>
+       <article class="menu-card" data-cat="salads">
+        <div class="menu-card-media">
+          <img src="./images/RAF02853.jpg" alt="Chickpea and vegetable salad">
+          <span class="tag">260 kcal · Fibre Rich</span>
+        </div>
+        <div class="menu-card-body">
+          <h3>Mediterranean Chickpea Salad</h3>
+          <p>Chickpeas, feta, olives, peppers, oregano lemon dressing.</p>
+          <span class="price">AED 32</span>
+        </div>
+      </article>
+       <article class="menu-card" data-cat="salads">
+        <div class="menu-card-media">
+          <img src="./images/RAF02853.jpg" alt="Chickpea and vegetable salad">
+          <span class="tag">260 kcal · Fibre Rich</span>
+        </div>
+        <div class="menu-card-body">
+          <h3>Mediterranean Chickpea Salad</h3>
+          <p>Chickpeas, feta, olives, peppers, oregano lemon dressing.</p>
+          <span class="price">AED 32</span>
+        </div>
+      </article>
+
+      <!-- Protein -->
+      <article class="menu-card" data-cat="protein">
+        <div class="menu-card-media">
+          <img src="https://images.unsplash.com/photo-1532550907401-a500c9a57435?auto=format&fit=crop&w=700&q=80" alt="Grilled chicken breast with vegetables">
+          <span class="tag">450 kcal · High Protein</span>
+        </div>
+        <div class="menu-card-body">
+          <h3>Grilled Chicken & Greens</h3>
+          <p>Herb-marinated chicken breast, steamed broccoli, sweet potato mash.</p>
+          <span class="price">AED 42</span>
+        </div>
+      </article>
+      <article class="menu-card" data-cat="protein">
+        <div class="menu-card-media">
+          <img src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=700&q=80" alt="Lean beef steak plate with vegetables">
+          <span class="tag">470 kcal · Iron Rich</span>
+        </div>
+        <div class="menu-card-body">
+          <h3>Lean Steak Plate</h3>
+          <p>Grass-fed sirloin, grilled asparagus, roasted baby potatoes.</p>
+          <span class="price">AED 55</span>
+        </div>
+      </article>
+
+      <!-- Drinks -->
+      <article class="menu-card" data-cat="drinks">
+        <div class="menu-card-media">
+          <img src="https://images.unsplash.com/photo-1610970881699-44a5587cabec?auto=format&fit=crop&w=700&q=80" alt="Fresh green detox juice">
+          <span class="tag">90 kcal · Detox</span>
+        </div>
+        <div class="menu-card-body">
+          <h3>Green Detox Juice</h3>
+          <p>Kale, apple, cucumber, ginger, lemon — cold-pressed daily.</p>
+          <span class="price">AED 22</span>
+        </div>
+      </article>
+      <article class="menu-card" data-cat="drinks">
+        <div class="menu-card-media">
+          <img src="https://images.unsplash.com/photo-1568909344668-6f14a07b56a0?auto=format&fit=crop&w=700&q=80" alt="Berry protein smoothie">
+          <span class="tag">180 kcal · Protein Boost</span>
+        </div>
+        <div class="menu-card-body">
+          <h3>Berry Protein Smoothie</h3>
+          <p>Mixed berries, banana, oats, whey protein, almond milk.</p>
+          <span class="price">AED 26</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ORDER ONLINE ===== -->
+<section class="section order" id="order">
+  <div class="container">
+    <p class="eyebrow center reveal">Order Online</p>
+    <h2 class="center reveal">Craving Nature Fit? Get it delivered</h2>
+    <p class="section-sub center reveal">Order your favourite healthy meals through your preferred delivery platform — fast, fresh and straight to your door in Dubai.</p>
+
+    <div class="order-grid">
+      <a href="https://www.talabat.com" target="_blank" rel="noopener noreferrer" class="order-card reveal" style="--brand:#FF5A00">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span>Talabat</span>
+        <small>Order now <i class="fa-solid fa-arrow-right-long"></i></small>
+      </a>
+      <a href="https://www.careem.com/en-ae/careem-food/" target="_blank" rel="noopener noreferrer" class="order-card reveal" style="--brand:#3AC582">
+        <i class="fa-solid fa-motorcycle"></i>
+        <span>Careem Food</span>
+        <small>Order now <i class="fa-solid fa-arrow-right-long"></i></small>
+      </a>
+      <a href="https://food.noon.com" target="_blank" rel="noopener noreferrer" class="order-card reveal" style="--brand:#FEC201">
+        <i class="fa-solid fa-utensils"></i>
+        <span>Noon Food</span>
+        <small>Order now <i class="fa-solid fa-arrow-right-long"></i></small>
+      </a>
+      <a href="https://www.keeta.com" target="_blank" rel="noopener noreferrer" class="order-card reveal" style="--brand:#1B4332">
+        <i class="fa-solid fa-basket-shopping"></i>
+        <span>Keeta</span>
+        <small>Order now <i class="fa-solid fa-arrow-right-long"></i></small>
+      </a>
+    </div>
+    <p class="order-note reveal">Prefer to visit us? Nature Fit Restaurant is located inside Al Safa Complex, Dubai — dine in or pick up any day of the week.</p>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section class="section gallery alt-bg" id="gallery">
+  <div class="container">
+    <p class="eyebrow center reveal">Gallery</p>
+    <h2 class="center reveal">A taste of what's cooking</h2>
+    <div class="gallery-grid">
+      <img class="reveal" src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&fit=crop&w=600&q=80" alt="Colourful fresh salad bowl">
+      <img class="reveal" src="https://images.unsplash.com/photo-1543352634-a1c51d9f1fa7?auto=format&fit=crop&w=600&q=80" alt="Healthy breakfast spread">
+      <img class="reveal" src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=600&q=80" alt="Fresh fruit and smoothie bowl">
+      <img class="reveal" src="https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=600&q=80" alt="Grilled protein plate with vegetables">
+      <img class="reveal" src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80" alt="Fresh grain bowl close up">
+      <img class="reveal" src="https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?auto=format&fit=crop&w=600&q=80" alt="Fresh vegetables on a table">
+    </div>
+  </div>
+</section>
+
+
+<!-- ===== REVIEWS ===== -->
+<section class="section reviews" id="reviews">
+  <div class="container">
+    <p class="eyebrow center reveal">Customer Reviews</p>
+    <h2 class="center reveal">Loved by the Al Safa community</h2>
+
+    <div class="reviews-grid">
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>"Finally a healthy spot near Al Safa that actually tastes amazing. The quinoa bowl is now part of my weekly routine."</p>
+        <div class="reviewer"><strong>Sara M.</strong><span>Dubai</span></div>
+      </div>
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>"I order through Talabat almost every day after the gym. Fresh, filling, and never greasy."</p>
+        <div class="reviewer"><strong>Omar K.</strong><span>Al Safa</span></div>
+      </div>
+      <div class="review-card reveal">
+        <div class="stars">★★★★★</div>
+        <p>"Portion sizes are perfect for my macros and everything genuinely tastes fresh, not like typical diet food."</p>
+        <div class="reviewer"><strong>Priya R.</strong><span>Jumeirah</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="leaf-divider" aria-hidden="true"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C150,60 300,0 450,30 C600,60 750,0 900,30 C1050,60 1150,10 1200,30 L1200,60 L0,60 Z"></path></svg></div>
+
+<!-- ===== FAQ ===== -->
+<section class="section faq alt-bg" id="faq">
+  <div class="container faq-wrap">
+    <div class="faq-intro reveal">
+      <p class="eyebrow">FAQs</p>
+      <h2>Good to know</h2>
+      <p>Answers to the questions we hear most from our Al Safa community.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Is the food actually prepared fresh every day?</span><i class="fa-solid fa-plus"></i></button>
+        <div class="faq-a"><p>Yes — every dish at Nature Fit is prepared fresh daily using clean, whole ingredients. Nothing is frozen or pre-cooked days in advance.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Which delivery platforms can I use to order?</span><i class="fa-solid fa-plus"></i></button>
+        <div class="faq-a"><p>You can order Nature Fit meals through Talabat, Careem Food, Noon Food or Keeta — links are available in our Order Online section above.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Do you offer vegan or low-carb options?</span><i class="fa-solid fa-plus"></i></button>
+        <div class="faq-a"><p>Yes, our menu includes clearly marked vegan, high-protein and low-carb dishes to fit different dietary goals.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Where exactly is Nature Fit Restaurant located?</span><i class="fa-solid fa-plus"></i></button>
+        <div class="faq-a"><p>We're located inside Al Safa Complex, Dubai. Full directions and contact details are in the Contact section below.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Can I place a bulk or catering order?</span><i class="fa-solid fa-plus"></i></button>
+        <div class="faq-a"><p>Absolutely — reach out via our contact form or call us directly and our team will help set up catering for your event or office.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ===== MEAL PACKAGES ===== -->
+<section class="section meal-plans alt-bg" id="meal-plans">
+  <div class="container">
+    <p class="eyebrow center reveal">One-Month Meal Packages</p>
+    <h2 class="center reveal">Choose your goal. We will customize the plan.</h2>
+    <p class="section-sub center reveal">Fresh meals prepared for your body, lifestyle and goals, with delivery across Dubai. Packages start from AED 1,250.</p>
+
+    <div class="plan-grid">
+      <article class="plan-card plan-green reveal">
+        <div class="plan-icon"><i class="fa-solid fa-weight-scale"></i></div>
+        <h3>Weight Loss</h3>
+        <p>Balanced portions designed to support healthy, sustainable weight management.</p>
+        <ul>
+          <li><i class="fa-solid fa-check"></i> Calorie-conscious choices</li>
+          <li><i class="fa-solid fa-check"></i> High-protein options</li>
+          <li><i class="fa-solid fa-check"></i> Custom preferences</li>
+        </ul>
+        <a class="btn btn-primary plan-whatsapp" data-plan="Weight Loss" href="https://api.whatsapp.com/message/25ZQDLF7Z3IGB1?autoload=1&app_absent=0">Ask on WhatsApp</a>
+      </article>
+
+      <article class="plan-card plan-orange reveal">
+        <div class="plan-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+        <h3>Balance</h3>
+        <p>A practical everyday plan for steady energy, nourishment and convenience.</p>
+        <ul>
+          <li><i class="fa-solid fa-check"></i> Balanced nutrition</li>
+          <li><i class="fa-solid fa-check"></i> Fresh daily preparation</li>
+          <li><i class="fa-solid fa-check"></i> Flexible preferences</li>
+        </ul>
+        <a class="btn btn-primary plan-whatsapp" data-plan="Balance" href="https://api.whatsapp.com/message/25ZQDLF7Z3IGB1?autoload=1&app_absent=0">Ask on WhatsApp</a>
+      </article>
+
+      <article class="plan-card plan-blue reveal">
+        <div class="plan-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+        <h3>Healthy Lifestyle</h3>
+        <p>Wholesome meals for people who simply want to eat better every day.</p>
+        <ul>
+          <li><i class="fa-solid fa-check"></i> Whole-food ingredients</li>
+          <li><i class="fa-solid fa-check"></i> Lifestyle-friendly portions</li>
+          <li><i class="fa-solid fa-check"></i> Delivered across Dubai</li>
+        </ul>
+        <a class="btn btn-primary plan-whatsapp" data-plan="Healthy Lifestyle" href="https://api.whatsapp.com/message/25ZQDLF7Z3IGB1?autoload=1&app_absent=0">Ask on WhatsApp</a>
+      </article>
+
+      <article class="plan-card plan-purple reveal">
+        <div class="plan-icon"><i class="fa-solid fa-dumbbell"></i></div>
+        <h3>Muscle Gain</h3>
+        <p>Protein-focused meals made to support active routines and performance goals.</p>
+        <ul>
+          <li><i class="fa-solid fa-check"></i> Protein-rich options</li>
+          <li><i class="fa-solid fa-check"></i> Goal-based portions</li>
+          <li><i class="fa-solid fa-check"></i> Custom meal preferences</li>
+        </ul>
+        <a class="btn btn-primary plan-whatsapp" data-plan="Muscle Gain" href="https://api.whatsapp.com/message/25ZQDLF7Z3IGB1?autoload=1&app_absent=0">Ask on WhatsApp</a>
+      </article>
+    </div>
+
+    <div class="custom-plan-panel reveal">
+      <div>
+        <p class="eyebrow">Personalized for you</p>
+        <h3>Customize your own meal plan</h3>
+        <p>Share your age, height, weight, lifestyle and goal. Our team will help you choose the most suitable option.</p>
+      </div>
+      <a class="btn btn-primary" id="customPlanWhatsApp" href="https://api.whatsapp.com/message/25ZQDLF7Z3IGB1?autoload=1&app_absent=0">Customize on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT ===== -->
+<section class="section contact" id="contact">
+  <div class="container contact-grid">
+    <div class="contact-info reveal">
+      <p class="eyebrow">Contact Us</p>
+      <h2>Let's talk healthy food</h2>
+      <p>Have a question, feedback, or a catering request? Send us a message and our team will get back to you shortly.</p>
+
+      <ul class="contact-details">
+        <li><i class="fa-solid fa-location-dot"></i><span>Nature Fit Restaurant, Al Safa Complex, Dubai, UAE</span></li>
+        <li><i class="fa-solid fa-phone"></i><span>+971 4 123 4567</span></li>
+        <li><i class="fa-solid fa-envelope"></i><span>hello@naturefitrestaurant.com</span></li>
+        <li><i class="fa-solid fa-clock"></i><span>Daily · 8:00 AM – 11:00 PM</span></li>
+      </ul>
+
+      <div class="social-row">
+        <a href="https://www.instagram.com/naturefit.res/" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+        <a href="" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+      </div>
+    </div>
+
+    <form class="contact-form reveal" id="contactForm" novalidate>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fullName">Full Name *</label>
+          <input type="text" id="fullName" name="fullName" placeholder="Your full name" required>
+          <span class="error-msg" id="err-fullName"></span>
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required>
+          <span class="error-msg" id="err-email"></span>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="https://api.whatsapp.com/message/25ZQDLF7Z3IGB1?autoload=1&app_absent=0">Phone Number *</label>
+          <input type="tel" id="phone" name="phone" placeholder="+971 5X XXX XXXX" required>
+          <span class="error-msg" id="err-phone"></span>
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject *</label>
+          <input type="text" id="subject" name="subject" placeholder="What's this about?" required>
+          <span class="error-msg" id="err-subject"></span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="message">Message *</label>
+        <textarea id="message" name="message" rows="5" placeholder="Write your message..." required></textarea>
+        <span class="error-msg" id="err-message"></span>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-full" id="submitBtn">
+        <span class="btn-text">Send Message</span>
+        <span class="btn-spinner" hidden></span>
+      </button>
+      <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+
+<!-- ===== FOOTER ===== -->
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="Nature Fit Restaurant logo" class="brand-logo footer-logo">
+      <p>Fresh, healthy, nutritious meals — prepared daily inside Al Safa Complex, Dubai.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Explore</h4>
+      <a href="#about">About Us</a>
+      <a href="#menu">Menu</a>
+      <a href="#order">Order Online</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-links">
+      <h4>Order On</h4>
+      <a href="https://www.talabat.com" target="_blank" rel="noopener noreferrer">Talabat</a>
+      <a href="https://www.careem.com/en-ae/careem-food/" target="_blank" rel="noopener noreferrer">Careem Food</a>
+      <a href="https://food.noon.com" target="_blank" rel="noopener noreferrer">Noon Food</a>
+      <a href="https://www.keeta.com" target="_blank" rel="noopener noreferrer">Keeta</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">&copy; <span id="year"></span> Nature Fit Restaurant. All rights reserved.</div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<script src="js/script.js"></script>
+</body>
+</html>
