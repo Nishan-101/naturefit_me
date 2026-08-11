@@ -26,6 +26,512 @@
   --container:1200px;
   --transition:0.35s cubic-bezier(.4,0,.2,1);
 }
+/* =========================================
+   MEAL PACKAGES SECTION
+========================================= */
+
+.meal-plans {
+  padding: 90px 20px;
+  background: #f7faf7;
+}
+
+.meal-plans .container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* -----------------------------------------
+   Section Headings
+----------------------------------------- */
+
+.meal-plans .eyebrow {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #2f7d32;
+  margin-bottom: 12px;
+}
+
+.meal-plans .center {
+  text-align: center;
+}
+
+.meal-plans h2 {
+  max-width: 850px;
+  margin: 0 auto 18px;
+  font-size: clamp(32px, 5vw, 50px);
+  line-height: 1.15;
+  font-weight: 800;
+  color: #17351c;
+}
+
+.meal-plans .section-sub {
+  max-width: 760px;
+  margin: 0 auto 50px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: #66706a;
+}
+
+
+/* =========================================
+   PLAN GRID
+========================================= */
+
+.plan-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+
+/* =========================================
+   PLAN CARD
+========================================= */
+
+.plan-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 30px 26px;
+  background: #ffffff;
+  border: 1px solid #e8eee9;
+  border-radius: 22px;
+  overflow: hidden;
+
+  box-shadow:
+    0 8px 25px rgba(20, 50, 25, 0.06);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.plan-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 5px;
+
+  background: var(--plan-color);
+}
+
+.plan-card:hover {
+  transform: translateY(-8px);
+
+  border-color: var(--plan-color);
+
+  box-shadow:
+    0 18px 45px rgba(20, 50, 25, 0.12);
+}
+
+
+/* =========================================
+   PLAN COLORS
+========================================= */
+
+.plan-green {
+  --plan-color: #4caf50;
+  --plan-light: #eaf7eb;
+}
+
+.plan-orange {
+  --plan-color: #f59e0b;
+  --plan-light: #fff5df;
+}
+
+.plan-blue {
+  --plan-color: #2196f3;
+  --plan-light: #e8f4fd;
+}
+
+.plan-purple {
+  --plan-color: #8b5cf6;
+  --plan-light: #f1ebff;
+}
+
+
+/* =========================================
+   PLAN ICON
+========================================= */
+
+.plan-icon {
+  width: 62px;
+  height: 62px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 22px;
+
+  border-radius: 18px;
+
+  background: var(--plan-light);
+  color: var(--plan-color);
+
+  font-size: 25px;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease,
+    color 0.3s ease;
+}
+
+.plan-card:hover .plan-icon {
+  transform: scale(1.08) rotate(-3deg);
+  background: var(--plan-color);
+  color: #ffffff;
+}
+
+
+/* =========================================
+   PLAN TEXT
+========================================= */
+
+.plan-card h3 {
+  margin: 0 0 12px;
+
+  font-size: 24px;
+  line-height: 1.25;
+
+  color: #18351d;
+  font-weight: 800;
+}
+
+.plan-card > p {
+  margin: 0 0 22px;
+
+  font-size: 15px;
+  line-height: 1.7;
+
+  color: #677069;
+}
+
+
+/* =========================================
+   PLAN FEATURES LIST
+========================================= */
+
+.plan-card ul {
+  list-style: none;
+
+  padding: 0;
+  margin: 0 0 28px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+}
+
+.plan-card li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  font-size: 14px;
+  line-height: 1.5;
+
+  color: #35453a;
+}
+
+.plan-card li i {
+  margin-top: 3px;
+
+  color: var(--plan-color);
+
+  font-size: 13px;
+}
+
+
+/* =========================================
+   BUTTON
+========================================= */
+
+.meal-plans .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 48px;
+
+  padding: 13px 20px;
+
+  border: none;
+  border-radius: 12px;
+
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.meal-plans .btn-primary {
+  background: #246b2a;
+  color: #ffffff;
+
+  box-shadow:
+    0 6px 16px rgba(36, 107, 42, 0.2);
+}
+
+.meal-plans .btn-primary:hover {
+  background: #1d5c23;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 10px 22px rgba(36, 107, 42, 0.27);
+}
+
+
+/* Push button to bottom of every card */
+.plan-card .plan-whatsapp {
+  margin-top: auto;
+  width: 100%;
+}
+
+
+/* =========================================
+   CUSTOM MEAL PLAN PANEL
+========================================= */
+
+.custom-plan-panel {
+  position: relative;
+
+  margin-top: 45px;
+
+  padding: 34px 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+
+  border-radius: 24px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #153d1b 0%,
+      #246b2a 50%,
+      #2e8535 100%
+    );
+
+  overflow: hidden;
+
+  box-shadow:
+    0 18px 45px rgba(20, 75, 28, 0.2);
+}
+
+.custom-plan-panel::before {
+  content: "";
+
+  position: absolute;
+
+  width: 260px;
+  height: 260px;
+
+  right: -100px;
+  top: -120px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.06);
+}
+
+.custom-plan-panel::after {
+  content: "";
+
+  position: absolute;
+
+  width: 180px;
+  height: 180px;
+
+  right: 120px;
+  bottom: -130px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(255, 255, 255, 0.04);
+}
+
+.custom-plan-panel > * {
+  position: relative;
+  z-index: 2;
+}
+
+.custom-plan-panel .eyebrow {
+  margin-bottom: 8px;
+
+  color: #bde8c0;
+}
+
+.custom-plan-panel h3 {
+  margin: 0 0 10px;
+
+  font-size: 30px;
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.custom-plan-panel p {
+  max-width: 700px;
+
+  margin: 0;
+
+  font-size: 15px;
+  line-height: 1.7;
+
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.custom-plan-panel .btn-primary {
+  flex-shrink: 0;
+
+  min-width: 210px;
+
+  background: #ffffff;
+  color: #1f6425;
+
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, 0.14);
+}
+
+.custom-plan-panel .btn-primary:hover {
+  background: #f2f8f2;
+  color: #174e1c;
+}
+
+
+/* =========================================
+   REVEAL ANIMATION
+========================================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+/* =========================================
+   TABLET RESPONSIVE
+========================================= */
+
+@media (max-width: 1050px) {
+
+  .plan-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+/* =========================================
+   MOBILE RESPONSIVE
+========================================= */
+
+@media (max-width: 700px) {
+
+  .meal-plans {
+    padding: 65px 16px;
+  }
+
+  .meal-plans h2 {
+    font-size: 34px;
+  }
+
+  .meal-plans .section-sub {
+    font-size: 15px;
+    margin-bottom: 35px;
+  }
+
+  .plan-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .plan-card {
+    padding: 25px 22px;
+    border-radius: 18px;
+  }
+
+  .plan-card h3 {
+    font-size: 22px;
+  }
+
+  .custom-plan-panel {
+    padding: 28px 24px;
+
+    flex-direction: column;
+    align-items: flex-start;
+
+    border-radius: 20px;
+  }
+
+  .custom-plan-panel h3 {
+    font-size: 26px;
+  }
+
+  .custom-plan-panel .btn-primary {
+    width: 100%;
+    min-width: unset;
+  }
+
+}
+
+
+/* =========================================
+   VERY SMALL MOBILE
+========================================= */
+
+@media (max-width: 420px) {
+
+  .meal-plans {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .meal-plans h2 {
+    font-size: 30px;
+  }
+
+  .plan-card {
+    padding: 22px 18px;
+  }
+
+  .plan-icon {
+    width: 55px;
+    height: 55px;
+    font-size: 22px;
+  }
+
+}
 
 /* ---------- Dark theme ---------- */
 html[data-theme="dark"]{
