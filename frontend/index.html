@@ -303,205 +303,1909 @@
 </section>  -->
 
 
-<!-- ===== MENU ===== -->
-<section class="section menu" id="menu">
-  <div class="container">
+<!-- =========================================================
+     NATURE FIT RESTAURANT - FULL MENU SECTION
+     Replace image filenames with your own food photos.
+========================================================= -->
 
-    <p class="eyebrow center reveal">Nature Fit Menu</p>
+<section class="nf-menu-section" id="menu">
 
-    <h2 class="center reveal">
-      Fresh, healthy food made daily
-    </h2>
+<style>
 
-    <p class="section-sub center reveal">
-      Explore some of our most popular dishes.
-      Full menu available on Talabat and our delivery partners.
+/* ============================================
+   NATURE FIT MENU
+============================================ */
+
+.nf-menu-section {
+    padding: 90px 20px;
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #fbfdfb 50%,
+            #f6faf7 100%
+        );
+    font-family: "Plus Jakarta Sans", Arial, sans-serif;
+}
+
+.nf-menu-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: auto;
+}
+
+
+/* HEADER */
+
+.nf-menu-eyebrow {
+    text-align: center;
+    color: #1b5e45;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.nf-menu-title {
+    text-align: center;
+    font-family: "Fraunces", Georgia, serif;
+    font-size: clamp(34px, 5vw, 56px);
+    line-height: 1.1;
+    color: #123d31;
+    margin: 0;
+}
+
+.nf-menu-subtitle {
+    max-width: 690px;
+    margin: 18px auto 0;
+    text-align: center;
+    color: #6c7973;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+
+/* ============================================
+   CATEGORY TABS
+============================================ */
+
+.nf-menu-tabs-wrapper {
+    margin-top: 40px;
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.nf-menu-tabs-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+.nf-menu-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    min-width: max-content;
+    padding: 5px;
+}
+
+.nf-tab-btn {
+    border: 1px solid #dce4df;
+    background: #ffffff;
+    color: #52625b;
+
+    padding: 13px 23px;
+
+    border-radius: 999px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background .25s ease,
+        color .25s ease,
+        transform .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+}
+
+.nf-tab-btn:hover {
+    border-color: #1b5e45;
+    color: #1b5e45;
+    transform: translateY(-2px);
+}
+
+.nf-tab-btn.active {
+    background: #174f3b;
+    color: #ffffff;
+    border-color: #174f3b;
+
+    box-shadow:
+        0 8px 24px rgba(23, 79, 59, .18);
+}
+
+
+/* ============================================
+   MENU GRID
+============================================ */
+
+.nf-menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    margin-top: 45px;
+}
+
+
+/* ============================================
+   MENU CARD
+============================================ */
+
+.nf-menu-card {
+    display: none;
+
+    background: #ffffff;
+    overflow: hidden;
+
+    border-radius: 24px;
+
+    border: 1px solid rgba(20, 70, 53, .08);
+
+    box-shadow:
+        0 12px 35px rgba(27, 67, 50, .07);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+
+    animation: nfFadeIn .35s ease;
+}
+
+.nf-menu-card.show {
+    display: block;
+}
+
+.nf-menu-card:hover {
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 20px 45px rgba(27, 67, 50, .13);
+}
+
+
+/* IMAGE */
+
+.nf-menu-image {
+    width: 100%;
+    height: 230px;
+    position: relative;
+    overflow: hidden;
+    background: #eef3ef;
+}
+
+.nf-menu-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    display: block;
+
+    transition: transform .5s ease;
+}
+
+.nf-menu-card:hover .nf-menu-image img {
+    transform: scale(1.06);
+}
+
+
+/* BADGE */
+
+.nf-menu-badge {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+
+    padding: 8px 13px;
+
+    border-radius: 50px;
+
+    background: rgba(23,79,59,.95);
+
+    color: #ffffff;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    box-shadow:
+        0 4px 14px rgba(0,0,0,.14);
+}
+
+
+/* BODY */
+
+.nf-menu-card-body {
+    padding: 22px;
+}
+
+.nf-menu-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.nf-menu-card h3 {
+    margin: 0;
+
+    color: #163d31;
+
+    font-family: "Fraunces", Georgia, serif;
+
+    font-size: 22px;
+    line-height: 1.25;
+}
+
+.nf-menu-description {
+    margin: 12px 0 18px;
+
+    color: #718078;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* PRICE */
+
+.nf-menu-price {
+    color: #f36d3d;
+
+    font-size: 16px;
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+
+/* NUTRITION LABEL */
+
+.nf-menu-meta {
+    display: inline-flex;
+    align-items: center;
+
+    background: #eff6f2;
+    color: #38634f;
+
+    border-radius: 50px;
+
+    padding: 7px 11px;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+/* ============================================
+   TALABAT BUTTON
+============================================ */
+
+.nf-menu-footer {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.nf-talabat-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 16px 30px;
+
+    border-radius: 50px;
+
+    background: #ff5a1f;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-weight: 800;
+    font-size: 15px;
+
+    box-shadow:
+        0 13px 30px rgba(255,90,31,.23);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+.nf-talabat-btn:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 18px 38px rgba(255,90,31,.3);
+}
+
+
+/* ============================================
+   ANIMATION
+============================================ */
+
+@keyframes nfFadeIn {
+
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* ============================================
+   TABLET
+============================================ */
+
+@media (max-width: 950px) {
+
+    .nf-menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .nf-menu-tabs {
+        justify-content: flex-start;
+    }
+
+}
+
+
+/* ============================================
+   MOBILE
+============================================ */
+
+@media (max-width: 600px) {
+
+    .nf-menu-section {
+        padding: 65px 15px;
+    }
+
+    .nf-menu-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+        margin-top: 30px;
+    }
+
+    .nf-menu-image {
+        height: 220px;
+    }
+
+    .nf-menu-title {
+        font-size: 37px;
+    }
+
+    .nf-menu-subtitle {
+        font-size: 14px;
+    }
+
+    .nf-tab-btn {
+        padding: 11px 18px;
+        font-size: 13px;
+    }
+
+}
+
+</style>
+
+
+<div class="nf-menu-container">
+
+    <p class="nf-menu-eyebrow">
+        Nature Fit Restaurant
     </p>
 
-    <!-- MENU TABS -->
-    <div class="menu-tabs reveal" role="tablist">
+    <h2 class="nf-menu-title">
+        Healthy food you'll actually enjoy
+    </h2>
 
-      <button class="tab-btn active" data-tab="picks">
-        Picks for You 🔥
-      </button>
+    <p class="nf-menu-subtitle">
+        Fresh ingredients, balanced meals and bold flavours —
+        prepared daily at Nature Fit Restaurant.
+    </p>
 
-      <button class="tab-btn" data-tab="breakfast">
-        Breakfast
-      </button>
 
-      <button class="tab-btn" data-tab="salads">
-        Salads
-      </button>
+    <!-- ========================================
+         CATEGORY BUTTONS
+    ========================================= -->
 
-      <button class="tab-btn" data-tab="soups">
-        Soups
-      </button>
+    <div class="nf-menu-tabs-wrapper">
 
-      <button class="tab-btn" data-tab="burgers">
-        Burgers & Wraps
-      </button>
+        <div class="nf-menu-tabs">
 
-      <button class="tab-btn" data-tab="main">
-        Main Course
-      </button>
+            <button class="nf-tab-btn active" data-menu-tab="picks">
+                🔥 Picks for You
+            </button>
 
-      <button class="tab-btn" data-tab="bowls">
-        Bowls
-      </button>
+            <button class="nf-tab-btn" data-menu-tab="breakfast">
+                Breakfast
+            </button>
 
-      <button class="tab-btn" data-tab="juice">
-        Fresh Juice
-      </button>
+            <button class="nf-tab-btn" data-menu-tab="salads">
+                Salads
+            </button>
+
+            <button class="nf-tab-btn" data-menu-tab="soups">
+                Soups
+            </button>
+
+            <button class="nf-tab-btn" data-menu-tab="burgers">
+                Burgers & Wraps
+            </button>
+
+            <button class="nf-tab-btn" data-menu-tab="main">
+                Main Course
+            </button>
+
+            <button class="nf-tab-btn" data-menu-tab="bowls">
+                Bowls
+            </button>
+
+            <button class="nf-tab-btn" data-menu-tab="juice">
+                Fresh Juice
+            </button>
+
+        </div>
 
     </div>
 
 
-    <!-- MENU GRID -->
-    <div class="menu-grid" id="menuGrid">
+    <div class="nf-menu-grid">
 
 
-      <!-- =========================
-           PICKS FOR YOU
-      ========================== -->
-
-      <article class="menu-card" data-cat="picks">
-
-        <div class="menu-card-media">
-
-          <img
-            src="./images/muscle-man.jpg"
-            alt="Muscle Man"
-            loading="lazy"
-          >
-
-          <span class="tag">
-            🔥 Best Seller
-          </span>
-
-        </div>
-
-        <div class="menu-card-body">
-
-          <h3>Muscle Man</h3>
-
-          <p>
-            One of Nature Fit Restaurant's most popular healthy meals.
-          </p>
-
-        </div>
-
-      </article>
+        <!-- ========================================
+             PICKS FOR YOU
+        ========================================= -->
 
 
+        <article class="nf-menu-card"
+                 data-category="picks main">
 
-      <article class="menu-card" data-cat="picks burgers">
+            <div class="nf-menu-image">
 
-        <div class="menu-card-media">
+                <img
+                    src="./images/Screenshot 2026-08-12 190515.png"
+                    alt="Muscle Man">
 
-          <img
-            src="./images/muscle-man-burger.jpg"
-            alt="Muscle Man Burger"
-            loading="lazy"
-          >
+                <span class="nf-menu-badge">
+                    🔥 Best Seller
+                </span>
 
-          <span class="tag">
-            🔥 Best Seller
-          </span>
+            </div>
 
-        </div>
+            <div class="nf-menu-card-body">
 
-        <div class="menu-card-body">
+                <div class="nf-menu-card-top">
 
-          <h3>Muscle Man Burger</h3>
+                    <h3>Muscle Man</h3>
 
-          <p>
-            A customer-favourite protein-packed burger from Nature Fit.
-          </p>
+                    <span class="nf-menu-price">
+                        
+                    </span>
 
-        </div>
+                </div>
 
-      </article>
+                <p class="nf-menu-description">
+                    Premium protein-focused Nature Fit meal prepared
+                    with fresh ingredients.
+                </p>
+
+                <span class="nf-menu-meta">
+                    High Protein
+                </span>
+
+            </div>
+
+        </article>
 
 
 
-      <article class="menu-card" data-cat="picks main">
+        <!-- OMEGA -->
 
-        <div class="menu-card-media">
+        <article class="nf-menu-card"
+                 data-category="picks main">
 
-          <img
-            src="./images/steamed-cauliflower.jpg"
-            alt="Steamed Cauliflower"
-            loading="lazy"
-          >
+            <div class="nf-menu-image">
 
-          <span class="tag">
-            Healthy Choice
-          </span>
+                <img
+                    src="./images/image.png"
+                    alt="Omega">
 
-        </div>
+                <span class="nf-menu-badge">
+                    🔥 Best Seller
+                </span>
 
-        <div class="menu-card-body">
+            </div>
 
-          <h3>Steamed Cauliflower</h3>
+            <div class="nf-menu-card-body">
 
-          <p>
-            Light and freshly prepared steamed cauliflower.
-          </p>
+                <div class="nf-menu-card-top">
 
-        </div>
+                    <h3>Omega</h3>
 
-      </article>
+                    <span class="nf-menu-price">
+                        
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Grilled salmon with avocado, cucumber and turmeric
+                    rice topped with chia and flax seeds, served with
+                    cilantro lemon sauce.
+                </p>
+
+                <span class="nf-menu-meta">
+                    Salmon • Balanced
+                </span>
+
+            </div>
+
+        </article>
 
 
 
-      <article class="menu-card" data-cat="picks main">
+        <!-- EUROPEAN BOWL -->
 
-        <div class="menu-card-media">
+        <article class="nf-menu-card"
+                 data-category="picks bowls">
 
-          <img
-            src="./images/vegetable-fried-rice.jpg"
-            alt="Vegetable Fried Rice"
-            loading="lazy"
-          >
+            <div class="nf-menu-image">
 
-          <span class="tag">
-            Popular
-          </span>
+                <img
+                    src="./images/Screenshot 2026-08-12 190931.png"
+                    alt="European Bowl">
 
-        </div>
+                <span class="nf-menu-badge">
+                    🔥 Best Seller
+                </span>
 
-        <div class="menu-card-body">
+            </div>
 
-          <h3>Vegetable Fried Rice</h3>
+            <div class="nf-menu-card-body">
 
-          <p>
-            Freshly prepared rice with mixed vegetables.
-          </p>
+                <div class="nf-menu-card-top">
 
-        </div>
+                    <h3>European Bowl</h3>
 
-      </article>
+                    <span class="nf-menu-price">
+                        
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Chicken breast and Angus beef tenderloin with
+                    broccoli and baby asparagus over basmati rice.
+                </p>
+
+                <span class="nf-menu-meta">
+                    Protein Bowl
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- STEAMED BROCCOLI -->
+
+        <article class="nf-menu-card"
+                 data-category="picks main">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/Screenshot 2026-08-12 191158.png"
+                    alt="Steamed Broccoli">
+
+                <span class="nf-menu-badge">
+                    🔥 Best Seller
+                </span>
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Steamed Broccoli</h3>
+
+                    <span class="nf-menu-price">
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Fresh broccoli lightly steamed for a simple
+                    and nutritious side.
+                </p>
+
+                <span class="nf-menu-meta">
+                    Healthy Side
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ========================================
+             BREAKFAST
+        ========================================= -->
+
+
+        <article class="nf-menu-card"
+                 data-category="breakfast">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/Screenshot 2026-08-12 191232.png"
+                    alt="Greek Yogurt Bowl">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Greek Yogurt Bowl</h3>
+
+                    <span class="nf-menu-price">
+                      
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Homemade Greek yogurt with kiwi, strawberry,
+                    mango, granola, coconut flakes and honey.
+                </p>
+
+                <span class="nf-menu-meta">
+                    Breakfast
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="breakfast">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/Screenshot 2026-08-12 191257.png\"
+                    alt="Herb Omelette">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Herb Omelette</h3>
+
+                    <span class="nf-menu-price">
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Herb-infused omelette served with fresh arugula
+                    and cherry tomatoes.
+                </p>
+
+                <span class="nf-menu-meta">
+                    360 kcal
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="breakfast">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/Screenshot 2026-08-12 191327.png"
+                    alt="Chia Pudding Strawberry">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Chia Pudding Strawberry</h3>
+
+                    <span class="nf-menu-price">
+                        
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Chia seeds soaked overnight with coconut milk
+                    and honey, topped with fresh tropical fruits.
+                </p>
+
+                <span class="nf-menu-meta">
+                    Vegetarian
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="breakfast">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/Screenshot 2026-08-12 191354.png"
+                    alt="Berries Loaded Oatmeal">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Berries Loaded Oatmeal</h3>
+
+                    <span class="nf-menu-price">
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Oats, banana, cranberries, flax seeds, chia seeds,
+                    skimmed milk and blueberries.
+                </p>
+
+                <span class="nf-menu-meta">
+                    466 kcal
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="breakfast">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/Screenshot 2026-08-12 191421.png"
+                    alt="Nature Granola">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Nature Granola</h3>
+
+                    <span class="nf-menu-price">
+                        AED 40
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Fresh yogurt with hazelnut praline,
+                    mixed berries and crunchy granola.
+                </p>
+
+                <span class="nf-menu-meta">
+                    217 kcal
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ========================================
+             SALADS
+        ========================================= -->
+
+
+        <article class="nf-menu-card"
+                 data-category="salads">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/chicken-caesar-salad.jpg"
+                    alt="Chicken Caesar Salad">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Chicken Caesar Salad</h3>
+
+                    <span class="nf-menu-price">
+                     
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Chicken breast, lettuce, parmesan, sunflower seeds,
+                    cherry tomatoes and bread croutons with Caesar dressing.
+                </p>
+
+                <span class="nf-menu-meta">
+                    550 kcal
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="salads">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/grilled-salad.jpg"
+                    alt="Chicken Ceaser Salad">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Chicken Ceaser Salad</h3>
+
+                    <span class="nf-menu-price">
+                        AED 59
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Beef tenderloin, portobello mushroom, quinoa,
+                    lettuce, spinach, cherry tomatoes, peas and avocado.
+                </p>
+
+                <span class="nf-menu-meta">
+                    660 kcal
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="salads">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/shrimp-salad.jpg"
+                    alt="Shrimp Salad">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Shrimp Salad</h3>
+
+                    <span class="nf-menu-price">
+                     
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Shrimp with mixed lettuce, bean sprouts,
+                    edamame, cherry tomatoes, sweet corn and avocado.
+                </p>
+
+                <span class="nf-menu-meta">
+                    625 kcal
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="salads">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/amazon-salad.jpg"
+                    alt="Amazon Salad">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Amazon Salad</h3>
+
+                    <span class="nf-menu-price">
+                 
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Chicken breast, lettuce, cucumber, spring onion,
+                    strawberry, blueberry, raspberry and feta.
+                </p>
+
+                <span class="nf-menu-meta">
+                    395 kcal
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ========================================
+             BURGERS & WRAPS
+        ========================================= -->
+
+
+        <article class="nf-menu-card"
+                 data-category="burgers">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/nature-steak-wrap.jpg"
+                    alt="Nature Steak Wrap">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Nature Steak Wrap</h3>
+
+                    <span class="nf-menu-price">
+                        AED 54
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Angus tenderloin, baby spinach, tomato and onion
+                    in wheat tortilla with sweet potato fries.
+                </p>
+
+                <span class="nf-menu-meta">
+                    617 kcal
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="burgers">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/beef-burger.jpg"
+                    alt="Beef Burger">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Beef Burger</h3>
+
+                    <span class="nf-menu-price">
+                       
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Angus beef with Mac sauce, rocca,
+                    caramelized mushrooms and onions,
+                    served with sweet potato fries.
+                </p>
+
+                <span class="nf-menu-meta">
+                    479 kcal
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="burgers">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/special-burrito-wrap.jpg"
+                    alt="Special Burrito Wrap">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Special Burrito Wrap</h3>
+
+                    <span class="nf-menu-price">
+                        AED 56
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Angus beef tenderloin with egg white,
+                    avocado and cheddar cheese.
+                </p>
+
+                <span class="nf-menu-meta">
+                    564 kcal
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="burgers">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/grilled-chicken-burger.jpg"
+                    alt="Grilled Chicken Burger">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Grilled Chicken Burger</h3>
+
+                    <span class="nf-menu-price">
+                        AED 54
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Grilled chicken breast with turkey strips,
+                    cheddar, capsicum, onion and mushrooms
+                    served with sweet potato fries.
+                </p>
+
+                <span class="nf-menu-meta">
+                    445 kcal
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="burgers">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/chicken-caesar-wrap.jpg"
+                    alt="Chicken Caesar Wrap">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Chicken Caesar Wrap</h3>
+
+                    <span class="nf-menu-price">
+                        AED 54
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Chicken breast, lettuce, parmesan and Caesar
+                    dressing wrapped in wheat tortilla.
+                </p>
+
+                <span class="nf-menu-meta">
+                    445 kcal
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ========================================
+             MAIN COURSE
+        ========================================= -->
+
+
+        <article class="nf-menu-card"
+                 data-category="main">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/grilled-chicken-rice.jpg"
+                    alt="Grilled Chicken With Rice">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Grilled Chicken With Rice</h3>
+
+                    <span class="nf-menu-price">
+                        AED 52
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Chicken breast with mushroom, onion and peppers
+                    served with vegetable pilaf rice.
+                </p>
+
+                <span class="nf-menu-meta">
+                    Main Course
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="main">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/grilled-tenderloin.jpg"
+                    alt="Grilled Tenderloin">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Grilled Tenderloin</h3>
+
+                    <span class="nf-menu-price">
+                        AED 63
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Angus beef tenderloin with steamed vegetables
+                    and mushroom sauce.
+                </p>
+
+                <span class="nf-menu-meta">
+                    530 kcal
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="main">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/grilled-salmon.jpg"
+                    alt="Grilled Salmon">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Grilled Salmon</h3>
+
+                    <span class="nf-menu-price">
+                        AED 60
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Herb-marinated grilled salmon with mashed potato
+                    and fresh side salad.
+                </p>
+
+                <span class="nf-menu-meta">
+                    Omega-3
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="main">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/grilled-seabass.jpg"
+                    alt="Grilled Sea Bass">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Grilled Sea Bass</h3>
+
+                    <span class="nf-menu-price">
+                        AED 60
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Herb-marinated sea bass with sweet mashed potato,
+                    salad and lemon butter sauce.
+                </p>
+
+                <span class="nf-menu-meta">
+                    545 kcal
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="main">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/sauteed-beef.jpg"
+                    alt="Sauteed Beef">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Sauteed Beef</h3>
+
+                    <span class="nf-menu-price">
+                        AED 58
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Angus beef tenderloin sautéed with garlic
+                    and onion, served with vegetables and mushroom sauce.
+                </p>
+
+                <span class="nf-menu-meta">
+                    High Protein
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="main">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/spaghetti-salmon.jpg"
+                    alt="Spaghetti With Salmon">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Spaghetti With Salmon</h3>
+
+                    <span class="nf-menu-price">
+                        AED 60
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Pasta with salmon pieces and creamy sauce,
+                    finished with parmesan and fresh basil.
+                </p>
+
+                <span class="nf-menu-meta">
+                    425 kcal
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="main">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/fusilli-red-sauce.jpg"
+                    alt="Fusilli Pasta and Red Sauce">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Fusilli Pasta & Red Sauce</h3>
+
+                    <span class="nf-menu-price">
+                        AED 53
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Fusilli pasta with red sauce, chicken breast,
+                    sautéed mushrooms, parmesan and basil.
+                </p>
+
+                <span class="nf-menu-meta">
+                    635 kcal
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="main">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/grilled-chicken.jpg"
+                    alt="Grilled Chicken">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Grilled Chicken</h3>
+
+                    <span class="nf-menu-price">
+                        AED 60
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Herb-marinated grilled chicken with mashed potato,
+                    side salad and Greek sauce.
+                </p>
+
+                <span class="nf-menu-meta">
+                    High Protein
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- ========================================
+             FRESH JUICE
+        ========================================= -->
+
+
+        <article class="nf-menu-card"
+                 data-category="juice">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/ginger-carrot-orange.jpg"
+                    alt="Ginger Carrot Orange Juice">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Ginger, Carrot & Orange</h3>
+
+                    <span class="nf-menu-price">
+                        AED 29
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Fresh ginger, carrots and orange blended
+                    into a refreshing wellness juice.
+                </p>
+
+                <span class="nf-menu-meta">
+                    Fresh Juice
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="juice">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/carrot-juice.jpg"
+                    alt="Carrot Juice">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Carrot Juice</h3>
+
+                    <span class="nf-menu-price">
+                        AED 29
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Fresh carrot juice with no added sugar or ice.
+                </p>
+
+                <span class="nf-menu-meta">
+                    No Added Sugar
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="juice">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/pineapple-juice.jpg"
+                    alt="Pineapple Juice">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Pineapple Juice</h3>
+
+                    <span class="nf-menu-price">
+                        AED 24
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Fresh pineapple juice with no added sugar or ice.
+                </p>
+
+                <span class="nf-menu-meta">
+                    Tropical
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="juice">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/green-apple-juice.jpg"
+                    alt="Green Apple Juice">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Green Apple Juice</h3>
+
+                    <span class="nf-menu-price">
+                        AED 29
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Fresh green apple juice with no added sugar or ice.
+                </p>
+
+                <span class="nf-menu-meta">
+                    Fresh
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="juice">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/watermelon-juice.jpg"
+                    alt="Watermelon Juice">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Watermelon Juice</h3>
+
+                    <span class="nf-menu-price">
+                        AED 29
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Naturally sweet fresh watermelon juice
+                    with no added sugar.
+                </p>
+
+                <span class="nf-menu-meta">
+                    Refreshing
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="juice">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/ginger-shot.jpg"
+                    alt="Ginger Shot">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Ginger Shot</h3>
+
+                    <span class="nf-menu-price">
+                        AED 29
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Bold and refreshing ginger wellness shot.
+                </p>
+
+                <span class="nf-menu-meta">
+                    Wellness
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="juice">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/matcha-juice.jpg"
+                    alt="Organic Matcha Juice">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Organic Matcha Juice</h3>
+
+                    <span class="nf-menu-price">
+                        AED 34
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Organic matcha blended into a refreshing drink
+                    with no added sugar.
+                </p>
+
+                <span class="nf-menu-meta">
+                    Energy Boost
+                </span>
+
+            </div>
+
+        </article>
+
+
+
+        <article class="nf-menu-card"
+                 data-category="juice">
+
+            <div class="nf-menu-image">
+
+                <img
+                    src="./images/orange-juice.jpg"
+                    alt="Orange Juice">
+
+            </div>
+
+            <div class="nf-menu-card-body">
+
+                <div class="nf-menu-card-top">
+
+                    <h3>Orange Juice</h3>
+
+                    <span class="nf-menu-price">
+                        AED 29
+                    </span>
+
+                </div>
+
+                <p class="nf-menu-description">
+                    Freshly squeezed orange juice with
+                    no added sugar or ice.
+                </p>
+
+                <span class="nf-menu-meta">
+                    Vitamin Boost
+                </span>
+
+            </div>
+
+        </article>
 
 
     </div>
 
 
-    <!-- VIEW FULL MENU -->
-    <div class="menu-action center reveal">
 
-      <a
-        href="https://www.talabat.com/uae/nature-fit-restaurant"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn btn-primary"
-      >
-        View Full Menu on Talabat
-      </a>
+    <!-- ========================================
+         TALABAT BUTTON
+    ========================================= -->
+
+    <div class="nf-menu-footer">
+
+        <a
+           class="nf-talabat-btn"
+           href="https://www.talabat.com/uae/nature-fit-restaurant"
+           target="_blank"
+           rel="noopener noreferrer">
+
+            View Full Menu on Talabat →
+
+        </a>
 
     </div>
 
-  </div>
+</div>
+
+
+
+<!-- ============================================
+     MENU FILTER JAVASCRIPT
+============================================ -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const buttons =
+        document.querySelectorAll(".nf-tab-btn");
+
+    const cards =
+        document.querySelectorAll(".nf-menu-card");
+
+
+    function showCategory(category) {
+
+        cards.forEach(function(card) {
+
+            const categories =
+                card.dataset.category.split(" ");
+
+            if (categories.includes(category)) {
+
+                card.classList.add("show");
+
+            } else {
+
+                card.classList.remove("show");
+
+            }
+
+        });
+
+    }
+
+
+    /* DEFAULT TAB */
+
+    showCategory("picks");
+
+
+    /* BUTTON CLICK */
+
+    buttons.forEach(function(button) {
+
+        button.addEventListener("click", function() {
+
+            buttons.forEach(function(btn) {
+
+                btn.classList.remove("active");
+
+            });
+
+            this.classList.add("active");
+
+            const category =
+                this.dataset.menuTab;
+
+            showCategory(category);
+
+        });
+
+    });
+
+});
+
+</script>
+
 </section>
+
+
+    
 
 <!-- ===== ORDER ONLINE ===== -->
 <section class="section order" id="order">
