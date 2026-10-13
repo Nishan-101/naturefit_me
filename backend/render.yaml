@@ -37,7 +37,15 @@ services:
         sync: false
       - key: ADMIN_EMAIL
         sync: false
+      - key: INQUIRY_EMAIL
+        sync: false
       - key: MAIL_FROM
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: SESSION_SECRET
+        sync: false
+      - key: ADMIN_PASSWORD
         sync: false
       - key: CONTACT_RATE_LIMIT_WINDOW_MINUTES
         value: 15

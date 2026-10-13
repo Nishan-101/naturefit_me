@@ -4,11 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Nature Fit Restaurant | Eat Healthy, Live Better — Al Safa, Dubai</title>
+<title>Nature Fit Restaurant | Meal Plans — Al Safa, Dubai</title>
 
 <meta
   name="description"
-  content="Nature Fit Restaurant in Al Safa Complex, Dubai serves fresh, healthy, nutritious meals prepared daily. Order online via Talabat, Careem Food, Noon Food or Keeta."
+  content="Build a Nature Fit meal plan in Al Safa, Dubai. Choose your goal, meals, and days — fresh food delivered across Dubai. Packages from AED 1,250."
 >
 
 <script>
@@ -36,7 +36,7 @@
   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 >
 
-<link rel="stylesheet" href="./css/style.css?v=4">
+<link rel="stylesheet" href="./css/style.css?v=9">
 
 </head>
 <body>
@@ -44,25 +44,22 @@
 <!-- ===== HEADER / NAV ===== -->
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
-    <a href="#home" class="brand">
+    <a href="#plans" class="brand">
       <img src="images/logo.png" alt="Nature Fit Restaurant logo" class="brand-logo">
     </a>
 
     <nav class="main-nav" id="mainNav">
-      <a href="#about">About</a>
-      <a href="#Meal Plans">Meal Plans</a>
+      <a href="#plans" class="is-current">Plans</a>
       <a href="#menu">Menu</a>
-      <a href="#order">Order Online</a>
-      <!-- <a href="#gallery">Gallery</a> -->
+      <a href="#about">About</a>
       <a href="#reviews">Reviews</a>
-      <a href="#contact">Contact</a>
       <a href="#faq">FAQs</a>
-      <a href="#why-us">Why Us</a>
-  
+      <a href="#contact">Contact</a>
+      <a href="account.html">Inquiry</a>
     </nav>
 
     <div class="header-actions">
-      <a href="#order" class="btn btn-primary btn-small">Order Now</a>
+      <a href="#plans" class="btn btn-primary btn-small">Build my plan</a>
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
         <i class="fa-solid fa-moon icon-moon"></i>
         <i class="fa-solid fa-sun icon-sun"></i>
@@ -76,49 +73,141 @@
 
 <main>
 
-<!-- ===== HERO ===== -->
-<section class="hero" id="home">
-  <div class="container hero-grid">
-
-    <div class="hero-copy">
-      <p class="eyebrow reveal">Al Safa Complex, Dubai · Fresh Daily</p>
-      <h1 class="reveal">Eat Healthy,<br><span>Live Better</span></h1>
-      <p class="hero-sub reveal">Nature Fit Restaurant prepares fresh, wholesome, nutrient-packed meals every single day — real food, made to fuel your lifestyle, not slow it down.</p>
-      <div class="hero-cta reveal">
-        <a href="#order" class="btn btn-primary">Order Online</a>
-        <a href="#menu" class="btn btn-outline">Explore the Menu</a>
-      </div>
-      <div class="hero-stats reveal">
-        <div><strong>100%</strong><span>Fresh, made daily</span></div>
-        <div><strong>4.4/5</strong><span>Customer rating</span></div>
-        <div><strong>5</strong><span>Delivery platforms</span></div>
-      </div>
+<!-- ===== MEAL PLAN BUILDER ===== -->
+<section class="plan-studio" id="plans">
+  <div class="container">
+    <div class="ps-intro">
+      <p class="ps-kicker">Plans</p>
+      <h1>Customize your perfect meal plan</h1>
+      <p class="ps-lead">Choose a goal, then set your meals and days. Send the inquiry and Nature Fit will reply by email. No payment on this page. Packages start from AED 1,250, with delivery across Dubai.</p>
     </div>
 
-    <div class="hero-visual reveal">
-      <div class="hero-blob" aria-hidden="true"></div>
-      <div class="hero-image-wrap">
-        <img src="./images/RAF03614.jpg" alt="Fresh healthy grain bowl with avocado, greens and roasted vegetables" loading="eager">
-        <div class="hero-badge hero-badge-top">
-          <i class="fa-solid fa-leaf"></i>
-          <div><strong>100% Fresh</strong><span>Prepared daily</span></div>
+    <div class="ps-layout">
+      <div class="ps-main">
+
+        <div class="ps-block">
+          <h2>What kind of meals do you prefer?</h2>
+          <div class="ps-styles" id="planStyles">
+            <article class="ps-style is-selected" data-style="weight-loss">
+              <div class="ps-style-top">
+                <div>
+                  <h3>Weight Loss</h3>
+                  <p>Calorie-conscious portions</p>
+                </div>
+                <span class="ps-style-icon" aria-hidden="true"><i class="fa-solid fa-weight-scale"></i></span>
+              </div>
+              <p class="ps-more-copy">Sized to keep you full with enough protein, without the extra. Tell us your preferences and we'll shape the month around them.</p>
+              <div class="ps-style-actions">
+                <button type="button" class="ps-more" aria-expanded="false">Learn more</button>
+                <button type="button" class="ps-select" data-plan="weight-loss" aria-pressed="true"><i class="fa-solid fa-check"></i> Selected</button>
+              </div>
+            </article>
+
+            <article class="ps-style" data-style="muscle-gain">
+              <div class="ps-style-top">
+                <div>
+                  <h3>Muscle Gain</h3>
+                  <p>Protein-focused plates</p>
+                </div>
+                <span class="ps-style-icon" aria-hidden="true"><i class="fa-solid fa-dumbbell"></i></span>
+              </div>
+              <p class="ps-more-copy">Higher-protein meals for training days and recovery, with portions set around your routine.</p>
+              <div class="ps-style-actions">
+                <button type="button" class="ps-more" aria-expanded="false">Learn more</button>
+                <button type="button" class="ps-select" data-plan="muscle-gain" aria-pressed="false">Select plan</button>
+              </div>
+            </article>
+
+            <article class="ps-style" data-style="balance">
+              <div class="ps-style-top">
+                <div>
+                  <h3>Balance</h3>
+                  <p>Steady everyday energy</p>
+                </div>
+                <span class="ps-style-icon" aria-hidden="true"><i class="fa-solid fa-scale-balanced"></i></span>
+              </div>
+              <p class="ps-more-copy">A practical mix of protein, fibre and good fats for people who want consistent meals without a strict cut or bulk.</p>
+              <div class="ps-style-actions">
+                <button type="button" class="ps-more" aria-expanded="false">Learn more</button>
+                <button type="button" class="ps-select" data-plan="balance" aria-pressed="false">Select plan</button>
+              </div>
+            </article>
+
+            <article class="ps-style" data-style="lifestyle">
+              <div class="ps-style-top">
+                <div>
+                  <h3>Healthy Lifestyle</h3>
+                  <p>Eat well, every day</p>
+                </div>
+                <span class="ps-style-icon" aria-hidden="true"><i class="fa-solid fa-heart-pulse"></i></span>
+              </div>
+              <p class="ps-more-copy">Whole-food meals for anyone who simply wants fresh, balanced food delivered and ready.</p>
+              <div class="ps-style-actions">
+                <button type="button" class="ps-more" aria-expanded="false">Learn more</button>
+                <button type="button" class="ps-select" data-plan="lifestyle" aria-pressed="false">Select plan</button>
+              </div>
+            </article>
+          </div>
         </div>
-        <div class="hero-badge hero-badge-bottom">
-          <i class="fa-solid fa-star"></i>
-          <div><strong>4.8 / 5</strong><span>Customer rating</span></div>
+
+        <div class="ps-block">
+          <h2>How many meals per day?</h2>
+          <p class="ps-help">Select a minimum of 2 meals, including lunch or dinner. AM Meal and PM Meal are the mid-morning and evening plates.</p>
+          <div class="ps-meals" id="planMeals">
+            <button type="button" class="ps-meal is-on" data-meal="breakfast" aria-pressed="true"><span>Breakfast</span><span class="ps-tick" aria-hidden="true"></span></button>
+            <button type="button" class="ps-meal is-on" data-meal="lunch" aria-pressed="true"><span>Lunch</span><span class="ps-tick" aria-hidden="true"></span></button>
+            <button type="button" class="ps-meal is-on" data-meal="dinner" aria-pressed="true"><span>Dinner</span><span class="ps-tick" aria-hidden="true"></span></button>
+            <button type="button" class="ps-meal" data-meal="am" aria-pressed="false"><span>AM Meal</span><span class="ps-tick" aria-hidden="true"></span></button>
+            <button type="button" class="ps-meal" data-meal="pm" aria-pressed="false"><span>PM Meal</span><span class="ps-tick" aria-hidden="true"></span></button>
+          </div>
         </div>
+
+        <div class="ps-block">
+          <h2>How many days a week are you eating Nature Fit?</h2>
+          <p class="ps-help">Select a minimum of 5 days.</p>
+          <div class="ps-days" id="planDays">
+            <button type="button" class="ps-day is-on" data-day="0" aria-label="Sunday" aria-pressed="true">S</button>
+            <button type="button" class="ps-day is-on" data-day="1" aria-label="Monday" aria-pressed="true">M</button>
+            <button type="button" class="ps-day is-on" data-day="2" aria-label="Tuesday" aria-pressed="true">T</button>
+            <button type="button" class="ps-day is-on" data-day="3" aria-label="Wednesday" aria-pressed="true">W</button>
+            <button type="button" class="ps-day is-on" data-day="4" aria-label="Thursday" aria-pressed="true">T</button>
+            <button type="button" class="ps-day" data-day="5" aria-label="Friday" aria-pressed="false">F</button>
+            <button type="button" class="ps-day" data-day="6" aria-label="Saturday" aria-pressed="false">S</button>
+          </div>
+        </div>
+
+        <div class="ps-block">
+          <h2>Plan duration</h2>
+          <div class="ps-durations" id="planDurations">
+            <button type="button" class="ps-duration is-on" data-days="20" aria-pressed="true"><span><strong>20 days</strong><small>Programme length</small></span><span class="ps-radio" aria-hidden="true"></span></button>
+            <button type="button" class="ps-duration" data-days="24" aria-pressed="false"><span><strong>24 days</strong><small>Programme length</small></span><span class="ps-radio" aria-hidden="true"></span></button>
+            <button type="button" class="ps-duration" data-days="30" aria-pressed="false"><span><strong>30 days</strong><small>Programme length</small></span><span class="ps-radio" aria-hidden="true"></span></button>
+            <button type="button" class="ps-duration" data-days="90" aria-pressed="false"><span><strong>90 days</strong><small>Programme length</small></span><span class="ps-radio" aria-hidden="true"></span></button>
+          </div>
+        </div>
+
       </div>
+
+      <aside class="ps-summary" aria-live="polite">
+        <div class="ps-summary-top">
+          <h2>Your package, your way</h2>
+          <span class="ps-bag" aria-hidden="true"><i class="fa-solid fa-bag-shopping"></i></span>
+        </div>
+        <p class="ps-summary-line" id="planSummaryLine">Weight Loss, 3 meals, 5 days per week, 20 days</p>
+        <p class="ps-summary-note">Packages start from AED 1,250. Send your details and the kitchen receives them at naturefitdxb@gmail.com.</p>
+        <p class="ps-hint" id="planHint" hidden></p>
+        <p class="ps-submit-status" id="planSubmitStatus" role="status"></p>
+        <button type="button" class="ps-btn" id="planSubmit">Send my inquiry</button>
+      </aside>
     </div>
 
+    <ol class="ps-steps">
+      <li><strong>1</strong><span>Pick the goal that fits how you want to eat.</span></li>
+      <li><strong>2</strong><span>Set meals per day, days each week, and how long to run it.</span></li>
+      <li><strong>3</strong><span>Add your email and phone. We reply from Gmail with the price.</span></li>
+    </ol>
   </div>
-
-  <a href="#about" class="scroll-cue" aria-label="Scroll to About section">
-    <span></span>
-  </a>
 </section>
-
-<!-- signature leaf divider -->
-<div class="leaf-divider" aria-hidden="true"><svg viewBox="0 0 1200 60" preserveAspectRatio="none"><path d="M0,30 C150,60 300,0 450,30 C600,60 750,0 900,30 C1050,60 1150,10 1200,30 L1200,60 L0,60 Z"></path></svg></div>
 
 <!-- ===== ABOUT ===== -->
 <section class="section about" id="about">
@@ -2088,6 +2177,14 @@ document.addEventListener("DOMContentLoaded", function () {
     </div>
     <div class="faq-list">
       <div class="faq-item reveal">
+        <button class="faq-q"><span>How do meal plans work?</span><i class="fa-solid fa-plus"></i></button>
+        <div class="faq-a"><p>Choose a goal, how many meals you want each day, which days you eat with us, and a 20, 24, 30 or 90 day length. Send the inquiry with your email and phone, and we'll reply from naturefitdxb@gmail.com with the price and start date. Packages begin from AED 1,250.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q"><span>Can I change meals or skip a day?</span><i class="fa-solid fa-plus"></i></button>
+        <div class="faq-a"><p>Yes. Tell us your preferences when you message us — including dislikes, higher protein, or fewer carbs — and we'll build the plan around them.</p></div>
+      </div>
+      <div class="faq-item reveal">
         <button class="faq-q"><span>Is the food actually prepared fresh every day?</span><i class="fa-solid fa-plus"></i></button>
         <div class="faq-a"><p>Yes — every dish at Nature Fit is prepared fresh daily using clean, whole ingredients. Nothing is frozen or pre-cooked days in advance.</p></div>
       </div>
@@ -2112,73 +2209,6 @@ document.addEventListener("DOMContentLoaded", function () {
 </section>
 
 
-  <!-- ===== MEAL PACKAGES ===== -->
-<section class="section meal-plans alt-bg" id="Meal Plans">
-  <div class="container">
-    <p class="eyebrow center reveal">One-Month Meal Packages</p>
-    <h2 class="center reveal">Choose your goal. We will customize the plan.</h2>
-    <p class="section-sub center reveal">Fresh meals prepared for your body, lifestyle and goals, with delivery across Dubai. Packages start from AED 1,250.</p>
-
-    <div class="plan-grid">
-      <article class="plan-card plan-green reveal">
-        <div class="plan-icon"><i class="fa-solid fa-weight-scale"></i></div>
-        <h3>Weight Loss</h3>
-        <p>Balanced portions designed to support healthy, sustainable weight management.</p>
-        <ul>
-          <li><i class="fa-solid fa-check"></i> Calorie-conscious choices</li>
-          <li><i class="fa-solid fa-check"></i> High-protein options</li>
-          <li><i class="fa-solid fa-check"></i> Custom preferences</li>
-        </ul>
-        <a class="btn btn-primary plan-whatsapp" data-plan="Weight Loss" href="https://api.whatsapp.com/message/25ZQDLF7Z3IGB1?autoload=1&app_absent=0">Ask on WhatsApp</a>
-      </article>
-
-      <article class="plan-card plan-orange reveal">
-        <div class="plan-icon"><i class="fa-solid fa-scale-balanced"></i></div>
-        <h3>Balance</h3>
-        <p>A practical everyday plan for steady energy, nourishment and convenience.</p>
-        <ul>
-          <li><i class="fa-solid fa-check"></i> Balanced nutrition</li>
-          <li><i class="fa-solid fa-check"></i> Fresh daily preparation</li>
-          <li><i class="fa-solid fa-check"></i> Flexible preferences</li>
-        </ul>
-        <a class="btn btn-primary plan-whatsapp" data-plan="Balance" href="https://api.whatsapp.com/message/25ZQDLF7Z3IGB1?autoload=1&app_absent=0">Ask on WhatsApp</a>
-      </article>
-
-      <article class="plan-card plan-blue reveal">
-        <div class="plan-icon"><i class="fa-solid fa-heart-pulse"></i></div>
-        <h3>Healthy Lifestyle</h3>
-        <p>Wholesome meals for people who simply want to eat better every day.</p>
-        <ul>
-          <li><i class="fa-solid fa-check"></i> Whole-food ingredients</li>
-          <li><i class="fa-solid fa-check"></i> Lifestyle-friendly portions</li>
-          <li><i class="fa-solid fa-check"></i> Delivered across Dubai</li>
-        </ul>
-        <a class="btn btn-primary plan-whatsapp" data-plan="Healthy Lifestyle" href="https://api.whatsapp.com/message/25ZQDLF7Z3IGB1?autoload=1&app_absent=0">Ask on WhatsApp</a>
-      </article>
-
-      <article class="plan-card plan-purple reveal">
-        <div class="plan-icon"><i class="fa-solid fa-dumbbell"></i></div>
-        <h3>Muscle Gain</h3>
-        <p>Protein-focused meals made to support active routines and performance goals.</p>
-        <ul>
-          <li><i class="fa-solid fa-check"></i> Protein-rich options</li>
-          <li><i class="fa-solid fa-check"></i> Goal-based portions</li>
-          <li><i class="fa-solid fa-check"></i> Custom meal preferences</li>
-        </ul>
-        <a class="btn btn-primary plan-whatsapp" data-plan="Muscle Gain" href="https://api.whatsapp.com/message/25ZQDLF7Z3IGB1?autoload=1&app_absent=0">Ask on WhatsApp</a>
-      </article>
-    </div>
-
-    <div class="custom-plan-panel reveal">
-      <div>
-        <p class="eyebrow">Personalized for you</p>
-        <h3>Customize your own meal plan</h3>
-        <p>Share your age, height, weight, lifestyle and goal. Our team will help you choose the most suitable option.</p>
-      </div>
-      <a class="btn btn-primary" id="customPlanWhatsApp" href="https://api.whatsapp.com/message/25ZQDLF7Z3IGB1?autoload=1&app_absent=0">Customize on WhatsApp</a>
-    </div>
-  </div>
-</section>
 
 <!-- ===== CONTACT ===== -->
 <section class="section contact" id="contact">
@@ -2186,7 +2216,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <div class="contact-info reveal">
       <p class="eyebrow">Contact Us</p>
       <h2>Let's talk healthy food</h2>
-      <p>Have a question, feedback, or a catering request? Send us a message and our team will get back to you shortly.</p>
+      <p>Questions about a meal plan, a preference, or a catering request? Send a message and our team will get back to you shortly.</p>
 
       <ul class="contact-details">
         <li><i class="fa-solid fa-location-dot"></i><span>Nature Fit Restaurant, Al Safa Complex, Dubai, UAE</span></li>
@@ -2250,14 +2280,15 @@ document.addEventListener("DOMContentLoaded", function () {
   <div class="container footer-inner">
     <div class="footer-brand">
       <img src="images/logo.png" alt="Nature Fit Restaurant logo" class="brand-logo footer-logo">
-      <p>Fresh, healthy, nutritious meals — prepared daily inside Al Safa Complex, Dubai.</p>
+      <p>Custom meal plans and fresh daily meals, prepared in Al Safa Complex, Dubai.</p>
     </div>
     <div class="footer-links">
       <h4>Explore</h4>
-      <a href="#about">About Us</a>
+      <a href="#plans">Meal Plans</a>
       <a href="#menu">Menu</a>
-      <a href="#order">Order Online</a>
+      <a href="#about">About Us</a>
       <a href="#contact">Contact</a>
+      <a href="admin.html">Staff</a>
     </div>
     <div class="footer-links">
       <h4>Order On</h4>
@@ -2274,6 +2305,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <button class="back-to-top" id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
 
-<script src="js/script.js"></script>
+<script src="js/platform.js?v=4"></script>
+<script src="js/script.js?v=7"></script>
 </body>
 </html>

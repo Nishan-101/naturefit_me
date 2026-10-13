@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Staff | Nature Fit Restaurant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css?v=7">
+</head>
+<body data-page="admin">
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="index.html#plans" class="brand"><img src="images/logo.png" alt="Nature Fit Restaurant logo" class="brand-logo"></a>
+    <nav class="main-nav simple-nav"><a href="index.html#plans">Plans</a></nav>
+    <button type="button" class="btn btn-outline btn-small" id="adminLogout">Log out</button>
+  </div>
+</header>
+<main class="app-main">
+  <p class="app-status" id="adminStatus" role="status"></p>
+  <section class="app-card" id="adminLogin">
+    <p class="ps-kicker">Staff</p>
+    <h1>Kitchen dashboard</h1>
+    <p class="app-lead">Every inquiry is also emailed to naturefitdxb@gmail.com. Reply to that email, or use Email and Call here, to reach the customer. Confirm allergen suitability before a plan starts.</p>
+    <form id="staffForm">
+      <div class="form-group">
+        <label for="adminPassword">Staff password</label>
+        <input id="adminPassword" type="password" autocomplete="current-password" required>
+      </div>
+      <button type="submit" class="ps-btn">Open dashboard</button>
+    </form>
+  </section>
+  <section id="adminBoard" hidden>
+    <section class="app-card">
+      <h2>Customers</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Customer</th><th>Goal</th><th>Body</th><th>Allergies and diet</th><th>Profile</th></tr></thead>
+          <tbody id="customerRows"></tbody>
+        </table>
+      </div>
+    </section>
+    <section class="app-card">
+      <h2>Meal-plan inquiries</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Customer</th><th>Plan</th><th>Meals and days</th><th>Notes</th><th>Email</th><th>Status</th></tr></thead>
+          <tbody id="inquiryRows"></tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+</main>
+<script src="js/platform.js?v=4"></script>
+</body>
+</html>

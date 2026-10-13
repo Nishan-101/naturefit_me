@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initFaqAccordion();
   initBackToTop();
   initContactForm();
+  initPlanBuilder();
   document.getElementById("year").textContent = new Date().getFullYear();
 });
 
@@ -30,7 +31,7 @@ function initTheme() {
   const initial = stored || (prefersDark ? "dark" : "light");
   root.setAttribute("data-theme", initial);
 
-  toggleBtn.addEventListener("click", () => {
+  if (toggleBtn) toggleBtn.addEventListener("click", () => {
     const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
     root.setAttribute("data-theme", next);
     localStorage.setItem(storageKey, next);
@@ -40,6 +41,7 @@ function initTheme() {
 /* ---------- Sticky header on scroll ---------- */
 function initHeader() {
   const header = document.getElementById("siteHeader");
+  if (!header) return;
   const toggle = () => {
     if (window.scrollY > 40) header.classList.add("scrolled");
     else header.classList.remove("scrolled");
@@ -52,6 +54,7 @@ function initHeader() {
 function initMobileNav() {
   const navToggle = document.getElementById("navToggle");
   const mainNav = document.getElementById("mainNav");
+  if (!navToggle || !mainNav) return;
 
   navToggle.addEventListener("click", () => {
     const isOpen = mainNav.classList.toggle("open");
@@ -123,6 +126,7 @@ function initFaqAccordion() {
 /* ---------- Back to top button ---------- */
 function initBackToTop() {
   const btn = document.getElementById("backToTop");
+  if (!btn) return;
   window.addEventListener(
     "scroll",
     () => {
@@ -137,6 +141,7 @@ function initBackToTop() {
 /* ---------- Contact form ---------- */
 function initContactForm() {
   const form = document.getElementById("contactForm");
+  if (!form) return;
   const submitBtn = document.getElementById("submitBtn");
   const statusEl = document.getElementById("formStatus");
 
@@ -245,4 +250,161 @@ function initContactForm() {
       setLoading(false);
     }
   });
+}
+
+/* ---------- Meal plan builder ---------- */
+function initPlanBuilder() {
+  const root = document.getElementById("plans");
+  if (!root) return;
+
+  const plans = {
+    "weight-loss": "Weight Loss",
+    "muscle-gain": "Muscle Gain",
+    balance: "Balance",
+    lifestyle: "Healthy Lifestyle",
+  };
+  const mealNames = {
+    breakfast: "Breakfast",
+    lunch: "Lunch",
+    dinner: "Dinner",
+    am: "AM Meal",
+    pm: "PM Meal",
+  };
+  const mealOrder = ["breakfast", "lunch", "dinner", "am", "pm"];
+  const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+  const state = {
+    plan: "weight-loss",
+    meals: new Set(["breakfast", "lunch", "dinner"]),
+    days: new Set([0, 1, 2, 3, 4]),
+    duration: 20,
+  };
+
+  const hint = document.getElementById("planHint");
+  const summary = document.getElementById("planSummaryLine");
+
+  function showHint(message) {
+    hint.hidden = !message;
+    hint.textContent = message || "";
+  }
+
+  function mealOk(next) {
+    const hasMain = next.has("lunch") || next.has("dinner");
+    return next.size >= 2 && hasMain;
+  }
+
+  root.querySelectorAll(".ps-more").forEach((button) => {
+    button.addEventListener("click", () => {
+      const card = button.closest(".ps-style");
+      const open = card.classList.toggle("is-open");
+      button.setAttribute("aria-expanded", open ? "true" : "false");
+      button.textContent = open ? "Show less" : "Learn more";
+    });
+  });
+
+  root.querySelectorAll(".ps-select").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.plan = button.dataset.plan;
+      showHint("");
+      render();
+    });
+  });
+
+  root.querySelectorAll(".ps-meal").forEach((button) => {
+    button.addEventListener("click", () => {
+      const id = button.dataset.meal;
+      const next = new Set(state.meals);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      if (!mealOk(next)) {
+        showHint("Select at least 2 meals, including lunch or dinner.");
+        return;
+      }
+      state.meals = next;
+      showHint("");
+      render();
+    });
+  });
+
+  root.querySelectorAll(".ps-day").forEach((button) => {
+    button.addEventListener("click", () => {
+      const day = Number(button.dataset.day);
+      const next = new Set(state.days);
+      if (next.has(day)) next.delete(day);
+      else next.add(day);
+      if (next.size < 5) {
+        showHint("Select at least 5 days a week.");
+        return;
+      }
+      state.days = next;
+      showHint("");
+      render();
+    });
+  });
+
+  root.querySelectorAll(".ps-duration").forEach((button) => {
+    button.addEventListener("click", () => {
+      state.duration = Number(button.dataset.days);
+      showHint("");
+      render();
+    });
+  });
+
+  function render() {
+    root.querySelectorAll(".ps-style").forEach((card) => {
+      const on = card.dataset.style === state.plan;
+      card.classList.toggle("is-selected", on);
+      const button = card.querySelector(".ps-select");
+      button.setAttribute("aria-pressed", on ? "true" : "false");
+      button.innerHTML = on
+        ? '<i class="fa-solid fa-check"></i> Selected'
+        : "Select plan";
+    });
+
+    root.querySelectorAll(".ps-meal").forEach((button) => {
+      const on = state.meals.has(button.dataset.meal);
+      button.classList.toggle("is-on", on);
+      button.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+
+    root.querySelectorAll(".ps-day").forEach((button) => {
+      const on = state.days.has(Number(button.dataset.day));
+      button.classList.toggle("is-on", on);
+      button.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+
+    root.querySelectorAll(".ps-duration").forEach((button) => {
+      const on = Number(button.dataset.days) === state.duration;
+      button.classList.toggle("is-on", on);
+      button.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+
+    const chosenMeals = mealOrder.filter((id) => state.meals.has(id)).map((id) => mealNames[id]);
+    const chosenDays = [...state.days].sort((a, b) => a - b).map((day) => dayNames[day]);
+    const planName = plans[state.plan];
+    summary.textContent = `${planName}, ${chosenMeals.length} meals, ${chosenDays.length} days per week, ${state.duration} days`;
+
+  }
+
+  function currentDraft() {
+    return {
+      plan: state.plan,
+      meals: mealOrder.filter((id) => state.meals.has(id)),
+      days: [...state.days].sort((a, b) => a - b),
+      duration: state.duration,
+    };
+  }
+
+  const submitBtn = document.getElementById("planSubmit");
+  const submitStatus = document.getElementById("planSubmitStatus");
+  if (submitBtn) {
+    submitBtn.addEventListener("click", () => {
+      const draft = currentDraft();
+      if (window.NatureFit) NatureFit.saveDraft(draft);
+      if (submitStatus) submitStatus.textContent = "Add your contact details so we can email you back.";
+      location.href = "account.html";
+    });
+  }
+
+  render();
 }
