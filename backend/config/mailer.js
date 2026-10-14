@@ -1,6 +1,13 @@
 require("dotenv").config();
 
 const RESEND_API_URL = "https://api.resend.com/emails";
+const VERIFIED_FROM = "Nature Fit Restaurant <inquiries@naturefit.site>";
+
+function mailFrom() {
+  const configured = String(process.env.MAIL_FROM || "").trim();
+  if (/@naturefit\.site\s*>?$/i.test(configured)) return configured;
+  return VERIFIED_FROM;
+}
 
 /**
  * Confirms a Resend API key is present on startup (logs only — does not crash the server).
@@ -21,7 +28,7 @@ async function verifyMailer() {
  */
 async function sendContactNotification({ fullName, email, phone, subject, message }) {
   const payload = {
-    from: process.env.MAIL_FROM || "Nature Fit Restaurant <onboarding@resend.dev>",
+    from: mailFrom(),
     to: [process.env.ADMIN_EMAIL],
     reply_to: email,
     subject: `New Contact Form Submission: ${subject}`,
@@ -195,7 +202,7 @@ async function sendInquiryNotification(details) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: process.env.MAIL_FROM || "Nature Fit Restaurant <onboarding@resend.dev>",
+      from: mailFrom(),
       to: [message.to],
       reply_to: message.replyTo,
       subject: message.subject,
@@ -211,4 +218,4 @@ async function sendInquiryNotification(details) {
   return response.json();
 }
 
-module.exports = { verifyMailer, sendContactNotification, sendInquiryNotification, buildInquiryEmail };
+module.exports = { verifyMailer, sendContactNotification, sendInquiryNotification, buildInquiryEmail, mailFrom };

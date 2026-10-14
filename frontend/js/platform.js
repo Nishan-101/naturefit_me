@@ -16,12 +16,17 @@
 
   async function api(path, options) {
     const opts = options || {};
-    const response = await fetch(`${apiBase()}${path}`, {
-      method: opts.method || "GET",
-      credentials: "include",
-      headers: { "Content-Type": "application/json" },
-      body: opts.body ? JSON.stringify(opts.body) : undefined,
-    });
+    let response;
+    try {
+      response = await fetch(`${apiBase()}${path}`, {
+        method: opts.method || "GET",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: opts.body ? JSON.stringify(opts.body) : undefined,
+      });
+    } catch {
+      throw new Error("Could not reach Nature Fit. Please try again in a moment.");
+    }
     const data = await response.json().catch(() => ({}));
     if (!response.ok) {
       const error = new Error(data.message || "Something went wrong. Please try again.");

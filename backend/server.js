@@ -34,16 +34,23 @@ const allowedOrigins = (process.env.CLIENT_ORIGIN || "")
   .split(",")
   .map((origin) => origin.trim())
   .filter(Boolean);
+const siteOrigins = ["https://naturefit.site", "https://www.naturefit.site"];
 
 app.use(
   cors({
     origin: (origin, callback) => {
       // allow requests with no origin (curl, mobile apps, server-to-server, health checks)
       const localhost = origin && /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/.test(origin);
-      if (!origin || localhost || allowedOrigins.length === 0 || allowedOrigins.includes(origin)) {
+      if (
+        !origin ||
+        localhost ||
+        allowedOrigins.length === 0 ||
+        allowedOrigins.includes(origin) ||
+        siteOrigins.includes(origin)
+      ) {
         return callback(null, true);
       }
-      return callback(new Error("Not allowed by CORS"));
+      return callback(null, false);
     },
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
     allowedHeaders: ["Content-Type"],
