@@ -113,9 +113,18 @@
       return document.getElementById(`step${step}Status`);
     }
 
+    function selectedInput(name) {
+      return document.querySelector(`input[name="${name}"]:checked`);
+    }
+
     function selectedValue(name) {
-      const chosen = document.querySelector(`input[name="${name}"]:checked`);
+      const chosen = selectedInput(name);
       return chosen ? chosen.value : "";
+    }
+
+    function selectedLabel(name) {
+      const chosen = selectedInput(name);
+      return chosen ? chosen.dataset.label || chosen.value : "";
     }
 
     function describeDraft(draft) {
@@ -142,12 +151,17 @@
 
     function profileBody(draft) {
       const mealCount = Array.isArray(draft.meals) ? draft.meals.length : 0;
+      const kcal = selectedValue("kcal");
       return {
         fullName: document.getElementById("fullName").value,
         email: document.getElementById("email").value,
+        age: selectedValue("ageBand"),
+        heightCm: selectedValue("heightBand"),
+        weightKg: selectedValue("weightBand"),
         primaryGoal: selectedValue("goal"),
         extraGoals: [],
-        calorieGuidance: true,
+        calorieGuidance: kcal === "guide",
+        calorieKcal: kcal === "guide" ? "" : kcal,
         proteinGuidance: true,
         mealsPerDay: Math.min(5, Math.max(2, mealCount || 2)),
         preferredDuration: draft.duration,
@@ -218,6 +232,10 @@
         setStatus(notice, "Choose a meal plan on the home page first.", "error");
         return;
       }
+      if (!selectedValue("ageBand")) return setStatus(notice, "Choose your age range.", "error");
+      if (!selectedValue("heightBand")) return setStatus(notice, "Choose your height range.", "error");
+      if (!selectedValue("weightBand")) return setStatus(notice, "Choose your weight range.", "error");
+      if (!selectedValue("kcal")) return setStatus(notice, "Choose a calorie target, or tap Not sure.", "error");
       if (!selectedValue("goal")) return setStatus(notice, "Choose what you want from the plan.", "error");
       if (!diet) return setStatus(notice, "Choose how you like to eat.", "error");
       if (!allergies.length) return setStatus(notice, "Choose an allergy, or tap None.", "error");
@@ -239,7 +257,13 @@
             ...profileBody(draft),
             countryCode: document.getElementById("countryCode").value,
             nationalNumber: document.getElementById("nationalNumber").value,
-            notes: `Best time to call: ${callTime}`,
+            notes: [
+              `Age: ${selectedLabel("ageBand")}`,
+              `Height: ${selectedLabel("heightBand")}`,
+              `Weight: ${selectedLabel("weightBand")}`,
+              `Calories: ${selectedLabel("kcal")}`,
+              `Best time to call: ${callTime}`,
+            ].join(". "),
             plan: draft.plan,
             meals: draft.meals,
             days: draft.days,
