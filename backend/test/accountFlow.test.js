@@ -35,6 +35,27 @@ test("normalizes a UAE phone number to E.164", () => {
   assert.equal(normalizePhone("971", "123"), null);
 });
 
+test("accepts a short inquiry without body measurements", () => {
+  const ready = validateProfile(
+    {
+      fullName: "Amina Noor",
+      email: "amina@example.com",
+      primaryGoal: "Fat Loss",
+      allergies: ["No known food allergies"],
+      diet: "Halal",
+      deliveryAddress: "Dubai Marina, Dubai",
+      allergyAcknowledged: true,
+    },
+    { requireEmail: true, inquiry: true }
+  );
+  assert.deepEqual(ready.errors, []);
+  assert.equal(ready.profile.age, null);
+  assert.equal(ready.profile.heightCm, null);
+  assert.equal(ready.profile.weightKg, null);
+  assert.equal(ready.profile.calorieGuidance, true);
+  assert.equal(ready.profile.proteinGuidance, true);
+});
+
 test("requires a reply email for a meal-plan inquiry", () => {
   const missing = validateProfile(validProfile({ email: "" }), { requireEmail: true });
   assert.ok(missing.errors.some((error) => /email/i.test(error)));

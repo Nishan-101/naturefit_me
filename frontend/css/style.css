@@ -1438,6 +1438,17 @@ section[id]{scroll-margin-top:88px;}
 .app-card input:focus,.app-card select:focus,.app-card textarea:focus{outline:2px solid #1b4332;border-color:#1b4332;}
 .app-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px;}
 .app-actions .ps-btn{width:auto;padding:0 22px;}
+.choice-set{border:0;padding:0;margin:0 0 18px;}
+.choice-set legend{font-weight:800;padding:0;margin:0 0 8px;color:#14281c;}
+.choice-grid{display:flex;flex-wrap:wrap;gap:8px;}
+.choice-grid label{
+  position:relative;display:inline-flex;align-items:center;justify-content:center;
+  min-height:44px;padding:10px 14px;border:1.5px solid #d7e2db;border-radius:999px;
+  background:#fff;font-weight:700;color:#14281c;cursor:pointer;
+}
+.app-card .choice-grid input{position:absolute;width:1px;height:1px;margin:0;padding:0;opacity:0;}
+.choice-grid label:has(input:checked){background:#1b4332;border-color:#1b4332;color:#fff;}
+.choice-grid label:focus-within{outline:2px solid #1b4332;outline-offset:2px;}
 .check-grid{border:0;padding:0;margin:0 0 16px;display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;}
 .check-grid label{display:flex;gap:8px;align-items:center;font-weight:600;}
 .check-grid input{width:auto;margin:0;}
@@ -1478,5 +1489,6 @@ html[data-theme="dark"] .app-card label{color:#14281c;}
 @media(max-width:700px){
   .app-grid,.check-grid{grid-template-columns:1fr;}
   .app-card{padding:22px;}
+  .wizard-step .ps-btn{width:100%;}
   .main-nav a{font-size:.84rem;}
 }

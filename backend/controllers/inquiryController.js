@@ -26,10 +26,8 @@ function validateSelection(body) {
   return { plan, meals, days, duration, notes };
 }
 
-function inquiryMessage(emailSent) {
-  return emailSent
-    ? "Your meal-plan inquiry was emailed to Nature Fit. We'll reply to the email address you entered."
-    : "Your inquiry is saved, but the email to the kitchen could not be sent. Please write to naturefitdxb@gmail.com.";
+function inquiryMessage() {
+  return "Thank you. Our team will reach you soon.";
 }
 
 async function deliverInquiryEmail(send, payload) {
@@ -62,7 +60,7 @@ async function create(req, res, next) {
     const phone = normalizePhone(body.countryCode, body.nationalNumber);
     if (!phone) throw httpError(400, "Enter a valid phone number, including the country code.");
 
-    const checked = validateProfile(body, { requireEmail: true });
+    const checked = validateProfile(body, { requireEmail: true, inquiry: true });
     if (checked.errors.length) throw httpError(400, checked.errors[0]);
 
     let customer = await customers.findCustomerByPhone(phone);
@@ -91,18 +89,15 @@ async function create(req, res, next) {
       notes: selection.notes,
     });
 
-    const emailSent = await deliverInquiryEmail(
-      sendInquiryNotification,
-      notificationPayload(inquiry, customer, profile)
-    );
-    await inquiries.markEmailed(inquiry.id, emailSent);
-
     res.status(201).json({
       success: true,
-      emailSent,
       inquiryId: inquiry.id,
-      message: inquiryMessage(emailSent),
+      message: inquiryMessage(),
     });
+
+    deliverInquiryEmail(sendInquiryNotification, notificationPayload(inquiry, customer, profile))
+      .then((emailSent) => inquiries.markEmailed(inquiry.id, emailSent))
+      .catch((error) => console.error("Inquiry email failed:", error.message));
   } catch (error) {
     next(error);
   }

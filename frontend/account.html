@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css?v=8">
+<link rel="stylesheet" href="css/style.css?v=9">
 </head>
 <body data-page="account">
 <header class="site-header">
@@ -25,9 +25,9 @@
   <p class="app-status" id="accountStatus" role="status"></p>
 
   <section class="app-card" id="wizard" hidden>
-    <p class="ps-kicker" id="stepLabel">Step 1 of 3</p>
+    <p class="ps-kicker" id="stepLabel">Step 1 of 2</p>
     <h1>Send your meal-plan inquiry</h1>
-    <p class="app-lead">Nature Fit receives this at naturefitdxb@gmail.com and replies to the email you enter. Add a phone number so we can call you too.</p>
+    <p class="app-lead">Two short steps. Tap the options that fit you, and our team will call or email you back.</p>
     <p class="field-note" id="draftSummary"></p>
     <form id="profileForm" novalidate>
       <div class="wizard-step" data-step="1">
@@ -49,127 +49,92 @@
             </select>
           </div>
           <div class="form-group"><label for="nationalNumber">Phone number</label><input id="nationalNumber" type="tel" inputmode="tel" autocomplete="tel" placeholder="50 123 4567" required></div>
-          <div class="form-group"><label for="age">Age</label><input id="age" type="number" min="18" max="90" inputmode="numeric" required></div>
-          <div class="form-group">
-            <label for="gender">Gender <span>(optional)</span></label>
-            <select id="gender">
-              <option value="">Prefer not to say</option>
-              <option>Female</option>
-              <option>Male</option>
-              <option>Other</option>
-            </select>
+        </div>
+        <fieldset class="choice-set">
+          <legend>Best time to call</legend>
+          <div class="choice-grid">
+            <label><input type="radio" name="callTime" value="Morning"> Morning</label>
+            <label><input type="radio" name="callTime" value="Afternoon"> Afternoon</label>
+            <label><input type="radio" name="callTime" value="Evening"> Evening</label>
+            <label><input type="radio" name="callTime" value="Anytime"> Anytime</label>
           </div>
-          <div class="form-group"><label for="heightCm">Height (cm)</label><input id="heightCm" type="number" min="120" max="230" inputmode="numeric" required></div>
-          <div class="form-group"><label for="weightKg">Weight (kg)</label><input id="weightKg" type="number" min="35" max="250" step="0.1" inputmode="decimal" required></div>
+        </fieldset>
+        <fieldset class="choice-set">
+          <legend>Delivery area</legend>
+          <div class="choice-grid">
+            <label><input type="radio" name="area" value="Dubai Marina"> Dubai Marina</label>
+            <label><input type="radio" name="area" value="JLT"> JLT</label>
+            <label><input type="radio" name="area" value="Downtown Dubai"> Downtown</label>
+            <label><input type="radio" name="area" value="Business Bay"> Business Bay</label>
+            <label><input type="radio" name="area" value="JVC"> JVC</label>
+            <label><input type="radio" name="area" value="Jumeirah"> Jumeirah</label>
+            <label><input type="radio" name="area" value="Al Barsha"> Al Barsha</label>
+            <label><input type="radio" name="area" value="Palm Jumeirah"> Palm Jumeirah</label>
+            <label><input type="radio" name="area" value="Deira"> Deira</label>
+            <label><input type="radio" name="area" value="Other"> Other</label>
+          </div>
+        </fieldset>
+        <div class="form-group">
+          <label for="building">Building or street <span>(optional)</span></label>
+          <input id="building" maxlength="160" placeholder="Tower, villa, or street">
         </div>
         <p class="step-status" id="step1Status" role="status"></p>
         <button type="button" class="ps-btn" id="toStep2">Continue</button>
       </div>
 
       <div class="wizard-step" data-step="2" hidden>
-        <div class="form-group">
-          <label for="primaryGoal">Fitness goal</label>
-          <select id="primaryGoal" required>
-            <option value="">Choose one</option>
-            <option>Fat Loss</option>
-            <option>Balanced Diet</option>
-            <option>Healthy Lifestyle</option>
-            <option>Muscle Gain</option>
-          </select>
-        </div>
-        <div class="app-grid">
-          <div class="form-group">
-            <label for="calorieKcal">Daily calorie target (kcal)</label>
-            <input id="calorieKcal" type="number" min="800" max="4500" inputmode="numeric">
-            <label class="guidance-row"><input type="checkbox" id="calorieGuidance"> Ask Nature Fit for guidance</label>
+        <fieldset class="choice-set">
+          <legend>What do you want from the plan?</legend>
+          <div class="choice-grid">
+            <label><input type="radio" name="goal" value="Fat Loss"> Lose weight</label>
+            <label><input type="radio" name="goal" value="Muscle Gain"> Build muscle</label>
+            <label><input type="radio" name="goal" value="Healthy Lifestyle"> Eat healthier</label>
+            <label><input type="radio" name="goal" value="Balanced Diet"> Stay balanced</label>
           </div>
-          <div class="form-group">
-            <label for="proteinGrams">Daily protein target (grams)</label>
-            <input id="proteinGrams" type="number" min="30" max="300" inputmode="numeric">
-            <label class="guidance-row"><input type="checkbox" id="proteinGuidance"> Ask Nature Fit for guidance</label>
-          </div>
-          <div class="form-group">
-            <label for="mealsPerDay">Meals per day</label>
-            <select id="mealsPerDay" required>
-              <option value="">Choose one</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="preferredDuration">Preferred plan length</label>
-            <select id="preferredDuration" required>
-              <option value="">Choose one</option>
-              <option value="20">20 days</option>
-              <option value="24">24 days</option>
-              <option value="30">30 days</option>
-              <option value="90">90 days</option>
-            </select>
-          </div>
-        </div>
-        <p class="field-note">Nature Fit does not calculate a calorie or protein target for you. Enter the numbers you already use, or ask the kitchen for guidance.</p>
-        <p class="step-status" id="step2Status" role="status"></p>
-        <div class="app-actions">
-          <button type="button" class="btn btn-outline" id="backTo1">Back</button>
-          <button type="button" class="ps-btn" id="toStep3">Continue</button>
-        </div>
-      </div>
-
-      <div class="wizard-step" data-step="3" hidden>
-        <fieldset class="check-grid">
-          <legend>Food allergies</legend>
-          <label><input type="checkbox" name="allergy" value="No known food allergies"> No known food allergies</label>
-          <label><input type="checkbox" name="allergy" value="Dairy"> Dairy</label>
-          <label><input type="checkbox" name="allergy" value="Eggs"> Eggs</label>
-          <label><input type="checkbox" name="allergy" value="Peanuts"> Peanuts</label>
-          <label><input type="checkbox" name="allergy" value="Tree nuts"> Tree nuts</label>
-          <label><input type="checkbox" name="allergy" value="Fish"> Fish</label>
-          <label><input type="checkbox" name="allergy" value="Shellfish"> Shellfish</label>
-          <label><input type="checkbox" name="allergy" value="Soy"> Soy</label>
-          <label><input type="checkbox" name="allergy" value="Gluten / wheat"> Gluten / wheat</label>
-          <label><input type="checkbox" name="allergy" value="Sesame"> Sesame</label>
-          <label><input type="checkbox" name="allergy" value="Other"> Other</label>
         </fieldset>
-        <div class="form-group"><label for="allergyOther">Other allergy</label><input id="allergyOther" maxlength="200"></div>
-        <div class="form-group">
-          <label for="diet">Dietary preference</label>
-          <select id="diet" required>
-            <option value="">Choose one</option>
-            <option>Regular</option>
-            <option>Vegetarian</option>
-            <option>Vegan</option>
-            <option>Pescatarian</option>
-            <option>Halal</option>
-            <option>Other</option>
-          </select>
+        <fieldset class="choice-set">
+          <legend>How do you like to eat?</legend>
+          <div class="choice-grid">
+            <label><input type="radio" name="dietChoice" value="No specific preference"> No preference</label>
+            <label><input type="radio" name="dietChoice" value="Regular"> Regular</label>
+            <label><input type="radio" name="dietChoice" value="Vegetarian"> Vegetarian</label>
+            <label><input type="radio" name="dietChoice" value="Vegan"> Vegan</label>
+            <label><input type="radio" name="dietChoice" value="Pescatarian"> Pescatarian</label>
+            <label><input type="radio" name="dietChoice" value="Halal"> Halal</label>
+          </div>
+        </fieldset>
+        <fieldset class="choice-set">
+          <legend>Any food allergies?</legend>
+          <div class="choice-grid">
+            <label><input type="checkbox" name="allergy" value="No known food allergies"> None</label>
+            <label><input type="checkbox" name="allergy" value="Dairy"> Dairy</label>
+            <label><input type="checkbox" name="allergy" value="Eggs"> Eggs</label>
+            <label><input type="checkbox" name="allergy" value="Peanuts"> Peanuts</label>
+            <label><input type="checkbox" name="allergy" value="Tree nuts"> Tree nuts</label>
+            <label><input type="checkbox" name="allergy" value="Fish"> Fish</label>
+            <label><input type="checkbox" name="allergy" value="Shellfish"> Shellfish</label>
+            <label><input type="checkbox" name="allergy" value="Soy"> Soy</label>
+            <label><input type="checkbox" name="allergy" value="Gluten / wheat"> Gluten</label>
+            <label><input type="checkbox" name="allergy" value="Sesame"> Sesame</label>
+            <label><input type="checkbox" name="allergy" value="Other"> Other</label>
+          </div>
+        </fieldset>
+        <div class="form-group" id="allergyOtherWrap" hidden>
+          <label for="allergyOther">Other allergy</label>
+          <input id="allergyOther" maxlength="200" placeholder="Tell us the allergy">
         </div>
-        <div class="form-group"><label for="dietOther">Other preference</label><input id="dietOther" maxlength="200"></div>
         <div class="form-group">
-          <label for="dislikes">Foods to avoid</label>
-          <textarea id="dislikes" rows="3" maxlength="1000"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="deliveryAddress">Delivery address</label>
-          <textarea id="deliveryAddress" rows="2" maxlength="300" required></textarea>
-        </div>
-        <div class="form-group">
-          <label for="deliveryInstructions">Delivery instructions <span>(optional)</span></label>
-          <textarea id="deliveryInstructions" rows="2" maxlength="500"></textarea>
-        </div>
-        <div class="form-group">
-          <label for="inquiryNotes">Anything else we should know <span>(optional)</span></label>
-          <textarea id="inquiryNotes" rows="3" maxlength="1000" placeholder="Best time to call, start date, or other notes"></textarea>
+          <label for="dislikes">Foods to skip <span>(optional)</span></label>
+          <input id="dislikes" maxlength="1000" placeholder="Coriander, mushrooms, spicy food">
         </div>
         <label class="ack">
           <input type="checkbox" id="allergyAck">
-          <span>I understand that listing an allergy does not guarantee a meal is free of that allergen. Nature Fit will confirm suitability before the plan starts. Meals are prepared in a kitchen that handles common allergens.</span>
+          <span>I understand meals are prepared in a kitchen that handles common allergens, and Nature Fit will confirm my choices before the plan starts.</span>
         </label>
-        <p class="step-status" id="step3Status" role="status"></p>
+        <p class="step-status" id="step2Status" role="status"></p>
         <div class="app-actions">
-          <button type="button" class="btn btn-outline" id="backTo2">Back</button>
-          <button type="submit" class="ps-btn" id="saveProfile">Email this inquiry</button>
+          <button type="button" class="btn btn-outline" id="backTo1">Back</button>
+          <button type="submit" class="ps-btn" id="saveProfile">Send my inquiry</button>
         </div>
       </div>
     </form>
@@ -177,12 +142,12 @@
 
   <section class="app-card" id="sent" hidden>
     <p class="ps-kicker">Inquiry sent</p>
-    <h1>Nature Fit has your request</h1>
-    <p class="app-lead" id="sentMessage"></p>
-    <p class="field-note">We reply from naturefitdxb@gmail.com to the email you entered. Keep an eye on your inbox, including spam.</p>
+    <h1>Thank you</h1>
+    <p class="app-lead" id="sentMessage">Our team will reach you soon.</p>
+    <p class="field-note">We'll call the number you entered, or reply from naturefitdxb@gmail.com.</p>
     <a class="ps-btn" href="index.html#plans">Back to plans</a>
   </section>
 </main>
-<script src="js/platform.js?v=7"></script>
+<script src="js/platform.js?v=8"></script>
 </body>
 </html>

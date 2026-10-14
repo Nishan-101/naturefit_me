@@ -10,10 +10,12 @@ function validateProfile(body, options = {}) {
   const errors = [];
   const fullName = cleanText(body.fullName, 150);
   const email = cleanText(body.email, 150);
-  const age = Number(body.age);
+  const inquiry = Boolean(options.inquiry);
+  const blank = (value) => value === "" || value == null;
+  const age = blank(body.age) ? null : Number(body.age);
   const gender = cleanText(body.gender, 30);
-  const heightCm = Number(body.heightCm);
-  const weightKg = Number(body.weightKg);
+  const heightCm = blank(body.heightCm) ? null : Number(body.heightCm);
+  const weightKg = blank(body.weightKg) ? null : Number(body.weightKg);
   const targetRaw = body.targetWeightKg === "" || body.targetWeightKg == null ? null : Number(body.targetWeightKg);
   const activityLevel = cleanText(body.activityLevel, 40);
   const primaryGoal = cleanText(body.primaryGoal, 40);
@@ -23,12 +25,12 @@ function validateProfile(body, options = {}) {
   const diet = cleanText(body.diet, 40);
   const dietOther = cleanText(body.dietOther, 200);
   const dislikes = cleanText(body.dislikes, 1000);
-  const calorieGuidance = Boolean(body.calorieGuidance);
-  const proteinGuidance = Boolean(body.proteinGuidance);
-  const calorieKcal = calorieGuidance || body.calorieKcal === "" || body.calorieKcal == null ? null : Number(body.calorieKcal);
-  const proteinGrams = proteinGuidance || body.proteinGrams === "" || body.proteinGrams == null ? null : Number(body.proteinGrams);
-  const mealsPerDay = Number(body.mealsPerDay);
-  const preferredDuration = Number(body.preferredDuration);
+  const calorieGuidance = Boolean(body.calorieGuidance) || (inquiry && blank(body.calorieKcal));
+  const proteinGuidance = Boolean(body.proteinGuidance) || (inquiry && blank(body.proteinGrams));
+  const calorieKcal = calorieGuidance || blank(body.calorieKcal) ? null : Number(body.calorieKcal);
+  const proteinGrams = proteinGuidance || blank(body.proteinGrams) ? null : Number(body.proteinGrams);
+  const mealsPerDay = blank(body.mealsPerDay) ? null : Number(body.mealsPerDay);
+  const preferredDuration = blank(body.preferredDuration) ? null : Number(body.preferredDuration);
   const deliveryAddress = cleanText(body.deliveryAddress, 300);
   const deliveryInstructions = cleanText(body.deliveryInstructions, 500);
   const allergyAcknowledged = Boolean(body.allergyAcknowledged);
@@ -41,10 +43,14 @@ function validateProfile(body, options = {}) {
   } else if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     errors.push("Enter a valid email address, or leave it blank.");
   }
-  if (!Number.isInteger(age) || age < 18 || age > 90) errors.push("Enter an age between 18 and 90.");
+  if (!(inquiry && age == null) && (!Number.isInteger(age) || age < 18 || age > 90)) errors.push("Enter an age between 18 and 90.");
   if (gender && !["Female", "Male", "Other", "Prefer not to say"].includes(gender)) errors.push("Choose a valid gender option.");
-  if (!Number.isInteger(heightCm) || heightCm < 120 || heightCm > 230) errors.push("Enter your height in centimeters.");
-  if (!Number.isFinite(weightKg) || weightKg < 35 || weightKg > 250) errors.push("Enter your current weight in kilograms.");
+  if (!(inquiry && heightCm == null) && (!Number.isInteger(heightCm) || heightCm < 120 || heightCm > 230)) {
+    errors.push("Enter your height in centimeters.");
+  }
+  if (!(inquiry && weightKg == null) && (!Number.isFinite(weightKg) || weightKg < 35 || weightKg > 250)) {
+    errors.push("Enter your current weight in kilograms.");
+  }
   if (targetRaw !== null && (!Number.isFinite(targetRaw) || targetRaw < 35 || targetRaw > 250)) {
     errors.push("Enter a target weight in kilograms, or leave it blank.");
   }
@@ -62,8 +68,10 @@ function validateProfile(body, options = {}) {
   if (!proteinGuidance && (!Number.isInteger(proteinGrams) || proteinGrams < 30 || proteinGrams > 300)) {
     errors.push("Enter a daily protein target between 30 and 300 grams, or ask Nature Fit for guidance.");
   }
-  if (![2, 3, 4, 5].includes(mealsPerDay)) errors.push("Choose 2 to 5 meals per day.");
-  if (!DURATIONS.includes(preferredDuration)) errors.push("Choose a plan length of 20, 24, 30, or 90 days.");
+  if (!(inquiry && mealsPerDay == null) && ![2, 3, 4, 5].includes(mealsPerDay)) errors.push("Choose 2 to 5 meals per day.");
+  if (!(inquiry && preferredDuration == null) && !DURATIONS.includes(preferredDuration)) {
+    errors.push("Choose a plan length of 20, 24, 30, or 90 days.");
+  }
   if (deliveryAddress.length < 8) errors.push("Enter a delivery address.");
   if (!allergyAcknowledged) errors.push("Please confirm that you understand the allergy note.");
 

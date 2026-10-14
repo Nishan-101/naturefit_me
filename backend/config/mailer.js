@@ -95,6 +95,9 @@ function buildInquiryEmail({ inquiry, customer, profile, mealLabels, dayLabels, 
   const submitted = inquiry.createdAt ? new Date(inquiry.createdAt).toISOString() : "Unknown";
   const calories = profile.calorieGuidance ? "Guidance requested" : `${profile.calorieKcal} kcal`;
   const protein = profile.proteinGuidance ? "Guidance requested" : `${profile.proteinGrams} g`;
+  const ageText = profile.age ? String(profile.age) : "Not provided";
+  const heightText = profile.heightCm ? `${profile.heightCm} cm` : "Not provided";
+  const weightText = profile.weightKg ? `${profile.weightKg} kg` : "Not provided";
   const diet = `${profile.diet}${profile.dietOther ? ` (${profile.dietOther})` : ""}`;
   const allergyText = `${allergies}${profile.allergyOther ? ` (${profile.allergyOther})` : ""}`;
   const text = `
@@ -123,10 +126,10 @@ Diet: ${diet}
 Allergies: ${allergyText}
 Foods to avoid: ${profile.dislikes || "None"}
 
-Age: ${profile.age}
+Age: ${ageText}
 Gender: ${profile.gender || "Not provided"}
-Height: ${profile.heightCm} cm
-Weight: ${profile.weightKg} kg
+Height: ${heightText}
+Weight: ${weightText}
 
 Delivery address: ${profile.deliveryAddress || "Not provided"}
 Delivery instructions: ${profile.deliveryInstructions || "None"}
@@ -168,10 +171,10 @@ ${allergyNote}
         ${row("Diet", diet)}
         ${row("Allergies", allergyText)}
         ${row("Foods to avoid", profile.dislikes || "None")}
-        ${row("Age", String(profile.age))}
+        ${row("Age", ageText)}
         ${row("Gender", profile.gender || "Not provided")}
-        ${row("Height", `${profile.heightCm} cm`)}
-        ${row("Weight", `${profile.weightKg} kg`)}
+        ${row("Height", heightText)}
+        ${row("Weight", weightText)}
         ${row("Delivery", profile.deliveryAddress || "Not provided")}
         ${row("Instructions", profile.deliveryInstructions || "None")}
         ${row("Submitted", submitted)}
