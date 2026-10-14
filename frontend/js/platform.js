@@ -56,6 +56,69 @@
     sessionStorage.setItem("nf-plan-draft", JSON.stringify(draft));
   }
 
+  const PENDING_INQUIRY_KEY = "nf-inquiry-pending";
+  let inquiryInFlight = false;
+  let inquiryRetryTimer = 0;
+
+  function readPendingInquiry() {
+    try {
+      return JSON.parse(localStorage.getItem(PENDING_INQUIRY_KEY) || "null");
+    } catch {
+      return null;
+    }
+  }
+
+  function queueInquiry(payload) {
+    try {
+      localStorage.setItem(PENDING_INQUIRY_KEY, JSON.stringify({ payload, attempts: 0 }));
+    } catch {
+      /* the request below still sends this visit */
+    }
+    flushPendingInquiry();
+  }
+
+  function flushPendingInquiry() {
+    if (inquiryInFlight) return;
+    const pending = readPendingInquiry();
+    if (!pending || !pending.payload || pending.attempts >= 6) return;
+    inquiryInFlight = true;
+    const attempts = pending.attempts + 1;
+    try {
+      localStorage.setItem(PENDING_INQUIRY_KEY, JSON.stringify({ payload: pending.payload, attempts }));
+    } catch {
+      /* keep trying this visit even if storage is full */
+    }
+    api("/api/inquiries", {
+      method: "POST",
+      credentials: "omit",
+      keepalive: true,
+      body: pending.payload,
+    })
+      .then(() => {
+        try {
+          localStorage.removeItem(PENDING_INQUIRY_KEY);
+        } catch {
+          /* already sent */
+        }
+      })
+      .catch((error) => {
+        if (error.status && error.status < 500) {
+          try {
+            localStorage.removeItem(PENDING_INQUIRY_KEY);
+          } catch {
+            /* the server already answered */
+          }
+          return;
+        }
+        const wait = [3000, 8000, 20000, 40000][Math.min(attempts - 1, 3)];
+        window.clearTimeout(inquiryRetryTimer);
+        inquiryRetryTimer = window.setTimeout(flushPendingInquiry, wait);
+      })
+      .finally(() => {
+        inquiryInFlight = false;
+      });
+  }
+
   function contactActions(email, phone) {
     const links = [];
     if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email || "")) {
@@ -256,39 +319,25 @@
         return setStatus(notice, "Please confirm the allergy note.", "error");
       }
       saveBtn.disabled = true;
-      setStatus(notice, "Sending your inquiry…", "pending");
       const callTime = selectedValue("callTime");
-      try {
-        await api("/api/inquiries", {
-          method: "POST",
-          credentials: "omit",
-          keepalive: true,
-          body: {
-            ...profileBody(draft),
-            countryCode: document.getElementById("countryCode").value,
-            nationalNumber: document.getElementById("nationalNumber").value,
-            notes: [
-              `Age: ${selectedLabel("ageBand")}`,
-              `Height: ${selectedLabel("heightBand")}`,
-              `Weight: ${selectedLabel("weightBand")}`,
-              `Calories: ${selectedLabel("kcal")}`,
-              `Best time to call: ${callTime}`,
-            ].join(". "),
-            plan: draft.plan,
-            meals: draft.meals,
-            days: draft.days,
-            duration: draft.duration,
-          },
-        });
-        showThanks();
-      } catch (error) {
-        if (!error.status) {
-          showThanks();
-          return;
-        }
-        setStatus(notice, error.message, "error");
-        saveBtn.disabled = false;
-      }
+      const payload = {
+        ...profileBody(draft),
+        countryCode: document.getElementById("countryCode").value,
+        nationalNumber: document.getElementById("nationalNumber").value,
+        notes: [
+          `Age: ${selectedLabel("ageBand")}`,
+          `Height: ${selectedLabel("heightBand")}`,
+          `Weight: ${selectedLabel("weightBand")}`,
+          `Calories: ${selectedLabel("kcal")}`,
+          `Best time to call: ${callTime}`,
+        ].join(". "),
+        plan: draft.plan,
+        meals: draft.meals,
+        days: draft.days,
+        duration: draft.duration,
+      };
+      showThanks();
+      queueInquiry(payload);
     });
 
     showStep(1, { scroll: false });
@@ -417,6 +466,7 @@
     const page = document.body.dataset.page;
     if (page === "account") initAccount();
     if (page === "admin") initAdmin();
+    flushPendingInquiry();
   });
 
   window.NatureFit = { api, saveDraft, readDraft, GOALS, ALLERGIES };
