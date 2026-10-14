@@ -1492,3 +1492,157 @@ html[data-theme="dark"] .app-card label{color:#14281c;}
   .wizard-step .ps-btn{width:100%;}
   .main-nav a{font-size:.84rem;}
 }
+
+/* Inquiry form */
+body[data-page="account"] .app-main{
+  padding:96px 16px 56px;
+  background:
+    radial-gradient(900px 280px at 50% -40px, #e5f3eb 0%, rgba(229,243,235,0) 72%),
+    #f6f3ec;
+}
+body[data-page="account"] .app-card{
+  max-width:680px;
+  padding:26px 20px 22px;
+  border:0;
+  border-radius:28px;
+  box-shadow:0 20px 50px rgba(20,40,28,.08);
+}
+body[data-page="account"] .app-card h1{
+  font-size:clamp(1.65rem, 6vw, 2.3rem);
+  line-height:1.05;
+  letter-spacing:-.04em;
+  margin:0 0 8px;
+}
+body[data-page="account"] .app-lead{font-size:1rem;line-height:1.5;margin:0 0 14px;}
+body[data-page="account"] .ps-kicker{
+  display:inline-flex;
+  align-items:center;
+  margin:0 0 12px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:#e7f3ec;
+  letter-spacing:.14em;
+}
+body[data-page="account"] #draftSummary.field-note{
+  display:inline-block;
+  margin:0 0 18px;
+  padding:8px 12px;
+  border-radius:999px;
+  background:#f3faf6;
+  color:#1b4332;
+  font-weight:700;
+}
+body[data-page="account"] .app-grid{gap:12px;}
+body[data-page="account"] .form-group label,
+body[data-page="account"] .choice-set legend{
+  display:block;
+  margin:0 0 8px;
+  font-size:.92rem;
+  font-weight:800;
+  letter-spacing:0;
+  color:#14281c;
+}
+body[data-page="account"] .form-group label span{font-weight:500;color:#6b7870;}
+@media(max-width:720px){
+  body[data-page="account"] .header-inner .btn-small{display:none;}
+}
+body[data-page="account"] .app-card input,
+body[data-page="account"] .app-card select,
+body[data-page="account"] .app-card textarea{
+  min-height:52px;
+  margin-top:0;
+  padding:14px 16px;
+  border:1.5px solid #e3ebe6;
+  border-radius:16px;
+  background:#fbfcfa;
+  font-size:16px;
+}
+body[data-page="account"] fieldset.choice-set{
+  border:0;
+  margin:0 0 18px;
+  padding:0;
+  min-width:0;
+  width:100%;
+}
+body[data-page="account"] .choice-grid{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:8px;
+}
+body[data-page="account"] .choice-grid label{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:10px;
+  width:auto;
+  min-height:48px;
+  margin:0;
+  padding:10px 12px;
+  border:1.5px solid #e3ebe6;
+  border-radius:16px;
+  background:#fbfcfa;
+  color:#14281c;
+  font-size:.92rem;
+  font-weight:700;
+  line-height:1.25;
+  text-align:left;
+  cursor:pointer;
+}
+body[data-page="account"] .choice-grid input{
+  position:static !important;
+  flex:0 0 18px;
+  width:18px !important;
+  height:18px !important;
+  min-width:18px;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+  border-radius:50%;
+  opacity:1 !important;
+  accent-color:#1b4332;
+  appearance:auto;
+}
+body[data-page="account"] .choice-grid label.is-on,
+body[data-page="account"] .choice-grid label:has(input:checked){
+  background:#1b4332;
+  border-color:#1b4332;
+  color:#fff;
+}
+body[data-page="account"] .choice-grid label.is-on input,
+body[data-page="account"] .choice-grid label:has(input:checked) input{
+  accent-color:#fff;
+}
+body[data-page="account"] .ack{
+  margin:4px 0 16px;
+  padding:12px;
+  border-radius:16px;
+  background:#f6f3ec;
+  line-height:1.45;
+}
+body[data-page="account"] .ack input{
+  width:18px !important;
+  height:18px;
+  margin:2px 0 0 !important;
+  accent-color:#1b4332;
+}
+body[data-page="account"] .wizard-step > .ps-btn,
+body[data-page="account"] .app-actions .ps-btn{
+  width:100%;
+  min-height:52px;
+  margin-top:4px;
+}
+body[data-page="account"] .app-actions{
+  display:grid;
+  grid-template-columns:minmax(96px, .7fr) 1.4fr;
+  gap:10px;
+}
+body[data-page="account"] .app-actions .btn{min-height:52px;border-radius:999px;}
+body[data-page="account"] #sent .ps-btn{margin-top:8px;}
+@media(min-width:760px){
+  body[data-page="account"] .app-card{padding:36px 34px 30px;}
+  body[data-page="account"] .choice-grid{grid-template-columns:repeat(3, minmax(0, 1fr));}
+}
+@media(max-width:380px){
+  body[data-page="account"] .choice-grid{grid-template-columns:1fr;}
+  body[data-page="account"] .app-actions{grid-template-columns:1fr;}
+}

@@ -175,6 +175,16 @@
       };
     }
 
+    function paintChoices() {
+      document.querySelectorAll(".choice-grid label").forEach((label) => {
+        const input = label.querySelector("input");
+        label.classList.toggle("is-on", Boolean(input && input.checked));
+      });
+    }
+    document.querySelectorAll(".choice-grid input").forEach((input) => {
+      input.addEventListener("change", paintChoices);
+    });
+
     document.querySelectorAll('input[name="allergy"]').forEach((box) => {
       box.addEventListener("change", () => {
         if (box.value === "No known food allergies" && box.checked) {
