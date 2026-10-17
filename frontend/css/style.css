@@ -622,8 +622,27 @@ h2.center{margin-bottom:14px;}
 .site-header.scrolled{box-shadow:0 6px 24px rgba(27,67,50,.10);padding:10px 0;}
 .header-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;}
 .brand{display:flex;align-items:center;gap:10px;}
-.brand-logo{height:auto;width:min(210px,46vw);display:block;border-radius:8px;}
-.footer-logo{width:min(230px,70vw);}
+.brand-logo{
+  width:clamp(64px, 7.2vw, 104px);
+  height:clamp(64px, 7.2vw, 104px);
+  aspect-ratio:1;
+  display:block;
+  border-radius:50%;
+  object-fit:cover;
+  object-position:center;
+  flex-shrink:0;
+  background:#33582c;
+  box-shadow:0 0 0 2px rgba(255,255,255,.7), 0 8px 18px rgba(27,67,50,.16);
+}
+.footer-logo{
+  width:clamp(84px, 11vw, 124px);
+  height:clamp(84px, 11vw, 124px);
+  box-shadow:0 0 0 2px rgba(255,255,255,.22);
+}
+@media(max-width:720px){
+  .brand-logo{width:64px;height:64px;}
+  .footer-logo{width:84px;height:84px;}
+}
 .brand-text{font-family:var(--font-display);font-weight:700;font-size:1.25rem;color:var(--heading);display:flex;flex-direction:column;line-height:1.05;}
 .brand-text em{font-style:normal;font-family:var(--font-body);font-weight:600;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);}
 .brand-text.light{color:var(--white);}
