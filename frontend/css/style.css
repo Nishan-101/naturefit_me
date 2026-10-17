@@ -622,8 +622,8 @@ h2.center{margin-bottom:14px;}
 .site-header.scrolled{box-shadow:0 6px 24px rgba(27,67,50,.10);padding:10px 0;}
 .header-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;}
 .brand{display:flex;align-items:center;gap:10px;}
-.brand-logo{height:48px;width:auto;display:block;border-radius:50%;}
-.footer-logo{height:56px;}
+.brand-logo{height:auto;width:min(210px,46vw);display:block;border-radius:8px;}
+.footer-logo{width:min(230px,70vw);}
 .brand-text{font-family:var(--font-display);font-weight:700;font-size:1.25rem;color:var(--heading);display:flex;flex-direction:column;line-height:1.05;}
 .brand-text em{font-style:normal;font-family:var(--font-body);font-weight:600;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);}
 .brand-text.light{color:var(--white);}
