@@ -126,4 +126,16 @@ async function testConnection() {
   }
 }
 
-module.exports = { pool, initDatabase, testConnection };
+async function readDatabaseIdentity() {
+  const connection = await pool.getConnection();
+  try {
+    const [rows] = await connection.query(
+      "SELECT DATABASE() AS databaseName, CURRENT_USER() AS currentUser"
+    );
+    return rows && rows[0] ? rows[0] : {};
+  } finally {
+    connection.release();
+  }
+}
+
+module.exports = { pool, initDatabase, testConnection, readDatabaseIdentity };

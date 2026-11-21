@@ -49,7 +49,18 @@ function otpRequiredNow() {
     stagingOtpOptional: process.env.STAGING_OTP_OPTIONAL,
     publicSiteUrl: process.env.PUBLIC_SITE_URL,
     clientOrigin: process.env.CLIENT_ORIGIN,
+    dbHost: process.env.DB_HOST,
     dbName: process.env.DB_NAME,
+    dbUser: process.env.DB_USER,
+    dbPassword: process.env.DB_PASSWORD,
+    stagingDbAddon: process.env.STAGING_DB_ADDON,
+    stagingDbHost: process.env.STAGING_DB_HOST,
+    stagingDbName: process.env.STAGING_DB_NAME,
+    stagingDbUser: process.env.STAGING_DB_USER,
+    productionDbHost: process.env.PRODUCTION_DB_HOST,
+    productionDbName: process.env.PRODUCTION_DB_NAME,
+    productionDbUser: process.env.PRODUCTION_DB_USER,
+    productionDbPassword: process.env.PRODUCTION_DB_PASSWORD,
     twilioConfigured: twilioConfig().configured,
   });
 }

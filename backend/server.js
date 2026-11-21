@@ -4,7 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
 
-const { initDatabase, testConnection } = require("./config/db");
+const { initDatabase, testConnection, readDatabaseIdentity } = require("./config/db");
 const { verifyMailer } = require("./config/mailer");
 const contactRoutes = require("./routes/contactRoutes");
 const accountRoutes = require("./routes/accountRoutes");
@@ -14,7 +14,7 @@ const orderRoutes = require("./routes/orderRoutes");
 const packageRoutes = require("./routes/packageRoutes");
 const customerRoutes = require("./routes/customerRoutes");
 const { stripeWebhook } = require("./controllers/paymentController");
-const { assertRuntimeIsolation } = require("./lib/runtimeIsolation");
+const { assertRuntimeIsolation, assertConnectedDatabase } = require("./lib/runtimeIsolation");
 const { notFoundHandler, errorHandler } = require("./middleware/errorHandler");
 
 const app = express();
@@ -99,6 +99,7 @@ async function start() {
   try {
     assertRuntimeIsolation();
     await testConnection();
+    assertConnectedDatabase(await readDatabaseIdentity());
     await initDatabase();
     await verifyMailer();
 

@@ -44,25 +44,25 @@ function publicOtpError(httpStatus, code) {
   };
 }
 
+const { stagingDatabaseFailure } = require("./runtimeIsolation");
+
 function referencesProductionSite(value) {
   return /naturefit\.site/i.test(String(value || ""));
 }
 
-const STAGING_DB_NAME = "naturefit_staging";
-
 /**
  * SMS verification is skipped only for a fully identified staging sandbox.
+ * The database check must match the separate staging identity, not a database name alone.
  * Every other configuration, including a missing or mixed setting, keeps OTP required.
  */
 function packageOtpRequired(env) {
   const source = env || {};
-  const appEnv = String(source.appEnv || "").trim().toLowerCase();
-  const secret = String(source.stripeSecretKey || "").trim();
-  const liveEnabled = source.liveEnabled === true || source.liveEnabled === "true";
-  const stagingOptOut = source.stagingOtpOptional === true || source.stagingOtpOptional === "true";
-  const publicSite = String(source.publicSiteUrl || "").trim();
-  const clientOrigin = String(source.clientOrigin || "").trim();
-  const dbName = String(source.dbName || "").trim();
+  const appEnv = String(source.appEnv || source.APP_ENV || "").trim().toLowerCase();
+  const secret = String(source.stripeSecretKey || source.STRIPE_SECRET_KEY || "").trim();
+  const liveEnabled = source.liveEnabled === true || source.liveEnabled === "true" || source.STRIPE_LIVE_ENABLED === "true";
+  const stagingOptOut = source.stagingOtpOptional === true || source.stagingOtpOptional === "true" || source.STAGING_OTP_OPTIONAL === "true";
+  const publicSite = String(source.publicSiteUrl || source.PUBLIC_SITE_URL || "").trim();
+  const clientOrigin = String(source.clientOrigin || source.CLIENT_ORIGIN || "").trim();
   const productionSite = referencesProductionSite(publicSite) || referencesProductionSite(clientOrigin);
   const testKey = secret.startsWith("sk_test_") && !secret.startsWith("sk_live_");
   const isolatedStaging =
@@ -73,7 +73,7 @@ function packageOtpRequired(env) {
     publicSite.length > 0 &&
     clientOrigin.length > 0 &&
     !productionSite &&
-    dbName === STAGING_DB_NAME;
+    stagingDatabaseFailure(source) === "";
   return !isolatedStaging;
 }
 
@@ -98,7 +98,6 @@ module.exports = {
   sendAllowed,
   checkAllowed,
   publicOtpError,
-  STAGING_DB_NAME,
   packageOtpRequired,
   parseSqlUtc,
   sqlDateTime,

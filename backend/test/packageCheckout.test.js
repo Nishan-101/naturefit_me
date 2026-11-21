@@ -9,7 +9,7 @@ const { validatePackageOrder, blockingPayment, INQUIRY_CONFIRMATION } = require(
 const { buildDeliveryDates } = require("../lib/schedule");
 const { createCheckoutSession } = require("../lib/stripe");
 const { sendAllowed, checkAllowed, publicOtpError, packageOtpRequired } = require("../lib/otpPolicy");
-const { isolationFailure, publicSiteOrigin } = require("../lib/runtimeIsolation");
+const { isolationFailure, connectedDatabaseFailure, publicSiteOrigin } = require("../lib/runtimeIsolation");
 const { createVerification, checkVerification } = require("../lib/twilioVerify");
 const { checkoutGate } = require("../lib/stripe");
 const { packageChatMessage, inquiryChatMessage } = require("../lib/whatsapp");
@@ -145,12 +145,28 @@ test("OTP stays required in production and is optional only on isolated Stripe t
     stagingOtpOptional: "true",
     publicSiteUrl: "https://naturefit-staging.vercel.app",
     clientOrigin: "https://naturefit-staging.vercel.app",
-    dbName: "naturefit_staging",
+    stagingDbAddon: "naturefit_staging",
+    stagingDbHost: "staging-db.mysql.services.clever-cloud.com",
+    stagingDbName: "bgeneratedstagingdb",
+    stagingDbUser: "ustaginggenerated",
+    dbHost: "staging-db.mysql.services.clever-cloud.com",
+    dbName: "bgeneratedstagingdb",
+    dbUser: "ustaginggenerated",
+    dbPassword: "staging-secret",
+    productionDbHost: "production-db.mysql.services.clever-cloud.com",
+    productionDbName: "naturefit_live",
+    productionDbUser: "ulive",
     twilioConfigured: false,
   };
   assert.equal(packageOtpRequired(staging), false);
   assert.equal(packageOtpRequired({ ...staging, dbName: "" }), true);
+  assert.equal(packageOtpRequired({ ...staging, dbName: "naturefit_staging" }), true);
   assert.equal(packageOtpRequired({ ...staging, dbName: "production_db" }), true);
+  assert.equal(packageOtpRequired({ ...staging, dbHost: "other.mysql.services.clever-cloud.com" }), true);
+  assert.equal(packageOtpRequired({ ...staging, dbUser: "other_user" }), true);
+  assert.equal(packageOtpRequired({ ...staging, dbHost: staging.productionDbHost }), true);
+  assert.equal(packageOtpRequired({ ...staging, dbName: staging.productionDbName, stagingDbName: staging.productionDbName }), true);
+  assert.equal(packageOtpRequired({ ...staging, productionDbHost: "" }), true);
   assert.equal(packageOtpRequired({ ...staging, publicSiteUrl: "" }), true);
   assert.equal(packageOtpRequired({ ...staging, clientOrigin: "" }), true);
   assert.equal(packageOtpRequired({ ...staging, stripeSecretKey: "" }), true);
@@ -183,31 +199,75 @@ test("OTP stays required in production and is optional only on isolated Stripe t
   );
 });
 
-test("staging refuses the live site, live Stripe keys, and any database other than naturefit_staging", () => {
+test("staging accepts the real Clever Cloud database name and refuses the production database", () => {
+  const stagingPassword = "staging-secret";
+  const productionPassword = "production-secret-must-not-appear";
   const staging = {
     APP_ENV: "staging",
     NODE_ENV: "production",
-    DB_NAME: "naturefit_staging",
-    DB_HOST: "staging-db.example.net",
-    DB_USER: "staging_user",
-    DB_PASSWORD: "staging-secret",
+    STAGING_DB_ADDON: "naturefit_staging",
+    STAGING_DB_HOST: "staging-db.mysql.services.clever-cloud.com",
+    STAGING_DB_NAME: "bgeneratedstagingdb",
+    STAGING_DB_USER: "ustaginggenerated",
+    DB_HOST: "staging-db.mysql.services.clever-cloud.com",
+    DB_NAME: "bgeneratedstagingdb",
+    DB_USER: "ustaginggenerated",
+    DB_PASSWORD: stagingPassword,
+    PRODUCTION_DB_HOST: "production-db.mysql.services.clever-cloud.com",
+    PRODUCTION_DB_NAME: "naturefit_live",
+    PRODUCTION_DB_USER: "ulive",
     PUBLIC_SITE_URL: "https://nature-fit-git-meal-plan-inquiry-checkout.vercel.app",
     CLIENT_ORIGIN: "https://nature-fit-git-meal-plan-inquiry-checkout.vercel.app",
     STRIPE_SECRET_KEY: "sk_test_123",
     STRIPE_LIVE_ENABLED: "",
   };
   assert.equal(isolationFailure(staging), "");
+  assert.equal(isolationFailure(staging).includes(stagingPassword), false);
   assert.equal(publicSiteOrigin(staging), "https://nature-fit-git-meal-plan-inquiry-checkout.vercel.app");
-  assert.equal(isolationFailure({ ...staging, DB_NAME: "naturefit_live" }).includes("naturefit_staging"), true);
-  assert.equal(isolationFailure({ ...staging, DB_HOST: "" }).includes("DB_HOST"), true);
-  assert.equal(isolationFailure({ ...staging, DB_PASSWORD: "" }).includes("DB_PASSWORD"), true);
-  assert.equal(isolationFailure({ ...staging, PUBLIC_SITE_URL: "https://naturefit.site" }).includes("naturefit.site"), true);
-  assert.equal(isolationFailure({ ...staging, STRIPE_SECRET_KEY: "sk_live_123" }).includes("live Stripe"), true);
-  assert.equal(isolationFailure({ ...staging, APP_ENV: "production" }).includes("naturefit_staging"), true);
-  assert.equal(isolationFailure({ APP_ENV: "", NODE_ENV: "production" }).includes("APP_ENV"), true);
+  assert.match(isolationFailure({ ...staging, DB_NAME: "naturefit_staging" }), /STAGING_DB_NAME/);
+  assert.match(isolationFailure({ ...staging, DB_NAME: "naturefit_live" }), /production database name/);
+  assert.match(isolationFailure({ ...staging, DB_HOST: "other.mysql.services.clever-cloud.com" }), /DB_HOST must match/);
+  assert.match(isolationFailure({ ...staging, DB_USER: "other_user" }), /DB_USER must match/);
+  assert.match(isolationFailure({ ...staging, DB_HOST: "" }), /DB_HOST/);
+  assert.match(isolationFailure({ ...staging, DB_PASSWORD: "" }), /DB_PASSWORD/);
+  assert.match(isolationFailure({ ...staging, STAGING_DB_NAME: "" }), /STAGING_DB_NAME/);
+  assert.match(isolationFailure({ ...staging, STAGING_DB_ADDON: "naturefit_live" }), /STAGING_DB_ADDON/);
+  assert.match(isolationFailure({ ...staging, PRODUCTION_DB_HOST: "" }), /PRODUCTION_DB_HOST/);
+  assert.match(isolationFailure({ ...staging, DB_HOST: staging.PRODUCTION_DB_HOST, STAGING_DB_HOST: staging.PRODUCTION_DB_HOST }), /production database host/);
+  assert.match(isolationFailure({ ...staging, DB_USER: staging.PRODUCTION_DB_USER, STAGING_DB_USER: staging.PRODUCTION_DB_USER }), /production database user/);
+  const passwordRefusal = isolationFailure({ ...staging, PRODUCTION_DB_PASSWORD: productionPassword });
+  assert.match(passwordRefusal, /PRODUCTION_DB_PASSWORD/);
+  assert.equal(passwordRefusal.includes(productionPassword), false);
+  assert.equal(passwordRefusal.includes(stagingPassword), false);
+  assert.match(isolationFailure({ ...staging, PUBLIC_SITE_URL: "https://naturefit.site" }), /naturefit\.site/);
+  assert.match(isolationFailure({ ...staging, STRIPE_SECRET_KEY: "sk_live_123" }), /live Stripe/);
+  assert.match(isolationFailure({ ...staging, APP_ENV: "production" }), /staging database/);
+  assert.match(isolationFailure({ APP_ENV: "", NODE_ENV: "production" }), /APP_ENV/);
   assert.equal(isolationFailure({ APP_ENV: "production", NODE_ENV: "production", DB_NAME: "live_db" }), "");
+  assert.match(
+    isolationFailure({ APP_ENV: "production", NODE_ENV: "production", DB_NAME: "naturefit_staging" }),
+    /naturefit_staging/
+  );
   assert.equal(publicSiteOrigin({ APP_ENV: "staging", PUBLIC_SITE_URL: "https://naturefit.site" }), "");
   assert.equal(publicSiteOrigin({ APP_ENV: "production", PUBLIC_SITE_URL: "" }), "https://naturefit.site");
+  assert.equal(
+    connectedDatabaseFailure(
+      { databaseName: "bgeneratedstagingdb", currentUser: "ustaginggenerated@%" },
+      staging
+    ),
+    ""
+  );
+  assert.match(
+    connectedDatabaseFailure({ databaseName: "naturefit_live", currentUser: "ustaginggenerated@%" }, staging),
+    /STAGING_DB_NAME|production database/
+  );
+  assert.match(
+    connectedDatabaseFailure({ databaseName: "bgeneratedstagingdb", currentUser: "ulive@%" }, staging),
+    /STAGING_DB_USER|production database user/
+  );
+  const dbSource = fs.readFileSync(path.join(__dirname, "../config/db.js"), "utf8");
+  assert.equal(dbSource.includes("PRODUCTION_DB_"), false);
+  assert.match(dbSource, /database: process\.env\.DB_NAME/);
 
   const vercel = JSON.parse(fs.readFileSync(path.join(__dirname, "../../frontend/vercel.json"), "utf8"));
   const production = vercel.rewrites.filter((rule) => String(rule.destination).includes("naturefit-me.onrender.com"));
