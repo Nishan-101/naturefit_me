@@ -2,11 +2,15 @@
    NATURE FIT RESTAURANT — FRONTEND SCRIPT
 ========================================================= */
 
-// ---- CONFIG ----
-// Set this to your deployed backend API base URL (Render), e.g. "https://naturefit-api.onrender.com"
-// Left as "" it will call a relative "/api" path (useful if frontend and backend share a domain).
-const API_BASE_URL = window.NATURE_FIT_API_URL || "https://naturefit-me.onrender.com";
-// const API_BASE_URL = window.NATURE_FIT_API_URL || "https://naturefit-api.onrender.com";
+// Same-origin /api follows the Vercel host rewrite. naturefit.site stays on the live API.
+// Preview hosts stay on the staging API. NATURE_FIT_API_URL overrides both when set.
+function apiBase() {
+  if (window.NATURE_FIT_API_URL) return String(window.NATURE_FIT_API_URL).replace(/\/$/, "");
+  if (location.port === "5000") return "";
+  if (location.hostname === "localhost" || location.hostname === "127.0.0.1") return "http://localhost:5000";
+  return "";
+}
+const API_BASE_URL = apiBase();
 document.addEventListener("DOMContentLoaded", () => {
   initTheme();
   initHeader();

@@ -544,6 +544,28 @@ async function claimWhatsappLog({ orderId, direction, status, recipient, bodyPre
   }
 }
 
+async function claimStripeEvent(eventId, eventType, reference) {
+  const id = String(eventId || "").trim();
+  if (!id) return false;
+  try {
+    const [result] = await pool.execute(
+      `INSERT INTO stripe_events (event_id, event_type, order_reference) VALUES (?, ?, ?)`,
+      [id.slice(0, 255), String(eventType || "").slice(0, 80), reference || null]
+    );
+    return result.affectedRows === 1;
+  } catch (error) {
+    if (error && error.code === "ER_DUP_ENTRY") return false;
+    throw error;
+  }
+}
+
+async function releaseStripeEvent(eventId) {
+  const id = String(eventId || "").trim();
+  if (!id) return 0;
+  const [result] = await pool.execute("DELETE FROM stripe_events WHERE event_id = ?", [id.slice(0, 255)]);
+  return result.affectedRows;
+}
+
 async function finishWhatsappLog({ orderId, direction, status, providerMessageId, errorMessage }) {
   await pool.execute(
     `UPDATE whatsapp_logs
@@ -590,4 +612,6 @@ module.exports = {
   scheduleForDate,
   claimWhatsappLog,
   finishWhatsappLog,
+  claimStripeEvent,
+  releaseStripeEvent,
 };

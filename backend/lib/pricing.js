@@ -43,7 +43,7 @@ function paymentTransition(current, event) {
   if (!event || event.type === "success_page_visited" || event.type === "cancel_page_visited") return status;
   if (status === "paid") return "paid";
   if (
-    event.type === "checkout.session.completed" &&
+    (event.type === "checkout.session.completed" || event.type === "checkout.session.async_payment_succeeded") &&
     event.paid === true &&
     event.currency === "aed" &&
     Number.isInteger(event.amountFils) &&

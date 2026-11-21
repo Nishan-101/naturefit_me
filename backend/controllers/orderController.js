@@ -12,9 +12,12 @@ const orders = require("../models/orderModel");
 const customers = require("../models/customerModel");
 const { sendOrderNotification } = require("../config/mailer");
 const { buildDeliveryDates } = require("../lib/schedule");
+const { publicSiteOrigin } = require("../lib/runtimeIsolation");
 
 function siteOrigin() {
-  return (process.env.PUBLIC_SITE_URL || "https://naturefit.site").replace(/\/$/, "");
+  const origin = publicSiteOrigin();
+  if (!origin) throw httpError(503, "Staging checkout cannot return customers to the live website.");
+  return origin;
 }
 
 async function context(mode, requirePassword) {

@@ -8,7 +8,8 @@ const { displayAed, toFils } = require("../lib/money");
 const { validatePackageOrder, blockingPayment, INQUIRY_CONFIRMATION } = require("../lib/packageOrder");
 const { buildDeliveryDates } = require("../lib/schedule");
 const { createCheckoutSession } = require("../lib/stripe");
-const { sendAllowed, checkAllowed, publicOtpError } = require("../lib/otpPolicy");
+const { sendAllowed, checkAllowed, publicOtpError, packageOtpRequired } = require("../lib/otpPolicy");
+const { isolationFailure, publicSiteOrigin } = require("../lib/runtimeIsolation");
 const { createVerification, checkVerification } = require("../lib/twilioVerify");
 const { checkoutGate } = require("../lib/stripe");
 const { packageChatMessage, inquiryChatMessage } = require("../lib/whatsapp");
@@ -133,6 +134,94 @@ test("Stripe checkout stays in test mode until a webhook secret exists", () => {
     checkoutGate({ secretKey: "sk_live_123", webhookSecret: "whsec_123", liveEnabled: true }).mode,
     "stripe_live"
   );
+});
+
+test("OTP stays required in production and is optional only on isolated Stripe test staging", () => {
+  const staging = {
+    nodeEnv: "production",
+    appEnv: "staging",
+    stripeSecretKey: "sk_test_123",
+    liveEnabled: "false",
+    stagingOtpOptional: "true",
+    publicSiteUrl: "https://naturefit-staging.vercel.app",
+    clientOrigin: "https://naturefit-staging.vercel.app",
+    dbName: "naturefit_staging",
+    twilioConfigured: false,
+  };
+  assert.equal(packageOtpRequired(staging), false);
+  assert.equal(packageOtpRequired({ ...staging, dbName: "" }), true);
+  assert.equal(packageOtpRequired({ ...staging, dbName: "production_db" }), true);
+  assert.equal(packageOtpRequired({ ...staging, publicSiteUrl: "" }), true);
+  assert.equal(packageOtpRequired({ ...staging, clientOrigin: "" }), true);
+  assert.equal(packageOtpRequired({ ...staging, stripeSecretKey: "" }), true);
+  assert.equal(packageOtpRequired({ ...staging, appEnv: "production" }), true);
+  assert.equal(packageOtpRequired({ ...staging, appEnv: "" }), true);
+  assert.equal(packageOtpRequired({ ...staging, stripeSecretKey: "sk_live_123" }), true);
+  assert.equal(packageOtpRequired({ ...staging, liveEnabled: "true" }), true);
+  assert.equal(packageOtpRequired({ ...staging, stagingOtpOptional: "" }), true);
+  assert.equal(packageOtpRequired({ ...staging, publicSiteUrl: "https://naturefit.site" }), true);
+  assert.equal(packageOtpRequired({ ...staging, clientOrigin: "https://naturefit.site,https://www.naturefit.site" }), true);
+  assert.equal(
+    packageOtpRequired({
+      nodeEnv: "production",
+      appEnv: "production",
+      stripeSecretKey: "sk_test_123",
+      stagingOtpOptional: "true",
+      publicSiteUrl: "https://example.test",
+      clientOrigin: "https://example.test",
+    }),
+    true
+  );
+  assert.equal(
+    packageOtpRequired({
+      nodeEnv: "development",
+      stripeSecretKey: "sk_test_123",
+      publicSiteUrl: "http://localhost:5000",
+      twilioConfigured: false,
+    }),
+    true
+  );
+});
+
+test("staging refuses the live site, live Stripe keys, and any database other than naturefit_staging", () => {
+  const staging = {
+    APP_ENV: "staging",
+    NODE_ENV: "production",
+    DB_NAME: "naturefit_staging",
+    DB_HOST: "staging-db.example.net",
+    DB_USER: "staging_user",
+    DB_PASSWORD: "staging-secret",
+    PUBLIC_SITE_URL: "https://nature-fit-git-meal-plan-inquiry-checkout.vercel.app",
+    CLIENT_ORIGIN: "https://nature-fit-git-meal-plan-inquiry-checkout.vercel.app",
+    STRIPE_SECRET_KEY: "sk_test_123",
+    STRIPE_LIVE_ENABLED: "",
+  };
+  assert.equal(isolationFailure(staging), "");
+  assert.equal(publicSiteOrigin(staging), "https://nature-fit-git-meal-plan-inquiry-checkout.vercel.app");
+  assert.equal(isolationFailure({ ...staging, DB_NAME: "naturefit_live" }).includes("naturefit_staging"), true);
+  assert.equal(isolationFailure({ ...staging, DB_HOST: "" }).includes("DB_HOST"), true);
+  assert.equal(isolationFailure({ ...staging, DB_PASSWORD: "" }).includes("DB_PASSWORD"), true);
+  assert.equal(isolationFailure({ ...staging, PUBLIC_SITE_URL: "https://naturefit.site" }).includes("naturefit.site"), true);
+  assert.equal(isolationFailure({ ...staging, STRIPE_SECRET_KEY: "sk_live_123" }).includes("live Stripe"), true);
+  assert.equal(isolationFailure({ ...staging, APP_ENV: "production" }).includes("naturefit_staging"), true);
+  assert.equal(isolationFailure({ APP_ENV: "", NODE_ENV: "production" }).includes("APP_ENV"), true);
+  assert.equal(isolationFailure({ APP_ENV: "production", NODE_ENV: "production", DB_NAME: "live_db" }), "");
+  assert.equal(publicSiteOrigin({ APP_ENV: "staging", PUBLIC_SITE_URL: "https://naturefit.site" }), "");
+  assert.equal(publicSiteOrigin({ APP_ENV: "production", PUBLIC_SITE_URL: "" }), "https://naturefit.site");
+
+  const vercel = JSON.parse(fs.readFileSync(path.join(__dirname, "../../frontend/vercel.json"), "utf8"));
+  const production = vercel.rewrites.filter((rule) => String(rule.destination).includes("naturefit-me.onrender.com"));
+  const stagingRewrite = vercel.rewrites.find((rule) => String(rule.destination).includes("naturefit-staging.onrender.com"));
+  assert.equal(production.length, 2);
+  production.forEach((rule) => {
+    assert.equal(rule.destination, "https://naturefit-me.onrender.com/api/:path*");
+    assert.equal(rule.has[0].type, "host");
+    assert.match(rule.has[0].value, /naturefit\.site$/);
+  });
+  assert.equal(stagingRewrite.destination, "https://naturefit-staging.onrender.com/api/:path*");
+  assert.equal(stagingRewrite.has, undefined);
+  const contactScript = fs.readFileSync(path.join(__dirname, "../../frontend/js/script.js"), "utf8");
+  assert.equal(contactScript.includes("https://naturefit-me.onrender.com"), false);
 });
 
 test("OTP sends are rate limited and codes expire after too many guesses", () => {

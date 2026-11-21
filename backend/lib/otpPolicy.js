@@ -44,6 +44,39 @@ function publicOtpError(httpStatus, code) {
   };
 }
 
+function referencesProductionSite(value) {
+  return /naturefit\.site/i.test(String(value || ""));
+}
+
+const STAGING_DB_NAME = "naturefit_staging";
+
+/**
+ * SMS verification is skipped only for a fully identified staging sandbox.
+ * Every other configuration, including a missing or mixed setting, keeps OTP required.
+ */
+function packageOtpRequired(env) {
+  const source = env || {};
+  const appEnv = String(source.appEnv || "").trim().toLowerCase();
+  const secret = String(source.stripeSecretKey || "").trim();
+  const liveEnabled = source.liveEnabled === true || source.liveEnabled === "true";
+  const stagingOptOut = source.stagingOtpOptional === true || source.stagingOtpOptional === "true";
+  const publicSite = String(source.publicSiteUrl || "").trim();
+  const clientOrigin = String(source.clientOrigin || "").trim();
+  const dbName = String(source.dbName || "").trim();
+  const productionSite = referencesProductionSite(publicSite) || referencesProductionSite(clientOrigin);
+  const testKey = secret.startsWith("sk_test_") && !secret.startsWith("sk_live_");
+  const isolatedStaging =
+    appEnv === "staging" &&
+    stagingOptOut &&
+    testKey &&
+    !liveEnabled &&
+    publicSite.length > 0 &&
+    clientOrigin.length > 0 &&
+    !productionSite &&
+    dbName === STAGING_DB_NAME;
+  return !isolatedStaging;
+}
+
 function parseSqlUtc(value) {
   if (value instanceof Date) return value.getTime();
   if (!value) return NaN;
@@ -65,6 +98,8 @@ module.exports = {
   sendAllowed,
   checkAllowed,
   publicOtpError,
+  STAGING_DB_NAME,
+  packageOtpRequired,
   parseSqlUtc,
   sqlDateTime,
 };

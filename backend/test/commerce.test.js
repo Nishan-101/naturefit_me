@@ -86,6 +86,26 @@ test("a success-page visit does not mark a payment as paid", () => {
   );
   assert.equal(
     paymentTransition("pending", {
+      type: "checkout.session.async_payment_succeeded",
+      paid: true,
+      currency: "aed",
+      amountFils: 10400,
+      expectedFils: 10400,
+    }),
+    "paid"
+  );
+  assert.equal(
+    paymentTransition("paid", {
+      type: "checkout.session.async_payment_succeeded",
+      paid: true,
+      currency: "aed",
+      amountFils: 10400,
+      expectedFils: 10400,
+    }),
+    "paid"
+  );
+  assert.equal(
+    paymentTransition("pending", {
       type: "checkout.session.completed",
       paid: true,
       currency: "aed",

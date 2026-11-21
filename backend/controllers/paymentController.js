@@ -13,6 +13,7 @@ function orderStatusFor(paymentStatus, current) {
 }
 
 async function stripeWebhook(req, res, next) {
+  let claimedEventId = "";
   try {
     const secret = process.env.STRIPE_WEBHOOK_SECRET || "";
     if (stripeMode() === "not_configured" || !secret) {
@@ -23,8 +24,16 @@ async function stripeWebhook(req, res, next) {
       throw httpError(400, "Invalid Stripe signature.");
     }
     const event = JSON.parse(req.body.toString("utf8"));
+    const eventId = String(event.id || "").trim();
+    if (!eventId) throw httpError(400, "Stripe event id is missing.");
     const session = event.data && event.data.object ? event.data.object : {};
-    const reference = (session.metadata && session.metadata.orderReference) || session.client_reference_id;
+    const reference = (session.metadata && session.metadata.orderReference) || session.client_reference_id || null;
+    const claimed = await orders.claimStripeEvent(eventId, event.type, reference);
+    if (!claimed) {
+      res.json({ received: true, duplicate: true });
+      return;
+    }
+    claimedEventId = eventId;
     if (!reference) {
       res.json({ received: true, ignored: true });
       return;
@@ -34,7 +43,7 @@ async function stripeWebhook(req, res, next) {
       res.json({ received: true, ignored: true });
       return;
     }
-    if (event.type === "payment_intent.payment_failed") {
+    if (event.type === "payment_intent.payment_failed" || event.type === "checkout.session.async_payment_failed") {
       // A declined card does not confirm or cancel the booking. Checkout stays open for another attempt.
       res.json({ received: true, ignored: true });
       return;
@@ -50,9 +59,8 @@ async function stripeWebhook(req, res, next) {
       res.json({ received: true });
       return;
     }
-    const type = event.type === "checkout.session.completed" ? "checkout.session.completed" : event.type;
     const nextStatus = paymentTransition(order.paymentStatus, {
-      type,
+      type: event.type,
       paid: session.payment_status === "paid",
       currency: session.currency,
       amountFils: session.amount_total,
@@ -79,6 +87,11 @@ async function stripeWebhook(req, res, next) {
     }
     res.json({ received: true });
   } catch (error) {
+    if (claimedEventId) {
+      await orders.releaseStripeEvent(claimedEventId).catch((releaseError) => {
+        console.error("Stripe event release failed:", releaseError.message);
+      });
+    }
     next(error);
   }
 }

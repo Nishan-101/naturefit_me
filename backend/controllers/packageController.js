@@ -12,11 +12,13 @@ const {
   checkAllowed,
   publicOtpError,
   parseSqlUtc,
+  packageOtpRequired,
 } = require("../lib/otpPolicy");
 const { validatePackageOrder, readDeliveryDays, INQUIRY_CONFIRMATION } = require("../lib/packageOrder");
 const { normalizePhone } = require("../lib/phone");
 const { isUaeMobile } = require("../lib/orderRules");
 const { twilioConfig, createVerification, checkVerification } = require("../lib/twilioVerify");
+const { publicSiteOrigin } = require("../lib/runtimeIsolation");
 const { stripeMode, checkoutGate, createCheckoutSession, retrieveCheckoutSession } = require("../lib/stripe");
 const { businessChatLink, inquiryChatMessage } = require("../lib/whatsapp");
 const { sendPackageInquiryNotification } = require("../config/mailer");
@@ -33,11 +35,23 @@ function hashProof(token) {
 function siteOrigin(req) {
   const host = req && req.get ? req.get("host") : "";
   if (host && /^(localhost|127\.0\.0\.1)(:\d+)?$/.test(host)) return `${req.protocol}://${host}`;
-  return (process.env.PUBLIC_SITE_URL || "https://naturefit.site").replace(/\/$/, "");
+  const origin = publicSiteOrigin();
+  if (!origin) throw httpError(503, "Staging checkout cannot return customers to the live website.");
+  return origin;
 }
 
 function otpRequiredNow() {
-  return process.env.NODE_ENV === "production" || twilioConfig().configured;
+  return packageOtpRequired({
+    nodeEnv: process.env.NODE_ENV,
+    appEnv: process.env.APP_ENV,
+    stripeSecretKey: process.env.STRIPE_SECRET_KEY,
+    liveEnabled: process.env.STRIPE_LIVE_ENABLED,
+    stagingOtpOptional: process.env.STAGING_OTP_OPTIONAL,
+    publicSiteUrl: process.env.PUBLIC_SITE_URL,
+    clientOrigin: process.env.CLIENT_ORIGIN,
+    dbName: process.env.DB_NAME,
+    twilioConfigured: twilioConfig().configured,
+  });
 }
 
 async function earliestStart() {
@@ -58,7 +72,7 @@ async function catalog(req, res, next) {
       weekdays: DAY_NAMES.map((name, index) => ({ day: index, name })),
       earliestStartDate: await earliestStart(),
       otpConfigured: twilio.configured,
-      otpRequired: process.env.NODE_ENV === "production" || twilio.configured,
+      otpRequired: otpRequiredNow(),
       paymentMode: mode,
       plans: listPackages(),
     });

@@ -274,6 +274,12 @@ async function ensureCommerceSchema(connection) {
       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
       CONSTRAINT fk_package_inquiry_customer FOREIGN KEY (customer_id) REFERENCES customers(id)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`,
+    `CREATE TABLE IF NOT EXISTS stripe_events (
+      event_id VARCHAR(255) PRIMARY KEY,
+      event_type VARCHAR(80) NOT NULL,
+      order_reference VARCHAR(24) NULL,
+      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4`,
   ];
 
   for (const statement of statements) {

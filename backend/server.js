@@ -14,6 +14,7 @@ const orderRoutes = require("./routes/orderRoutes");
 const packageRoutes = require("./routes/packageRoutes");
 const customerRoutes = require("./routes/customerRoutes");
 const { stripeWebhook } = require("./controllers/paymentController");
+const { assertRuntimeIsolation } = require("./lib/runtimeIsolation");
 const { notFoundHandler, errorHandler } = require("./middleware/errorHandler");
 
 const app = express();
@@ -96,6 +97,7 @@ app.use(errorHandler);
 /* ---------------- Start server ---------------- */
 async function start() {
   try {
+    assertRuntimeIsolation();
     await testConnection();
     await initDatabase();
     await verifyMailer();
