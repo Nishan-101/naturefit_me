@@ -408,7 +408,7 @@ function initPlanBuilder() {
     submitBtn.addEventListener("click", () => {
       const draft = currentDraft();
       if (window.NatureFit) NatureFit.saveDraft(draft);
-      if (submitStatus) submitStatus.textContent = "Add your contact details so we can email you back.";
+      if (submitStatus) submitStatus.textContent = "Add your details on the next page, then proceed to secure payment or send an inquiry.";
       location.href = "account.html";
     });
   }

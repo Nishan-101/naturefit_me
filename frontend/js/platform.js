@@ -213,8 +213,11 @@
       return [area, "Dubai", building].filter(Boolean).join(", ");
     }
 
+    function mealCount(draft) {
+      return Array.isArray(draft.meals) ? draft.meals.length : 0;
+    }
+
     function profileBody(draft) {
-      const mealCount = Array.isArray(draft.meals) ? draft.meals.length : 0;
       const kcal = selectedValue("kcal");
       return {
         fullName: document.getElementById("fullName").value,
@@ -227,7 +230,7 @@
         calorieGuidance: kcal === "guide",
         calorieKcal: kcal === "guide" ? "" : kcal,
         proteinGuidance: true,
-        mealsPerDay: Math.min(5, Math.max(2, mealCount || 2)),
+        mealsPerDay: Math.min(5, Math.max(2, mealCount(draft) || 2)),
         preferredDuration: draft.duration,
         allergies: checkedValues("allergy"),
         allergyOther: document.getElementById("allergyOther").value,
@@ -286,6 +289,50 @@
     });
     document.getElementById("backTo1").addEventListener("click", () => showStep(1));
 
+    function packageCheckoutBody(draft) {
+      const callTime = selectedValue("callTime");
+      return {
+        plan: draft.plan,
+        mealsPerDay: mealCount(draft),
+        duration: draft.duration,
+        deliveryDays: draft.days,
+        fullName: document.getElementById("fullName").value,
+        email: document.getElementById("email").value,
+        countryCode: document.getElementById("countryCode").value,
+        nationalNumber: document.getElementById("nationalNumber").value,
+        addressLine: deliveryAddress(),
+        startDate: document.getElementById("startDate").value,
+        instructions: [
+          `Age: ${selectedLabel("ageBand")}`,
+          `Height: ${selectedLabel("heightBand")}`,
+          `Weight: ${selectedLabel("weightBand")}`,
+          `Calories: ${selectedLabel("kcal")}`,
+          `Best time to call: ${callTime}`,
+          document.getElementById("dislikes").value.trim(),
+        ].filter(Boolean).join(". "),
+        privacyConsent: document.getElementById("privacyConsent").checked === true,
+        verificationToken: "",
+      };
+    }
+
+    function detailError() {
+      const allergies = checkedValues("allergy");
+      const diet = selectedValue("dietChoice");
+      if (!readDraft()) return "Choose a meal plan on the home page first.";
+      if (!selectedValue("ageBand")) return "Choose your age range.";
+      if (!selectedValue("heightBand")) return "Choose your height range.";
+      if (!selectedValue("weightBand")) return "Choose your weight range.";
+      if (!selectedValue("kcal")) return "Choose a calorie target, or tap Not sure.";
+      if (!selectedValue("goal")) return "Choose what you want from the plan.";
+      if (!diet) return "Choose how you like to eat.";
+      if (!allergies.length) return "Choose an allergy, or tap None.";
+      if (allergies.includes("Other") && document.getElementById("allergyOther").value.trim().length < 2) {
+        return "Tell us the other allergy.";
+      }
+      if (!document.getElementById("allergyAck").checked) return "Please confirm the allergy note.";
+      return "";
+    }
+
     function showThanks() {
       sessionStorage.removeItem("nf-plan-draft");
       wizard.hidden = true;
@@ -295,30 +342,71 @@
       window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
     }
 
+    const priceLine = document.getElementById("packagePrice");
+    const openingPlan = readDraft();
+    if (priceLine && openingPlan) {
+      api("/api/packages/quote", {
+        method: "POST",
+        body: {
+          plan: openingPlan.plan,
+          mealsPerDay: mealCount(openingPlan),
+          duration: openingPlan.duration,
+        },
+      })
+        .then((quote) => {
+          priceLine.textContent = quote.totalLabel ? `Package total ${quote.totalLabel}. This is the amount sent to secure payment.` : "";
+        })
+        .catch(() => {
+          priceLine.textContent = "This selection has no published card price. You can still send an inquiry. Card payment is available for priced plans of 1 to 28 days.";
+        });
+    }
+    api("/api/packages")
+      .then((catalog) => {
+        const start = document.getElementById("startDate");
+        if (start && catalog.earliestStartDate) start.min = catalog.earliestStartDate;
+      })
+      .catch(() => {
+        /* the payment request still reports a missing date */
+      });
+
+    document.getElementById("proceedPayment").addEventListener("click", async () => {
+      const draft = readDraft();
+      const notice = stepStatus(2);
+      const button = document.getElementById("proceedPayment");
+      const problem = detailError();
+      if (problem) return setStatus(notice, problem, "error");
+      if (!document.getElementById("startDate").value) {
+        return setStatus(notice, "Choose a delivery start date.", "error");
+      }
+      if (!document.getElementById("privacyConsent").checked) {
+        return setStatus(notice, "Privacy consent is required before payment.", "error");
+      }
+      button.disabled = true;
+      setStatus(notice, "Opening the secure payment page…", "pending");
+      try {
+        const result = await api("/api/packages/checkout", {
+          method: "POST",
+          body: packageCheckoutBody(draft),
+        });
+        if (!result.checkoutUrl) {
+          setStatus(notice, result.message || "Payment could not be started. No card was charged.", "error");
+          button.disabled = false;
+          return;
+        }
+        window.location.assign(result.checkoutUrl);
+      } catch (error) {
+        setStatus(notice, error.message, "error");
+        button.disabled = false;
+      }
+    });
+
     document.getElementById("profileForm").addEventListener("submit", async (event) => {
       event.preventDefault();
       const draft = readDraft();
       const saveBtn = document.getElementById("saveProfile");
       const notice = stepStatus(2);
-      const allergies = checkedValues("allergy");
-      const diet = selectedValue("dietChoice");
-      if (!draft) {
-        setStatus(notice, "Choose a meal plan on the home page first.", "error");
-        return;
-      }
-      if (!selectedValue("ageBand")) return setStatus(notice, "Choose your age range.", "error");
-      if (!selectedValue("heightBand")) return setStatus(notice, "Choose your height range.", "error");
-      if (!selectedValue("weightBand")) return setStatus(notice, "Choose your weight range.", "error");
-      if (!selectedValue("kcal")) return setStatus(notice, "Choose a calorie target, or tap Not sure.", "error");
-      if (!selectedValue("goal")) return setStatus(notice, "Choose what you want from the plan.", "error");
-      if (!diet) return setStatus(notice, "Choose how you like to eat.", "error");
-      if (!allergies.length) return setStatus(notice, "Choose an allergy, or tap None.", "error");
-      if (allergies.includes("Other") && document.getElementById("allergyOther").value.trim().length < 2) {
-        return setStatus(notice, "Tell us the other allergy.", "error");
-      }
-      if (!document.getElementById("allergyAck").checked) {
-        return setStatus(notice, "Please confirm the allergy note.", "error");
-      }
+      const problem = detailError();
+      if (problem) return setStatus(notice, problem, "error");
       saveBtn.disabled = true;
       const callTime = selectedValue("callTime");
       const payload = {

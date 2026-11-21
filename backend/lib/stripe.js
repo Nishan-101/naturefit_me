@@ -96,7 +96,7 @@ async function createCheckoutSession({
     "line_items[0][price_data][product_data][name]",
     productName || `Nature Fit meal plan ${reference}`
   );
-  body.set("automatic_payment_methods[enabled]", "true");
+  body.set("payment_method_types[0]", "card");
   body.set("payment_method_options[card][request_three_d_secure]", "automatic");
   if (customerEmail) body.set("customer_email", customerEmail);
 

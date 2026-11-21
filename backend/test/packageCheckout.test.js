@@ -431,6 +431,19 @@ test("the package page does not show discounts or send a price to the server", (
   assert.match(orderPage, /Thank you for choosing Nature Fit Healthy Restaurant\. Your meal plan order has been received successfully\./);
   assert.match(orderPage, /does not mark an order as paid/);
   assert.match(orderPage, /result === "cancelled"/);
+  const homePage = fs.readFileSync(path.join(root, "index.html"), "utf8");
+  const accountPage = fs.readFileSync(path.join(root, "account.html"), "utf8");
+  const planScript = fs.readFileSync(path.join(root, "js/platform.js"), "utf8");
+  assert.doesNotMatch(homePage, /No payment on this page/);
+  assert.match(accountPage, /Proceed to Secure Payment/);
+  assert.match(accountPage, /id="proceedPayment"/);
+  assert.match(accountPage, /id="saveProfile"/);
+  assert.match(planScript, /\/api\/packages\/checkout/);
+  assert.match(planScript, /checkoutUrl/);
+  const checkoutBody = planScript.slice(planScript.indexOf("function packageCheckoutBody"), planScript.indexOf("function detailError"));
+  assert.doesNotMatch(checkoutBody, /price|amount|total/i);
+  assert.match(checkoutBody, /privacyConsent/);
+  assert.match(checkoutBody, /verificationToken/);
   assert.equal(findPackage("weight-loss", 3, 29), null);
   assert.equal(findPackage("weight-loss", 3, 90), null);
 });
@@ -565,7 +578,8 @@ test("Stripe checkout charges AED fils and asks for 3D Secure when required", as
     assert.equal(captured.body.includes("sk_test_123"), false);
     assert.equal(params.get("line_items[0][price_data][currency]"), "aed");
     assert.equal(params.get("line_items[0][price_data][unit_amount]"), "112763");
-    assert.equal(params.get("automatic_payment_methods[enabled]"), "true");
+    assert.equal(params.get("payment_method_types[0]"), "card");
+    assert.equal(params.has("automatic_payment_methods[enabled]"), false);
     assert.equal(params.get("payment_method_options[card][request_three_d_secure]"), "automatic");
     assert.equal(params.get("line_items[0][price_data][unit_amount]") === "1127.63", false);
   } finally {
