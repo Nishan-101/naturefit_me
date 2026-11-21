@@ -2,6 +2,7 @@ const crypto = require("crypto");
 const { httpError, setSessionCookie, clearSessionCookie } = require("../config/session");
 const customers = require("../models/customerModel");
 const inquiries = require("../models/inquiryModel");
+const packageInquiries = require("../models/packageInquiryModel");
 
 const STATUSES = ["new", "reviewing", "confirmed", "closed"];
 
@@ -44,7 +45,11 @@ async function listCustomers(req, res, next) {
 
 async function listInquiries(req, res, next) {
   try {
-    res.json({ success: true, inquiries: await inquiries.listAll() });
+    res.json({
+      success: true,
+      inquiries: await inquiries.listAll(),
+      packageInquiries: await packageInquiries.listAll(),
+    });
   } catch (error) {
     next(error);
   }

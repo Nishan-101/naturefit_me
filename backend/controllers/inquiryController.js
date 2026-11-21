@@ -124,7 +124,6 @@ async function resendAdmin(req, res, next) {
 function listPlans(req, res) {
   res.json({
     success: true,
-    startingPriceAed: 1250,
     allergyNote: ALLERGY_NOTE,
     plans: PLANS,
   });

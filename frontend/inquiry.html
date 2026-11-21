@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Inquiry received | Nature Fit Restaurant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,560&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/style.css?v=15">
+<link rel="stylesheet" href="css/platform.css?v=16">
+<style>
+  body.order-status{background:var(--cream);}
+  .status-wrap{padding:140px 0 80px;}
+  .status-card{
+    max-width:720px;margin:0 auto;background:#fff;border:1px solid var(--border);
+    border-radius:28px;padding:32px;box-shadow:var(--shadow-soft);
+  }
+  .status-card h1{font-size:clamp(2rem,4vw,2.8rem);margin:8px 0 12px;}
+  .status-mark{
+    width:52px;height:52px;border-radius:16px;display:grid;place-items:center;
+    background:#e7f6ee;color:var(--forest);font-size:1.3rem;
+  }
+  .status-card p{color:var(--grey);}
+  .summary-line{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--border);color:var(--charcoal);}
+  .summary-line span{color:var(--grey);font-weight:600;}
+  .summary-line strong{text-align:right;}
+  .status-card .btn-forest{background:var(--forest);color:#fff;border:none;margin-top:18px;}
+  .status-links{margin-top:18px;}
+</style>
+</head>
+<body class="order-status">
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="brand"><img src="images/logo.png?v=4" alt="Nature Fit Restaurant logo" class="brand-logo"></a>
+    <nav class="main-nav" id="mainNav" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="plans.html">Meal Plans</a>
+      <a href="subscribe.html">Order</a>
+      <a href="account.html">Login</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<main class="status-wrap">
+  <section class="status-card">
+    <div class="status-mark" aria-hidden="true"><i class="fa-solid fa-check"></i></div>
+    <p class="eyebrow">Nature Fit Restaurant</p>
+    <h1 id="statusTitle">Inquiry received</h1>
+    <p id="thanks">Thank you for your interest in Nature Fit Healthy Restaurant. Your meal plan inquiry has been received successfully. Our team will contact you shortly.</p>
+    <p class="notice" id="paymentNote">No payment has been made.</p>
+    <div id="inquirySummary"></div>
+    <p id="whatsappBlock" hidden><a class="btn btn-forest" id="whatsappLink" target="_blank" rel="noopener noreferrer">Send on WhatsApp</a></p>
+    <p class="notice" id="whatsappNote"></p>
+    <p id="statusCopy">Checking the inquiry…</p>
+    <p class="status-links"><a href="subscribe.html">Back to meal plans</a> · <a href="index.html">Home</a></p>
+  </section>
+</main>
+<script src="js/platform.js?v=15"></script>
+<script src="js/script.js?v=15"></script>
+<script>
+  const ref = new URLSearchParams(location.search).get("ref");
+  const copy = document.getElementById("statusCopy");
+  const title = document.getElementById("statusTitle");
+
+  function escapeHtml(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function lines(pairs) {
+    return pairs
+      .map(([label, value]) => `<div class="summary-line"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value || "—")}</strong></div>`)
+      .join("");
+  }
+
+  function render(inquiry) {
+    title.textContent = "Inquiry received";
+    document.getElementById("thanks").textContent = inquiry.message || document.getElementById("thanks").textContent;
+    document.getElementById("paymentNote").textContent = inquiry.paymentNote || "No payment has been made.";
+    document.getElementById("inquirySummary").innerHTML = lines([
+      ["Inquiry reference", inquiry.reference],
+      ["Customer name", inquiry.customerName],
+      ["Meal plan", inquiry.planName],
+      ["Meals per day", inquiry.mealsPerDay],
+      ["Number of days", inquiry.durationDays],
+      ["Delivery days", (inquiry.dayLabels || []).join(", ")],
+      ["Preferred start date", inquiry.startDate],
+      ["Ending date", inquiry.endDate],
+      ["Delivery address", inquiry.addressLine],
+      ["Quoted total", inquiry.totalLabel],
+      ["Payment status", "Unpaid inquiry"]
+    ]);
+    const link = document.getElementById("whatsappLink");
+    if (inquiry.whatsappUrl) {
+      link.href = inquiry.whatsappUrl;
+      document.getElementById("whatsappBlock").hidden = false;
+    }
+    document.getElementById("whatsappNote").textContent = inquiry.whatsappNote || "";
+    copy.hidden = true;
+  }
+
+  if (!ref) {
+    title.textContent = "Inquiry not found";
+    copy.textContent = "Open this page from the confirmation link. It includes the inquiry reference.";
+    document.getElementById("paymentNote").hidden = true;
+    document.getElementById("thanks").hidden = true;
+  } else {
+    NatureFit.api("/api/packages/inquiries/" + encodeURIComponent(ref))
+      .then(render)
+      .catch((error) => {
+        title.textContent = "Inquiry not found";
+        document.getElementById("thanks").hidden = true;
+        document.getElementById("paymentNote").hidden = true;
+        copy.textContent = error.message;
+      });
+  }
+</script>
+</body>
+</html>

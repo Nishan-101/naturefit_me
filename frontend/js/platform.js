@@ -157,6 +157,7 @@
   };
 
   function initAccount() {
+    if (!document.getElementById("wizard")) return;
     const wizard = document.getElementById("wizard");
     if (!wizard) return;
     const sent = document.getElementById("sent");
@@ -465,7 +466,7 @@
   document.addEventListener("DOMContentLoaded", () => {
     const page = document.body.dataset.page;
     if (page === "account") initAccount();
-    if (page === "admin") initAdmin();
+    if (page === "admin" && !document.getElementById("adminApp")) initAdmin();
     flushPendingInquiry();
   });
 

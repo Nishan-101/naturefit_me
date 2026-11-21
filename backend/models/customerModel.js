@@ -66,6 +66,35 @@ async function updateCustomerIdentity(id, fullName, email) {
   ]);
 }
 
+async function findCustomerByEmail(email) {
+  const [rows] = await pool.execute("SELECT * FROM customers WHERE email = ? ORDER BY id DESC LIMIT 1", [email]);
+  return rows[0] || null;
+}
+
+async function setPassword(id, passwordHash) {
+  await pool.execute("UPDATE customers SET password_hash = ? WHERE id = ?", [passwordHash, id]);
+}
+
+async function setConsent(id, { privacyConsent, whatsappOptIn }) {
+  await pool.execute("UPDATE customers SET privacy_consent = ?, whatsapp_opt_in = ? WHERE id = ?", [
+    privacyConsent ? 1 : 0,
+    whatsappOptIn ? 1 : 0,
+    id,
+  ]);
+}
+
+function publicCustomer(row) {
+  if (!row) return null;
+  return {
+    id: row.id,
+    phone: row.phone_e164,
+    fullName: row.full_name,
+    email: row.email,
+    privacyConsent: Boolean(row.privacy_consent),
+    whatsappOptIn: Boolean(row.whatsapp_opt_in),
+  };
+}
+
 async function getProfile(customerId) {
   const [rows] = await pool.execute("SELECT * FROM customer_profiles WHERE customer_id = ? LIMIT 1", [customerId]);
   return shapeProfile(rows[0]);
@@ -157,13 +186,39 @@ async function listCustomers() {
   }));
 }
 
+async function updateDelivery(customerId, fields) {
+  await pool.execute(
+    `INSERT INTO customer_profiles (customer_id, delivery_address, delivery_instructions, emirate, area, building, allergy_ack, completed)
+     VALUES (?, ?, ?, ?, ?, ?, 0, 0)
+     ON DUPLICATE KEY UPDATE
+       delivery_address = VALUES(delivery_address),
+       delivery_instructions = VALUES(delivery_instructions),
+       emirate = VALUES(emirate),
+       area = VALUES(area),
+       building = VALUES(building)`,
+    [
+      customerId,
+      fields.deliveryAddress,
+      fields.deliveryInstructions || null,
+      fields.emirate,
+      fields.area,
+      fields.building,
+    ]
+  );
+}
+
 module.exports = {
   findCustomerByPhone,
+  findCustomerByEmail,
   findCustomerById,
   createCustomer,
   touchLogin,
   updateCustomerIdentity,
+  setPassword,
+  setConsent,
+  publicCustomer,
   getProfile,
   saveProfile,
+  updateDelivery,
   listCustomers,
 };

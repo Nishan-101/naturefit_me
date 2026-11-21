@@ -1,5 +1,6 @@
 const mysql = require("mysql2/promise");
 require("dotenv").config();
+const { ensureCommerceSchema } = require("./schema");
 
 // Connection pool to the MySQL database hosted on Clever Cloud.
 const pool = mysql.createPool({
@@ -12,6 +13,7 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   queueLimit: 0,
   ssl: process.env.DB_SSL === "true" ? { rejectUnauthorized: true } : undefined,
+  dateStrings: true,
 });
 
 /**
@@ -107,6 +109,7 @@ async function initDatabase() {
         "CREATE INDEX idx_inquiries_customer_created ON meal_inquiries (customer_id, created_at)"
       );
     }
+    await ensureCommerceSchema(connection);
     console.log("✅ MySQL: contact, customer, profile, and inquiry tables ready");
   } finally {
     connection.release();

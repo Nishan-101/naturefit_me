@@ -17,7 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
   initBackToTop();
   initContactForm();
   initPlanBuilder();
-  document.getElementById("year").textContent = new Date().getFullYear();
+  const year = document.getElementById("year");
+  if (year) year.textContent = new Date().getFullYear();
 });
 
 /* ---------- Light / dark theme ---------- */
@@ -115,6 +116,7 @@ function initFaqAccordion() {
   const items = document.querySelectorAll(".faq-item");
   items.forEach((item) => {
     const question = item.querySelector(".faq-q");
+    if (!question) return;
     question.addEventListener("click", () => {
       const isOpen = item.classList.contains("open");
       items.forEach((i) => i.classList.remove("open"));
@@ -254,6 +256,7 @@ function initContactForm() {
 
 /* ---------- Meal plan builder ---------- */
 function initPlanBuilder() {
+  if (!document.getElementById("planSubmit")) return;
   const root = document.getElementById("plans");
   if (!root) return;
 

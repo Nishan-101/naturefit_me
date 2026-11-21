@@ -1,0 +1,87 @@
+/* Nature Fit subscription platform. Builds on the existing green, cream, and white brand. */
+
+[hidden]{display:none !important;}
+
+.skip-link{
+  position:absolute;left:16px;top:-40px;background:var(--forest);color:#fff;padding:8px 12px;z-index:1000;border-radius:8px;
+}
+.skip-link:focus{top:12px;}
+
+@media (min-width: 961px){
+  .main-nav{gap:18px;}
+  .main-nav a{font-size:.86rem;}
+}
+.btn-forest:hover{background:#143528;color:#fff;transform:translateY(-2px);}
+
+.nf-goals{padding:80px 0 40px;}
+.goal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;}
+.nf-goal{
+  display:flex;flex-direction:column;gap:12px;background:var(--white);border:1px solid var(--border);
+  border-radius:22px;padding:22px;box-shadow:var(--shadow-soft);min-height:100%;
+}
+.nf-goal h3{margin:0;font-size:1.25rem;}
+.nf-goal p{margin:0;color:var(--grey);font-size:.94rem;}
+.nf-kcal{font-weight:800;color:var(--forest);font-size:.92rem;}
+.nf-goal .btn{margin-top:auto;align-self:flex-start;}
+
+.nf-how{padding:30px 0 70px;}
+.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:28px;}
+.how-card{background:var(--white);border-radius:18px;padding:22px;border:1px solid var(--border);}
+.how-card strong{display:block;font-family:var(--font-display);font-size:1.4rem;color:var(--leaf);margin-bottom:8px;}
+
+.nf-gallery{padding:10px 0 70px;}
+.gallery-mosaic{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.gallery-mosaic figure{margin:0;position:relative;border-radius:18px;overflow:hidden;aspect-ratio:1;background:#e7f0ea;}
+.gallery-mosaic img{width:100%;height:100%;object-fit:cover;}
+.gallery-mosaic figcaption{
+  position:absolute;left:0;right:0;bottom:0;padding:10px 12px;color:#fff;
+  background:linear-gradient(transparent, rgba(15,33,26,.78));font-size:.85rem;font-weight:700;
+}
+
+.nf-wa{
+  position:fixed;right:22px;bottom:22px;z-index:900;display:flex;align-items:center;gap:8px;
+  background:#128C7E;color:#fff;border-radius:999px;padding:12px 16px;font-weight:800;
+  box-shadow:0 12px 30px rgba(18,140,126,.35);
+}
+.nf-wa:hover{color:#fff;transform:translateY(-2px);}
+.back-to-top{right:auto;left:22px;}
+
+.builder-wrap,.dash-wrap{padding:120px 20px 80px;background:var(--cream);min-height:100vh;}
+.builder-card,.dash-card{
+  max-width:920px;margin:0 auto;background:var(--white);border-radius:24px;padding:28px;
+  box-shadow:var(--shadow-soft);border:1px solid var(--border);
+}
+.progress-list{display:flex;gap:8px;list-style:none;padding:0;margin:0 0 22px;flex-wrap:wrap;}
+.progress-list li{font-size:.75rem;font-weight:700;color:#1b4332;padding:6px 8px;border-radius:999px;background:#e7f0ea;}
+.progress-list li.is-on{background:var(--forest);color:#fff;}
+.choice-row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.choice-btn,.day-btn{
+  text-align:left;border:1.5px solid var(--border);background:var(--white);border-radius:16px;padding:14px 16px;color:var(--charcoal);
+}
+.choice-btn.is-on,.day-btn.is-on{border-color:var(--leaf);background:#e7f6ee;color:#143528;box-shadow:inset 0 0 0 1px var(--leaf);}
+.choice-btn.is-on small,.choice-btn.is-on .muted{color:#1b4332;}
+.choice-btn small,.muted{display:block;color:var(--grey);font-weight:600;margin-top:4px;}
+.day-row{display:flex;flex-wrap:wrap;gap:8px;}
+.day-btn{width:52px;height:52px;border-radius:50%;text-align:center;font-weight:800;}
+.builder-nav{display:flex;justify-content:space-between;gap:12px;margin-top:22px;}
+.summary-box{background:#f6faf7;border-radius:16px;padding:16px;line-height:1.6;}
+.check-line{display:flex;gap:10px;align-items:flex-start;margin:12px 0;font-size:.92rem;}
+.honeypot{position:absolute;left:-9999px;height:0;overflow:hidden;}
+.notice{background:#f8f4ea;border-radius:12px;padding:12px 14px;color:var(--charcoal);font-size:.92rem;}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px;}
+.tabs button{border:1px solid var(--border);background:#fff;border-radius:999px;padding:8px 12px;font-weight:700;}
+.tabs button.is-on{background:var(--forest);color:#fff;border-color:var(--forest);}
+.stack-form{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+.stack-form .wide{grid-column:1 / -1;}
+
+:focus-visible{outline:3px solid var(--leaf);outline-offset:2px;}
+
+@media (max-width: 980px){
+  .goal-grid,.how-grid,.gallery-mosaic{grid-template-columns:1fr 1fr;}
+}
+@media (max-width: 680px){
+  .goal-grid,.how-grid,.gallery-mosaic,.choice-row,.stack-form{grid-template-columns:1fr;}
+  .builder-card,.dash-card{padding:18px;}
+  .nf-wa span{display:none;}
+  .nf-wa{padding:14px;border-radius:50%;}
+}

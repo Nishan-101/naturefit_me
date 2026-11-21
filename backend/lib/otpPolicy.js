@@ -1,0 +1,70 @@
+const SEND_WINDOW_MS = 15 * 60 * 1000;
+const MAX_SENDS = 5;
+const RESEND_COOLDOWN_MS = 60 * 1000;
+const MAX_CHECKS = 5;
+const OTP_TTL_MS = 10 * 60 * 1000;
+const PROOF_TTL_MS = 20 * 60 * 1000;
+
+function sendAllowed(createdAtMs, nowMs) {
+  const recent = (createdAtMs || []).filter((time) => nowMs - time < SEND_WINDOW_MS && nowMs - time >= 0);
+  if (recent.length >= MAX_SENDS) {
+    return { ok: false, code: "rate" };
+  }
+  const latest = recent.reduce((max, time) => (time > max ? time : max), 0);
+  if (latest && nowMs - latest < RESEND_COOLDOWN_MS) {
+    return {
+      ok: false,
+      code: "cooldown",
+      retryAfterSeconds: Math.ceil((RESEND_COOLDOWN_MS - (nowMs - latest)) / 1000),
+    };
+  }
+  return { ok: true };
+}
+
+function checkAllowed(checkCount) {
+  return Number(checkCount) < MAX_CHECKS;
+}
+
+function publicOtpError(httpStatus, code) {
+  if (httpStatus === 429 || code === 20429 || code === 60203) {
+    return {
+      statusCode: 429,
+      message: "Too many verification messages. Wait a few minutes and try again.",
+    };
+  }
+  if (code === 60200 || code === 60202 || code === 20404 || httpStatus === 404) {
+    return {
+      statusCode: 400,
+      message: "That code is not valid. Request a new one if it has expired.",
+    };
+  }
+  return {
+    statusCode: 502,
+    message: "The SMS provider could not complete verification. Your number was not marked as verified.",
+  };
+}
+
+function parseSqlUtc(value) {
+  if (value instanceof Date) return value.getTime();
+  if (!value) return NaN;
+  const text = String(value).trim().replace(" ", "T");
+  return Date.parse(text.endsWith("Z") ? text : `${text}Z`);
+}
+
+function sqlDateTime(epochMs) {
+  return new Date(epochMs).toISOString().slice(0, 19).replace("T", " ");
+}
+
+module.exports = {
+  SEND_WINDOW_MS,
+  MAX_SENDS,
+  RESEND_COOLDOWN_MS,
+  MAX_CHECKS,
+  OTP_TTL_MS,
+  PROOF_TTL_MS,
+  sendAllowed,
+  checkAllowed,
+  publicOtpError,
+  parseSqlUtc,
+  sqlDateTime,
+};

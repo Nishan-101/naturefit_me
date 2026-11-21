@@ -9,6 +9,11 @@ const { verifyMailer } = require("./config/mailer");
 const contactRoutes = require("./routes/contactRoutes");
 const accountRoutes = require("./routes/accountRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const siteRoutes = require("./routes/siteRoutes");
+const orderRoutes = require("./routes/orderRoutes");
+const packageRoutes = require("./routes/packageRoutes");
+const customerRoutes = require("./routes/customerRoutes");
+const { stripeWebhook } = require("./controllers/paymentController");
 const { notFoundHandler, errorHandler } = require("./middleware/errorHandler");
 
 const app = express();
@@ -23,8 +28,13 @@ app.use(
     crossOriginResourcePolicy: { policy: "cross-origin" },
   })
 );
-app.use(express.json({ limit: "10kb" }));
-app.use(express.urlencoded({ extended: true, limit: "10kb" }));
+app.post(
+  "/api/payments/stripe/webhook",
+  express.raw({ type: "application/json", limit: "200kb" }),
+  stripeWebhook
+);
+app.use(express.json({ limit: "4mb" }));
+app.use(express.urlencoded({ extended: true, limit: "1mb" }));
 
 /* ---------------- CORS ----------------
    Only the origins listed in CLIENT_ORIGIN (comma-separated) are allowed —
@@ -65,9 +75,19 @@ app.get("/api/health", (req, res) => {
 
 app.use("/api/contact", contactRoutes);
 app.use("/api", accountRoutes);
+app.use("/api", siteRoutes);
+app.use("/api", orderRoutes);
+app.use("/api", packageRoutes);
+app.use("/api", customerRoutes);
 app.use("/api/admin", adminRoutes);
 
 app.use(express.static(path.join(__dirname, "../frontend")));
+
+["order", "plans", "build", "account", "admin", "privacy", "subscribe", "inquiry"].forEach((page) => {
+  app.get(`/${page}`, (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", `${page}.html`));
+  });
+});
 
 /* ---------------- 404 + Error handling ---------------- */
 app.use(notFoundHandler);

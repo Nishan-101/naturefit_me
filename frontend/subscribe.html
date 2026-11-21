@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Order a meal plan | Nature Fit Restaurant Dubai</title>
+<meta name="description" content="Choose a Nature Fit meal plan, verify your UAE mobile number, and pay the package price in AED.">
+<link rel="canonical" href="https://naturefit.site/subscribe">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,560;0,9..144,650;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/style.css?v=15">
+<link rel="stylesheet" href="css/platform.css?v=16">
+<style>
+  body.order-page{background:var(--cream);}
+  .order-hero{padding:148px 0 20px;}
+  .order-hero h1{font-size:clamp(2.3rem,4.4vw,3.5rem);font-weight:560;text-align:center;margin-bottom:.35em;}
+  .order-hero .section-sub{margin-bottom:28px;}
+  .order-page .notice{max-width:720px;margin:0 auto 28px;text-align:center;}
+  .order-flow{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:16px;}
+  .order-step{
+    background:#fff;border:1px solid var(--border);border-radius:28px;padding:22px 22px 24px;
+    box-shadow:var(--shadow-soft);
+  }
+  .step-head{display:flex;gap:14px;align-items:center;margin-bottom:16px;}
+  .step-num{
+    width:38px;height:38px;border-radius:50%;display:grid;place-items:center;flex:none;
+    background:#e7f0ea;color:var(--forest);font-weight:800;
+  }
+  .order-step.is-done .step-num{background:var(--forest);color:#fff;}
+  .order-step h2{font-size:1.45rem;margin:0;}
+  .step-head .eyebrow{margin:0 0 2px;}
+  .order-step.is-waiting{background:#f7f3ea;}
+  .order-step.is-waiting .choice-row,.order-step.is-waiting .order-hint{opacity:.85;}
+  .order-page .goal-grid{align-items:stretch;}
+  .order-page .goal-pick{
+    appearance:none;width:100%;height:100%;text-align:left;cursor:pointer;font:inherit;color:inherit;
+    position:relative;transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease, background .25s ease;
+  }
+  .order-page .goal-pick:hover{transform:translateY(-3px);border-color:var(--leaf);}
+  .goal-icon{
+    width:44px;height:44px;border-radius:14px;display:grid;place-items:center;
+    background:#e7f6ee;color:var(--forest);font-size:1.05rem;
+  }
+  .order-page .goal-pick h3{font-family:var(--font-display);color:var(--heading);font-size:1.28rem;margin:0;}
+  .order-page .goal-pick .nf-kcal{margin-top:auto;}
+  .pick-mark{
+    display:none;align-items:center;gap:6px;font-size:.78rem;font-weight:800;letter-spacing:.04em;
+    text-transform:uppercase;color:var(--forest);
+  }
+  .order-page .goal-pick.is-on{
+    border-color:var(--forest);background:#f3fbf6;box-shadow:inset 0 0 0 2px var(--forest);
+  }
+  .order-page .goal-pick.is-on .pick-mark{display:inline-flex;}
+  .order-page .goal-pick.is-on .goal-icon{background:var(--forest);color:#fff;}
+  .order-page .choice-row.meals{grid-template-columns:repeat(auto-fit,minmax(150px,1fr));}
+  .order-page .choice-row.anchors{grid-template-columns:repeat(5,minmax(0,1fr));margin-top:14px;}
+  .order-page .choice-row.anchors .choice-btn{min-height:74px;padding:12px 14px;}
+  .order-page .choice-row.anchors .choice-btn strong{font-size:1.35rem;}
+  .day-slider{margin:4px 0 8px;}
+  .day-slider-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:6px;}
+  .day-slider-head strong{font-family:var(--font-display);font-size:2rem;line-height:1;color:var(--heading);font-weight:560;}
+  .day-count-note{color:var(--forest);font-weight:800;}
+  .order-page input[type="range"]{
+    -webkit-appearance:none;appearance:none;width:100%;height:8px;border-radius:999px;
+    background:#d9e5dc;outline:none;margin:18px 0 0;cursor:pointer;
+  }
+  .order-page input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance:none;appearance:none;width:28px;height:28px;border-radius:50%;
+    background:#fff;border:3px solid var(--forest);box-shadow:0 1px 4px rgba(0,0,0,.18);cursor:pointer;
+  }
+  .order-page input[type="range"]::-moz-range-thumb{
+    width:28px;height:28px;border-radius:50%;background:#fff;border:3px solid var(--forest);cursor:pointer;
+  }
+  .day-scale{position:relative;height:1.6em;margin-top:8px;color:var(--grey);font-size:.8rem;font-weight:700;}
+  .day-scale span{position:absolute;top:0;transform:translateX(-50%);}
+  .day-scale span:first-child{left:0;transform:none;}
+  .day-scale span:last-child{left:100%;transform:translateX(-100%);}
+  .order-page .day-row{margin-top:4px;}
+  .order-page .day-btn{
+    width:auto;min-width:64px;height:46px;padding:0 12px;border-radius:999px;
+    font:inherit;font-weight:800;cursor:pointer;text-align:center;
+    background:#fff;color:#1b4332;border:1.5px solid #c9d5cc;
+  }
+  .order-page .day-btn.is-on{
+    background:#1b4332;color:#fff;border-color:#1b4332;
+    box-shadow:none;
+  }
+  .order-live{font-family:var(--font-display);font-size:clamp(2rem,4vw,2.6rem);color:var(--heading);margin:8px 0 0;line-height:1;text-align:center;}
+  .order-page .choice-btn{
+    display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:2px;
+    min-height:88px;padding:16px 18px;background:#fff;border-radius:18px;cursor:pointer;
+    box-shadow:none;transition:transform .2s ease, border-color .2s ease, background .2s ease;
+  }
+  .order-page .choice-btn:hover{transform:translateY(-2px);border-color:var(--leaf);}
+  .order-page .choice-btn strong{display:block;font-family:var(--font-display);font-size:1.7rem;line-height:1;color:var(--heading);font-weight:560;}
+  .order-page .choice-btn.is-on{background:#e7f6ee;border-color:var(--forest);box-shadow:inset 0 0 0 1px var(--forest);}
+  .order-hint{margin:0;color:var(--grey);}
+  .pick-recap{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:18px 0 0;}
+  .pick-recap span{
+    background:#fff;border:1px solid var(--border);border-radius:999px;padding:8px 14px;
+    font-weight:700;color:var(--forest);font-size:.92rem;
+  }
+  .order-kcal{text-align:center;font-weight:700;color:var(--forest);min-height:1.2em;margin:10px 0 0;}
+  .order-actions{display:flex;flex-direction:column;align-items:center;margin-top:8px;}
+  .order-actions .app-status{text-align:center;min-height:1.2em;}
+  .order-page .btn-forest{background:var(--forest);color:#fff;border:none;}
+  .order-page .btn-forest:hover{background:#143528;color:#fff;}
+  .order-pay{padding:20px 0 90px;background:var(--cream);}
+  .pay-layout{display:grid;grid-template-columns:1.25fr .75fr;gap:28px;align-items:start;}
+  .pay-panel,.pay-summary{
+    background:#fff;border:1px solid var(--border);border-radius:28px;padding:32px;box-shadow:var(--shadow-soft);
+  }
+  .pay-summary{position:sticky;top:108px;}
+  .pay-total{font-family:var(--font-display);font-size:clamp(2rem,4vw,2.8rem);color:var(--heading);margin:0 0 8px;line-height:1;}
+  .pay-lead{color:var(--grey);margin:0 0 18px;}
+  .pay-note{color:var(--grey);font-size:.92rem;margin-bottom:18px;}
+  .summary-line{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--border);color:var(--charcoal);}
+  .summary-line span{color:var(--grey);font-weight:600;}
+  .summary-line strong{text-align:right;font-weight:700;}
+  .order-page .stack-form{margin-top:8px;}
+  .otp-actions{display:flex;gap:12px;flex-wrap:wrap;margin:8px 0 12px;}
+  .pay-summary .btn{margin-top:22px;}
+  .path-choices{margin-top:8px;}
+  .path-steps{margin:0 0 8px;text-align:center;font-weight:700;color:var(--heading);}
+  .path-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;}
+  .path-card{
+    appearance:none;width:100%;text-align:center;cursor:pointer;font:inherit;color:inherit;
+    background:#fff;border:1px solid var(--border);border-radius:22px;padding:22px 16px;
+    box-shadow:var(--shadow-soft);display:flex;flex-direction:column;align-items:center;gap:6px;
+  }
+  .path-card i{font-size:1.25rem;color:var(--forest);}
+  .path-card strong{font-family:var(--font-display);font-size:1.35rem;font-weight:560;color:var(--heading);}
+  .path-card span{color:var(--grey);font-size:.92rem;}
+  .path-card:hover{border-color:var(--forest);}
+  .path-card:disabled{opacity:.65;cursor:wait;}
+  .choice-price{margin-top:16px;}
+  @media (max-width:980px){
+    .order-page .choice-row.meals{grid-template-columns:1fr 1fr;}
+    .order-page .choice-row.anchors{grid-template-columns:repeat(3,minmax(0,1fr));}
+    .pay-layout{grid-template-columns:1fr;}
+    .pay-summary{position:static;}
+  }
+  @media (max-width:680px){
+    .order-hero{padding-top:120px;}
+    .order-page .choice-row.meals{grid-template-columns:1fr;}
+    .order-page .choice-row.anchors{grid-template-columns:repeat(3,minmax(0,1fr));}
+    .pay-panel,.pay-summary{padding:22px;}
+    .path-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body class="order-page">
+<a class="skip-link" href="#packageOrder">Skip to order form</a>
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="brand"><img src="images/logo.png?v=4" alt="Nature Fit Restaurant logo" class="brand-logo"></a>
+    <nav class="main-nav" id="mainNav" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="plans.html">Meal Plans</a>
+      <a href="index.html#menu">Menu</a>
+      <a href="index.html#about">About Us</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="account.html">Login</a>
+    </nav>
+    <div class="header-actions">
+      <a href="build.html" class="btn btn-forest btn-small">Build Your Meal Plan</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<main id="packageOrder">
+  <section class="order-hero">
+    <div class="container">
+      <p class="eyebrow center">Meal plan order</p>
+      <h1>Choose your package</h1>
+      <p class="section-sub">Select a goal, how many meals you want each day, and any length from 1 to 28 days. The total updates as you change the selection.</p>
+      <p class="notice" id="setupNotice" hidden></p>
+      <ol class="order-flow">
+        <li class="order-step" id="stepPlan">
+          <div class="step-head">
+            <span class="step-num">1</span>
+            <div>
+              <p class="eyebrow">Package</p>
+              <h2>Choose a goal</h2>
+            </div>
+          </div>
+          <div id="planChoices" class="goal-grid" role="group" aria-label="Meal plan"></div>
+        </li>
+        <li class="order-step is-waiting" id="stepMeals">
+          <div class="step-head">
+            <span class="step-num">2</span>
+            <div>
+              <p class="eyebrow">Meals per day</p>
+              <h2>How many meals each day?</h2>
+            </div>
+          </div>
+          <div id="mealChoices" class="choice-row meals" role="group" aria-label="Meals per day"></div>
+        </li>
+        <li class="order-step" id="stepDays">
+          <div class="step-head">
+            <span class="step-num">3</span>
+            <div>
+              <p class="eyebrow">Subscription</p>
+              <h2>How long should it run?</h2>
+            </div>
+          </div>
+          <div class="day-slider">
+            <div class="day-slider-head">
+              <strong id="dayCount">—</strong>
+              <span class="day-count-note" id="dayCaption">Any length from 1 to 28 days</span>
+            </div>
+            <input id="dayRange" type="range" min="1" max="28" step="1" value="1" aria-label="Number of days" aria-valuemin="1" aria-valuemax="28">
+            <div class="day-scale" aria-hidden="true">
+              <span style="left:0%">1</span>
+              <span style="left:22.222%">7</span>
+              <span style="left:48.148%">14</span>
+              <span style="left:70.37%">20</span>
+              <span style="left:100%">28</span>
+            </div>
+          </div>
+          <div id="durationChoices" class="choice-row anchors" role="group" aria-label="Common lengths"></div>
+        </li>
+        <li class="order-step" id="stepWeekdays">
+          <div class="step-head">
+            <span class="step-num">4</span>
+            <div>
+              <p class="eyebrow">Delivery days</p>
+              <h2>Which days should we deliver?</h2>
+            </div>
+          </div>
+          <div id="weekdayChoices" class="day-row" role="group" aria-label="Delivery weekdays"></div>
+          <p class="order-hint">Choose any days, including all seven if you want a meal every day.</p>
+        </li>
+      </ol>
+      <div class="order-actions">
+        <div class="pick-recap" id="pickRecap" hidden></div>
+        <p id="calorieLine" class="order-kcal"></p>
+        <p class="order-live" id="livePrice" hidden></p>
+        <p class="app-status" id="pageStatus" role="status"></p>
+        <button class="btn btn-forest" type="button" id="continueButton">Continue</button>
+      </div>
+    </div>
+  </section>
+  <section class="order-pay" id="detailsCard" hidden>
+    <div class="container pay-layout">
+      <div class="pay-panel">
+        <div class="step-head">
+          <span class="step-num">5</span>
+          <div>
+            <p class="eyebrow">Your details</p>
+            <h2>Delivery and payment</h2>
+          </div>
+        </div>
+        <p class="pay-lead">Add the delivery details once. The same quoted total is used if you send an inquiry or pay now. Pay Now opens Stripe. Nature Fit does not see or store the card number.</p>
+        <form id="packageForm" novalidate>
+          <div class="honeypot" aria-hidden="true">
+            <label for="company">Company</label>
+            <input id="company" name="company" tabindex="-1" autocomplete="off">
+          </div>
+          <div class="stack-form">
+            <div class="form-group">
+              <label for="fullName">Full name</label>
+              <input id="fullName" name="fullName" autocomplete="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="form-group">
+              <label for="nationalNumber">UAE mobile number</label>
+              <input id="nationalNumber" name="nationalNumber" inputmode="numeric" autocomplete="tel" placeholder="50 123 4567" required>
+            </div>
+            <div class="form-group">
+              <label for="startDate">Preferred delivery start date</label>
+              <input id="startDate" name="startDate" type="date" required>
+            </div>
+            <div class="form-group wide">
+              <label for="addressLine">Delivery address</label>
+              <input id="addressLine" name="addressLine" autocomplete="street-address" required>
+            </div>
+            <div class="form-group wide">
+              <label for="instructions">Delivery instructions <span>(optional)</span></label>
+              <textarea id="instructions" name="instructions" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="check-line">
+            <input id="privacyConsent" type="checkbox" required>
+            <label for="privacyConsent">I agree to the <a href="privacy.html">privacy policy</a>.</label>
+          </div>
+          <div class="otp-actions">
+            <button class="btn btn-outline" type="button" id="sendOtp">Send OTP</button>
+            <button class="btn btn-outline" type="button" id="resendOtp" hidden>Resend OTP</button>
+          </div>
+          <div class="form-group" id="otpField" hidden>
+            <label for="otpCode">6-digit code</label>
+            <input id="otpCode" name="otpCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6">
+            <button class="btn btn-forest" type="button" id="verifyOtp">Verify code</button>
+          </div>
+          <p class="app-status" id="otpStatus" role="status"></p>
+          <div class="path-choices">
+            <p class="eyebrow center">Customer journey</p>
+            <p class="path-steps">Select meal plan → Meals per day → Number of days</p>
+            <p class="path-steps">View exact price → Enter customer and delivery details</p>
+            <p class="order-live choice-price" id="choicePrice"></p>
+            <div class="path-grid">
+              <button class="path-card" type="button" id="sendInquiry">
+                <i class="fa-regular fa-comment" aria-hidden="true"></i>
+                <strong>Send Inquiry</strong>
+                <span>Submit without payment</span>
+              </button>
+              <button class="path-card" type="submit" id="payNow">
+                <i class="fa-regular fa-credit-card" aria-hidden="true"></i>
+                <strong>Pay Now</strong>
+                <span>Secure Stripe Checkout</span>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <aside class="pay-summary" id="summaryCard" hidden>
+        <p class="eyebrow">Order summary</p>
+        <p class="pay-total" id="totalPrice"></p>
+        <p class="pay-note">This is the package price in AED. Send Inquiry and Pay Now use this same total.</p>
+        <div id="orderSummary"></div>
+      </aside>
+    </div>
+  </section>
+</main>
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-brand">
+      <img src="images/logo.png?v=4" alt="Nature Fit Restaurant logo" class="brand-logo footer-logo">
+      <p>Custom meal plans and fresh daily meals, prepared in Al Safa Complex, Dubai.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Explore</h4>
+      <a href="plans.html">Meal Plans</a>
+      <a href="index.html#menu">Menu</a>
+      <a href="index.html#about">About Us</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="account.html">Login</a>
+      <a href="privacy.html">Privacy</a>
+    </div>
+    <div class="footer-links">
+      <h4>Order On</h4>
+      <a href="https://www.talabat.com" target="_blank" rel="noopener noreferrer">Talabat</a>
+      <a href="https://www.careem.com/en-AE/food/?trigId=HUQJ5BBAE3Y3OX/" target="_blank" rel="noopener noreferrer">Careem Food</a>
+      <a href="https://food.noon.com" target="_blank" rel="noopener noreferrer">Noon Food</a>
+      <a href="https://www.keeta.com" target="_blank" rel="noopener noreferrer">Keeta</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">&copy; <span id="year"></span> Nature Fit Restaurant. All rights reserved.</div>
+  </div>
+</footer>
+<a class="nf-wa" href="https://wa.me/971502483083" target="_blank" rel="noopener noreferrer">
+  <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+  <span>WhatsApp</span>
+</a>
+<script src="js/platform.js?v=15"></script>
+<script src="js/script.js?v=15"></script>
+<script src="js/subscribe.js?v=10"></script>
+</body>
+</html>

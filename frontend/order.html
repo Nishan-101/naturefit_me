@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Order status | Nature Fit Restaurant</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,560&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/style.css?v=15">
+<link rel="stylesheet" href="css/platform.css?v=16">
+<style>
+  body.order-status{background:var(--cream);}
+  .status-wrap{padding:140px 0 80px;}
+  .status-card{
+    max-width:720px;margin:0 auto;background:#fff;border:1px solid var(--border);
+    border-radius:28px;padding:32px;box-shadow:var(--shadow-soft);
+  }
+  .status-card h1{font-size:clamp(2rem,4vw,2.8rem);margin:8px 0 12px;}
+  .status-mark{
+    width:52px;height:52px;border-radius:16px;display:grid;place-items:center;
+    background:#e7f6ee;color:var(--forest);font-size:1.3rem;
+  }
+  .status-card p{color:var(--grey);}
+  .summary-line{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid var(--border);color:var(--charcoal);}
+  .summary-line span{color:var(--grey);font-weight:600;}
+  .summary-line strong{text-align:right;}
+  .status-card .btn-forest{background:var(--forest);color:#fff;border:none;margin-top:18px;}
+  .status-links{margin-top:18px;}
+  .status-card .app-status{min-height:1.2em;}
+</style>
+</head>
+<body class="order-status">
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="brand"><img src="images/logo.png?v=4" alt="Nature Fit Restaurant logo" class="brand-logo"></a>
+    <nav class="main-nav" id="mainNav" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="plans.html">Meal Plans</a>
+      <a href="subscribe.html">Order</a>
+      <a href="account.html">Login</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<main class="status-wrap">
+  <section class="status-card">
+    <div class="status-mark" id="statusMark" aria-hidden="true"><i class="fa-solid fa-receipt"></i></div>
+    <p class="eyebrow">Nature Fit Restaurant</p>
+    <h1 id="statusTitle">Payment status</h1>
+    <p class="notice" id="verifyNote">Opening this page does not mark an order as paid. Nature Fit marks it paid only after Stripe verifies the charge.</p>
+    <div id="paidBlock" hidden>
+      <p id="thanks"></p>
+      <div id="paidSummary"></div>
+      <p><a class="btn btn-forest" id="whatsappLink" target="_blank" rel="noopener noreferrer">Confirm on WhatsApp</a></p>
+      <p class="notice" id="whatsappNote"></p>
+    </div>
+    <div id="savedSummary"></div>
+    <p id="retryBlock" hidden><button class="btn btn-forest" type="button" id="retryPay">Pay Now</button></p>
+    <p class="app-status" id="retryStatus" role="status"></p>
+    <p id="statusCopy">Checking the order…</p>
+    <p class="status-links"><a href="account.html">Go to your account</a> · <a href="subscribe.html">Order a package</a></p>
+  </section>
+</main>
+<script src="js/platform.js?v=15"></script>
+<script src="js/script.js?v=15"></script>
+<script>
+  const ref = new URLSearchParams(location.search).get("ref");
+  const copy = document.getElementById("statusCopy");
+  const title = document.getElementById("statusTitle");
+  const paidBlock = document.getElementById("paidBlock");
+  const mark = document.getElementById("statusMark");
+  let tries = 0;
+
+  function escapeHtml(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function lines(pairs) {
+    return pairs
+      .map(([label, value]) => `<div class="summary-line"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value || "—")}</strong></div>`)
+      .join("");
+  }
+
+  function orderLines(order) {
+    return lines([
+      ["Meal plan", order.planName],
+      ["Meals per day", order.mealsPerDay],
+      ["Total meal plan days", order.durationDays],
+      ["Delivery schedule", (order.dayLabels || []).join(", ")],
+      ["Starting date", order.startDate],
+      ["Ending date", order.endDate],
+      ["Final total", order.totalLabel]
+    ]);
+  }
+
+  function showRetry(order) {
+    const block = document.getElementById("retryBlock");
+    block.hidden = order.paymentStatus === "paid";
+    document.getElementById("savedSummary").innerHTML = order.paymentStatus === "paid" ? "" : orderLines(order);
+  }
+
+  const result = new URLSearchParams(location.search).get("result");
+
+  function render(order) {
+    showRetry(order);
+    if (order.paymentStatus === "paid") {
+      mark.innerHTML = '<i class="fa-solid fa-check"></i>';
+      title.textContent = "Payment Successful!";
+      document.getElementById("thanks").textContent = "Thank you for choosing Nature Fit Healthy Restaurant. Your meal plan order has been received successfully.";
+      const paidRows = [
+        ["Order ID", order.reference],
+        ["Customer name", order.customerName],
+        ["Meal plan", order.planName],
+        ["Meals per day", order.mealsPerDay],
+        ["Number of days", order.durationDays],
+        ["Preferred start date", order.startDate],
+        ["Total amount paid", order.totalLabel],
+        ["Payment status", "Paid"],
+        ["Delivery schedule", (order.dayLabels || []).join(", ")],
+        ["Ending date", order.endDate],
+        ["Delivery address", order.addressLine],
+        ["Payment reference", order.paymentReference]
+      ];
+      if (order.stripeSessionId) paidRows.push(["Stripe session", order.stripeSessionId]);
+      document.getElementById("paidSummary").innerHTML = lines(paidRows);
+      const link = document.getElementById("whatsappLink");
+      if (order.whatsappUrl) link.href = order.whatsappUrl;
+      else link.hidden = true;
+      document.getElementById("whatsappNote").textContent = order.whatsappNote || "";
+      paidBlock.hidden = false;
+      copy.hidden = true;
+      return;
+    }
+    paidBlock.hidden = true;
+    copy.hidden = false;
+    const total = order.totalAed == null ? "to be confirmed" : (order.totalLabel || ("AED " + Number(order.totalAed).toFixed(2)));
+    if (result === "cancelled") {
+      mark.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
+      title.textContent = "Payment cancelled";
+      copy.textContent = order.reference + " is still unpaid. No payment was completed and no card was charged. Your details are saved, and you can pay when you are ready.";
+      return;
+    }
+    if (order.paymentStatus === "pending" || order.paymentStatus === "starting") {
+      mark.innerHTML = '<i class="fa-solid fa-hourglass-half"></i>';
+      title.textContent = "Waiting for payment confirmation";
+      copy.textContent = order.reference + " is saved for " + order.planName + " at " + total + ". Stripe has not confirmed it yet, so the booking is not confirmed. Your details are kept if you need to try the payment again.";
+      return;
+    }
+    mark.innerHTML = '<i class="fa-solid fa-circle-exclamation"></i>';
+    title.textContent = "Payment not completed";
+    copy.textContent = order.reference + " · " + order.planName + " · " + total + ". This booking is not confirmed. Your details are saved, and you can proceed to payment again.";
+  }
+
+  document.getElementById("retryPay").addEventListener("click", async () => {
+    const button = document.getElementById("retryPay");
+    const status = document.getElementById("retryStatus");
+    button.disabled = true;
+    status.textContent = "Opening the secure payment page…";
+    try {
+      const result = await NatureFit.api("/api/packages/checkout/retry", { method: "POST", body: { reference: ref } });
+      if (!result.checkoutUrl) {
+        status.textContent = result.message || "Payment could not be started. No card was charged.";
+        button.disabled = false;
+        return;
+      }
+      window.location.assign(result.checkoutUrl);
+    } catch (error) {
+      status.textContent = error.message;
+      button.disabled = false;
+    }
+  });
+
+  function load() {
+    if (!ref) {
+      document.getElementById("verifyNote").hidden = true;
+      title.textContent = "Order not found";
+      copy.textContent = "Open this page from the payment return link. It includes the order number.";
+      return;
+    }
+    NatureFit.api("/api/orders/" + encodeURIComponent(ref) + "/status").then((order) => {
+      render(order);
+      if ((order.paymentStatus === "pending" || order.paymentStatus === "starting") && tries < 8) {
+        tries += 1;
+        window.setTimeout(load, 2000);
+      }
+    }).catch((error) => {
+      title.textContent = "Order not found";
+      copy.textContent = error.message;
+    });
+  }
+  load();
+</script>
+</body>
+</html>

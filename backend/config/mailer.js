@@ -221,4 +221,114 @@ async function sendInquiryNotification(details) {
   return response.json();
 }
 
-module.exports = { verifyMailer, sendContactNotification, sendInquiryNotification, buildInquiryEmail, mailFrom };
+function buildPackageInquiryEmail({ inquiry, customer }) {
+  const to = process.env.INQUIRY_EMAIL || process.env.ADMIN_EMAIL || "naturefitdxb@gmail.com";
+  const name = (customer && customer.full_name) || inquiry.customerName || "Customer";
+  const phone = (customer && customer.phone_e164) || inquiry.customerPhone || "Not provided";
+  const email = (customer && customer.email) || inquiry.customerEmail || "";
+  const total = inquiry.totalAed == null ? "Not priced" : `AED ${Number(inquiry.totalAed).toFixed(2)}`;
+  const days = Array.isArray(inquiry.dayLabels) ? inquiry.dayLabels.join(", ") : "";
+  const text = `
+UNPAID MEAL PLAN INQUIRY ${inquiry.reference}
+No payment has been made. This is not a paid order.
+
+Customer: ${name}
+Phone: ${phone}
+Email: ${email || "Not provided"}
+Meal plan: ${inquiry.planName}
+Meals per day: ${inquiry.mealsPerDay}
+Number of days: ${inquiry.durationDays}
+Delivery days: ${days || "Not provided"}
+Preferred start date: ${inquiry.startDate}
+Delivery address: ${inquiry.addressLine || "Not provided"}
+Instructions: ${inquiry.instructions || "None"}
+Quoted total: ${total}
+Payment status: Unpaid inquiry
+  `.trim();
+  return {
+    to,
+    subject: `Unpaid meal plan inquiry ${inquiry.reference} — ${name}`,
+    text,
+    replyTo: email || undefined,
+  };
+}
+
+async function sendPackageInquiryNotification(details) {
+  if (!process.env.RESEND_API_KEY) throw new Error("RESEND_API_KEY is not configured");
+  const message = buildPackageInquiryEmail(details);
+  const response = await fetch(RESEND_API_URL, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: mailFrom(),
+      to: [message.to],
+      reply_to: message.replyTo,
+      subject: message.subject,
+      text: message.text,
+    }),
+  });
+  if (!response.ok) {
+    const errorBody = await response.text().catch(() => "");
+    throw new Error(`Resend API error (${response.status}): ${errorBody}`);
+  }
+  return response.json();
+}
+
+async function sendOrderNotification(order) {
+  if (!process.env.RESEND_API_KEY) throw new Error("RESEND_API_KEY is not configured");
+  const to = process.env.INQUIRY_EMAIL || process.env.ADMIN_EMAIL;
+  const total = order.totalAed == null ? "To be confirmed" : `AED ${Number(order.totalAed).toFixed(2)}`;
+  const text = `
+New Nature Fit subscription order ${order.reference}
+
+Customer: ${order.customerName}
+Phone: ${order.customerPhone}
+Email: ${order.customerEmail || "Not provided"}
+Plan: ${order.planName}
+Meals per day: ${order.mealsPerDay}
+Duration: ${order.durationDays} delivery days
+Days: ${(order.dayLabels || []).join(", ")}
+Time: ${order.deliverySlotLabel || "Not selected"}
+Start: ${order.startDate}
+Address: ${order.addressLine}
+${order.emirate}, ${order.area}
+Building: ${order.building || "Not provided"}
+Instructions: ${order.instructions || "None"}
+Allergies: ${order.allergies || "None stated"}
+Total: ${total}
+Payment: ${order.paymentMethod} — ${order.paymentStatus}
+  `.trim();
+  const response = await fetch(RESEND_API_URL, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      from: mailFrom(),
+      to: [to],
+      reply_to: order.customerEmail || undefined,
+      subject: `Meal plan order ${order.reference} — ${order.customerName}`,
+      text,
+    }),
+  });
+  if (!response.ok) {
+    const errorBody = await response.text().catch(() => "");
+    throw new Error(`Resend API error (${response.status}): ${errorBody}`);
+  }
+  return response.json();
+}
+
+module.exports = {
+  verifyMailer,
+  sendContactNotification,
+  sendInquiryNotification,
+  sendPackageInquiryNotification,
+  sendOrderNotification,
+  buildInquiryEmail,
+  buildPackageInquiryEmail,
+  mailFrom,
+};

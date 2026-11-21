@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build your meal plan | Nature Fit Restaurant</title>
+<meta name="description" content="Choose a Nature Fit goal, meals per day, delivery days, and start date. Prices are confirmed from the kitchen before payment.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,560&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet" href="css/style.css?v=15">
+<link rel="stylesheet" href="css/platform.css?v=16">
+</head>
+<body data-page="build">
+<a class="skip-link" href="#builderForm">Skip to the meal plan builder</a>
+<header class="site-header" id="siteHeader">
+  <div class="container header-inner">
+    <a href="index.html" class="brand"><img src="images/logo.png?v=4" alt="Nature Fit Restaurant logo" class="brand-logo"></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="plans.html">Meal Plans</a>
+      <a href="index.html#menu">Menu</a>
+      <a href="index.html#about">About Us</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="account.html">Login</a>
+    </nav>
+    <div class="header-actions">
+      <a href="build.html" class="btn btn-forest btn-small">Build Your Meal Plan</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<main class="builder-wrap">
+  <div class="builder-card">
+    <p class="ps-kicker">Meal plan</p>
+    <h1>Build your meal plan</h1>
+    <p class="app-status" id="builderStatus" role="status"></p>
+    <ol class="progress-list" id="progress"></ol>
+    <form id="builderForm" novalidate>
+      <div id="stepBody"></div>
+      <div class="builder-nav">
+        <button type="button" class="btn btn-outline" id="backBtn">Back</button>
+        <button type="button" class="btn btn-forest" id="nextBtn">Continue</button>
+      </div>
+    </form>
+    <section id="done" hidden>
+      <h2>Order saved</h2>
+      <p id="doneCopy"></p>
+      <p><a class="btn btn-forest" id="whatsappLink" href="#" target="_blank" rel="noopener noreferrer">Open WhatsApp to send this order</a></p>
+      <p class="notice" id="whatsappNote"></p>
+      <p id="payCopy"></p>
+      <p><a id="statusLink" href="account.html">View your account</a></p>
+    </section>
+  </div>
+</main>
+<script src="js/platform.js?v=15"></script>
+<script src="js/script.js?v=15"></script>
+<script src="js/builder.js?v=15"></script>
+</body>
+</html>

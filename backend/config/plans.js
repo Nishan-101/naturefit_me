@@ -7,7 +7,7 @@ const PLANS = [
   },
   {
     id: "balance",
-    name: "Balance",
+    name: "Balanced Lifestyle",
     goals: ["Balanced Diet"],
     summary: "Everyday meals for steady energy, without a strict cut or bulk.",
   },
