@@ -548,7 +548,7 @@ test("the ending date follows the start date, weekdays, and purchased days", () 
   assert.equal(findPackage("balance", 2, 10).priceAed > 0, true);
 });
 
-test("Stripe checkout charges AED fils and asks for 3D Secure when required", async () => {
+test("Checkout Sessions do not send payment_method_types: The payment_method_types parameter is no longer supported when creating a Checkout Session", async () => {
   const previous = {
     secret: process.env.STRIPE_WEBHOOK_SECRET,
     live: process.env.STRIPE_LIVE_ENABLED,
@@ -578,9 +578,11 @@ test("Stripe checkout charges AED fils and asks for 3D Secure when required", as
     assert.equal(captured.body.includes("sk_test_123"), false);
     assert.equal(params.get("line_items[0][price_data][currency]"), "aed");
     assert.equal(params.get("line_items[0][price_data][unit_amount]"), "112763");
-    assert.equal(params.get("payment_method_types[0]"), "card");
-    assert.equal(params.has("automatic_payment_methods[enabled]"), false);
+    assert.equal(captured.body.includes("payment_method_types"), false);
+    assert.equal(captured.body.includes("automatic_payment_methods"), false);
     assert.equal(params.get("payment_method_options[card][request_three_d_secure]"), "automatic");
+    assert.equal(params.get("success_url"), "https://naturefit.site/order?ref=NF-20261121-ABC123");
+    assert.equal(params.get("cancel_url"), "https://naturefit.site/order?ref=NF-20261121-ABC123");
     assert.equal(params.get("line_items[0][price_data][unit_amount]") === "1127.63", false);
   } finally {
     if (previous.secret == null) delete process.env.STRIPE_WEBHOOK_SECRET;

@@ -96,7 +96,8 @@ async function createCheckoutSession({
     "line_items[0][price_data][product_data][name]",
     productName || `Nature Fit meal plan ${reference}`
   );
-  body.set("payment_method_types[0]", "card");
+  // Payment methods come from the Stripe Dashboard. Checkout Sessions reject
+  // payment_method_types, and automatic_payment_methods is not a session field.
   body.set("payment_method_options[card][request_three_d_secure]", "automatic");
   if (customerEmail) body.set("customer_email", customerEmail);
 
