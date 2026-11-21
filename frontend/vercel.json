@@ -15,7 +15,7 @@
     },
     {
       "source": "/api/:path*",
-      "destination": "https://naturefit-staging.onrender.com/api/:path*"
+      "destination": "https://naturefit-me-1.onrender.com/api/:path*"
     }
   ],
   "headers": [

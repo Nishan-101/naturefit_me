@@ -270,18 +270,25 @@ test("staging accepts the real Clever Cloud database name and refuses the produc
   assert.match(dbSource, /database: process\.env\.DB_NAME/);
 
   const vercel = JSON.parse(fs.readFileSync(path.join(__dirname, "../../frontend/vercel.json"), "utf8"));
-  const production = vercel.rewrites.filter((rule) => String(rule.destination).includes("naturefit-me.onrender.com"));
-  const stagingRewrite = vercel.rewrites.find((rule) => String(rule.destination).includes("naturefit-staging.onrender.com"));
+  const productionDestination = "https://naturefit-me.onrender.com/api/:path*";
+  const stagingDestination = "https://naturefit-me-1.onrender.com/api/:path*";
+  const production = vercel.rewrites.filter((rule) => rule.destination === productionDestination);
+  const stagingRewrite = vercel.rewrites.find((rule) => rule.destination === stagingDestination);
   assert.equal(production.length, 2);
   production.forEach((rule) => {
-    assert.equal(rule.destination, "https://naturefit-me.onrender.com/api/:path*");
+    assert.equal(rule.destination, productionDestination);
     assert.equal(rule.has[0].type, "host");
     assert.match(rule.has[0].value, /naturefit\.site$/);
   });
-  assert.equal(stagingRewrite.destination, "https://naturefit-staging.onrender.com/api/:path*");
+  assert.equal(vercel.rewrites.at(-1), stagingRewrite);
+  assert.equal(stagingRewrite.destination, stagingDestination);
   assert.equal(stagingRewrite.has, undefined);
   const contactScript = fs.readFileSync(path.join(__dirname, "../../frontend/js/script.js"), "utf8");
-  assert.equal(contactScript.includes("https://naturefit-me.onrender.com"), false);
+  const subscribeScript = fs.readFileSync(path.join(__dirname, "../../frontend/js/subscribe.js"), "utf8");
+  assert.equal(contactScript.includes("onrender.com"), false);
+  assert.equal(subscribeScript.includes("onrender.com"), false);
+  assert.match(contactScript, /\/api\/contact/);
+  assert.match(subscribeScript, /\/api\/packages\/checkout/);
 });
 
 test("OTP sends are rate limited and codes expire after too many guesses", () => {
