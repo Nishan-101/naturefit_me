@@ -1,0 +1,347 @@
+/* Nature Fit menu details. Scoped so the existing menu cards keep their layout. */
+
+.nf-menu-image.nf-menu-open,
+.nf-menu-card h3.nf-menu-open {
+  cursor: pointer;
+}
+
+.nf-menu-card h3.nf-menu-open:hover {
+  color: #1b5e45;
+}
+
+.nf-menu-details-cue {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  margin-top: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #1b5e45;
+  font-family: "Plus Jakarta Sans", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.nf-menu-details-cue::after {
+  content: " \2192";
+}
+
+.nf-menu-details-cue:hover {
+  color: #143d2e;
+}
+
+.nf-menu-open:focus-visible,
+.nf-menu-details-cue:focus-visible,
+.nf-dish-close:focus-visible {
+  outline: 2px solid #1b5e45;
+  outline-offset: 3px;
+}
+
+.nf-dish-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 18px;
+  background: rgba(16, 36, 29, 0.46);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+}
+
+.nf-dish-modal.is-open,
+.nf-dish-modal.is-closing {
+  visibility: visible;
+}
+
+.nf-dish-modal.is-open {
+  opacity: 1;
+}
+
+.nf-dish-modal.is-closing {
+  opacity: 0;
+}
+
+.nf-dish-dialog {
+  position: relative;
+  width: min(920px, 100%);
+  max-height: min(92vh, 920px);
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  color: #163d31;
+  border-radius: 28px;
+  border: 1px solid rgba(20, 70, 53, 0.08);
+  box-shadow: 0 24px 70px rgba(18, 48, 36, 0.22);
+  overflow: hidden;
+  transform: translateY(18px) scale(0.985);
+  opacity: 0;
+  transition: transform 0.32s ease, opacity 0.32s ease;
+}
+
+.nf-dish-modal.is-open .nf-dish-dialog {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.nf-dish-modal.is-closing .nf-dish-dialog {
+  transform: translateY(12px) scale(0.99);
+  opacity: 0;
+}
+
+.nf-dish-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.94);
+  color: #163d31;
+  font-size: 26px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(18, 48, 36, 0.12);
+}
+
+.nf-dish-scroll {
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+
+.nf-dish-hero {
+  width: 100%;
+  height: min(42vh, 380px);
+  background: #eef3ef;
+}
+
+.nf-dish-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.nf-dish-body {
+  padding: 26px 28px 32px;
+  font-family: "Plus Jakarta Sans", Arial, sans-serif;
+}
+
+.nf-dish-kicker {
+  margin: 0 0 8px;
+  color: #1b5e45;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.nf-dish-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.nf-dish-heading h2 {
+  margin: 0;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(30px, 4vw, 42px);
+  line-height: 1.12;
+  color: #123d31;
+}
+
+.nf-dish-price {
+  color: #f36d3d;
+  font-size: 18px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.nf-dish-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 16px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nf-dish-tags li {
+  background: #eff6f2;
+  color: #1b5e45;
+  border-radius: 999px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.nf-dish-status {
+  display: inline-flex;
+  margin-top: 14px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: #f4efe4;
+  color: #6d5424;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.nf-dish-status.is-approved {
+  background: #e7f4ec;
+  color: #1b5e45;
+}
+
+.nf-dish-copy,
+.nf-dish-block p,
+.nf-dish-note,
+.nf-dish-disclaimer {
+  color: #5d6d66;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.nf-dish-copy {
+  margin: 16px 0 0;
+}
+
+.nf-dish-macros {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.nf-dish-macro {
+  background: #f7fbf8;
+  border: 1px solid rgba(27, 94, 69, 0.1);
+  border-radius: 18px;
+  padding: 14px 12px 12px;
+  text-align: center;
+}
+
+.nf-dish-macro strong {
+  display: block;
+  color: #123d31;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 28px;
+  line-height: 1.1;
+}
+
+.nf-dish-macro span {
+  display: block;
+  margin-top: 4px;
+  color: #38634f;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.nf-dish-fibre,
+.nf-dish-published {
+  margin: 12px 0 0;
+  color: #38634f;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.nf-dish-disclaimer,
+.nf-dish-note {
+  margin: 12px 0 0;
+  font-size: 13px;
+}
+
+.nf-dish-block {
+  margin-top: 22px;
+}
+
+.nf-dish-block h3 {
+  margin: 0 0 8px;
+  color: #123d31;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 22px;
+}
+
+.nf-dish-list {
+  margin: 0;
+  padding-left: 18px;
+  color: #3e524a;
+  line-height: 1.7;
+}
+
+.nf-dish-basis {
+  margin-top: 18px;
+  border-top: 1px solid rgba(20, 70, 53, 0.1);
+  padding-top: 12px;
+}
+
+.nf-dish-basis summary {
+  cursor: pointer;
+  color: #1b5e45;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.nf-dish-basis p {
+  margin: 8px 0 0;
+  color: #5d6d66;
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+@media (max-width: 700px) {
+  .nf-dish-modal {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .nf-dish-dialog {
+    width: 100%;
+    height: 100dvh;
+    max-height: 100dvh;
+    border-radius: 22px 22px 0 0;
+    transform: translateY(100%);
+  }
+
+  .nf-dish-modal.is-open .nf-dish-dialog,
+  .nf-dish-modal.is-closing .nf-dish-dialog {
+    transform: translateY(0);
+  }
+
+  .nf-dish-modal.is-closing .nf-dish-dialog {
+    transform: translateY(100%);
+  }
+
+  .nf-dish-hero {
+    height: 220px;
+  }
+
+  .nf-dish-body {
+    padding: 20px 18px 36px;
+  }
+
+  .nf-dish-macros {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .nf-dish-heading {
+    flex-direction: column;
+    gap: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nf-dish-modal,
+  .nf-dish-dialog {
+    transition: none;
+  }
+}
