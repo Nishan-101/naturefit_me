@@ -31,9 +31,20 @@
     render();
   }
   function tabs() {
-    const names = ["orders", "inquiries", "pricing", "menu", "delivery", "schedule", "promos", "reviews", "settings"];
+    const names = [
+      ["orders", "orders"],
+      ["inquiries", "inquiries"],
+      ["pricing", "pricing"],
+      ["menu", "menu"],
+      ["dishes", "menu details"],
+      ["delivery", "delivery"],
+      ["schedule", "schedule"],
+      ["promos", "promos"],
+      ["reviews", "reviews"],
+      ["settings", "settings"],
+    ];
     document.getElementById("tabs").innerHTML = names
-      .map((name) => `<button type="button" class="${name === tab ? "is-on" : ""}" data-tab="${name}">${name}</button>`)
+      .map(([name, label]) => `<button type="button" class="${name === tab ? "is-on" : ""}" data-tab="${name}">${label}</button>`)
       .join("");
     document.querySelectorAll("[data-tab]").forEach((button) => {
       button.addEventListener("click", () => {
@@ -48,6 +59,7 @@
     else if (tab === "inquiries") renderInquiries();
     else if (tab === "pricing") renderPricing();
     else if (tab === "menu") renderMenu();
+    else if (tab === "dishes") renderDishes();
     else if (tab === "delivery") renderDelivery();
     else if (tab === "schedule") renderSchedule();
     else if (tab === "promos") renderPromos();
@@ -491,6 +503,122 @@
     setStatus(result.message, "success");
     await load();
   }
+  async function renderDishes() {
+    panel.innerHTML = "<p>Loading public menu details…</p>";
+    let catalog;
+    try {
+      const response = await fetch("data/menu-details.json");
+      catalog = await response.json();
+    } catch (error) {
+      panel.innerHTML = "<p>The public menu details file could not be loaded.</p>";
+      return;
+    }
+    let overrides = new Map();
+    try {
+      const saved = await api("/api/admin/public-menu");
+      overrides = new Map((saved.overrides || []).map((item) => [item.id, item]));
+    } catch (error) {
+      setStatus("Saved edits are unavailable until the database can be reached. Prices and the meal-plan builder are unchanged.", "error");
+    }
+    const options = catalog.items
+      .map((item) => {
+        const status = (overrides.get(item.id) || item).nutritionVerificationStatus || "estimated";
+        return `<option value="${escapeHtml(item.id)}">${escapeHtml(item.name)} · ${escapeHtml(status)}</option>`;
+      })
+      .join("");
+    panel.innerHTML = `<form id="dishForm" class="stack-form">
+        <p>Edit the public menu details. Saving stores a review copy for this dish. It does not change the printed price, the photo, checkout, or the meal-plan builder. The extra database table is created only when you save.</p>
+        <div class="form-group"><label>Dish</label><select id="dishId">${options}</select></div>
+        <div class="form-group"><label>Printed price</label><input id="dishPrice" disabled></div>
+        <div class="form-group wide"><label>Description</label><textarea id="dishDescription" rows="4"></textarea></div>
+        <div class="form-group wide"><label>Ingredients, one per line</label><textarea id="dishIngredients" rows="5"></textarea></div>
+        <div class="form-group wide"><label>Preparation</label><textarea id="dishPreparation" rows="3"></textarea></div>
+        <div class="form-group wide"><label>Serving size</label><textarea id="dishServing" rows="2"></textarea></div>
+        <div class="form-group"><label>Calories</label><input id="dishCalories" inputmode="decimal"></div>
+        <div class="form-group"><label>Protein g</label><input id="dishProtein" inputmode="decimal"></div>
+        <div class="form-group"><label>Carbohydrates g</label><input id="dishCarbs" inputmode="decimal"></div>
+        <div class="form-group"><label>Fats g</label><input id="dishFats" inputmode="decimal"></div>
+        <div class="form-group"><label>Fibre g</label><input id="dishFibre" inputmode="decimal"></div>
+        <div class="form-group"><label>Nutrition on the menu</label>
+          <select id="dishStatus">
+            <option value="estimated">Show nutrition</option>
+            <option value="withheld">Hide nutrition</option>
+          </select>
+        </div>
+        <div class="form-group wide"><label>Allergens, one per line</label><textarea id="dishAllergens" rows="3"></textarea></div>
+        <div class="form-group wide"><label>Allergen note</label><textarea id="dishAllergenNote" rows="2"></textarea></div>
+        <div class="form-group wide"><label>Labels, one per line</label><textarea id="dishTags" rows="3"></textarea></div>
+        <div class="form-group wide"><label>Dietary notes</label><textarea id="dishBenefits" rows="3"></textarea></div>
+        <button class="btn btn-forest" type="submit">Save dish details</button>
+      </form>`;
+    const form = panel.querySelector("#dishForm");
+    const select = panel.querySelector("#dishId");
+    const lines = (value) => (Array.isArray(value) ? value.join("\n") : "");
+    const fill = () => {
+      const base = catalog.items.find((item) => item.id === select.value);
+      const item = { ...base, ...(overrides.get(select.value) || {}) };
+      panel.querySelector("#dishPrice").value = base.priceAed == null ? "Not printed on the card" : `AED ${base.priceAed}`;
+      panel.querySelector("#dishDescription").value = item.description || "";
+      panel.querySelector("#dishIngredients").value = lines(item.ingredients);
+      panel.querySelector("#dishPreparation").value = item.preparationMethod || "";
+      panel.querySelector("#dishServing").value = item.servingSize || "";
+      panel.querySelector("#dishCalories").value = item.calories ?? "";
+      panel.querySelector("#dishProtein").value = item.protein ?? "";
+      panel.querySelector("#dishCarbs").value = item.carbohydrates ?? "";
+      panel.querySelector("#dishFats").value = item.fats ?? "";
+      panel.querySelector("#dishFibre").value = item.fibre ?? "";
+      panel.querySelector("#dishStatus").value = item.nutritionVerificationStatus || "estimated";
+      panel.querySelector("#dishAllergens").value = lines(item.allergens);
+      panel.querySelector("#dishAllergenNote").value = item.allergenNote || "";
+      panel.querySelector("#dishTags").value = lines(item.dietaryTags);
+      panel.querySelector("#dishBenefits").value = item.dietaryBenefits || "";
+    };
+    const itemBasis = (id) => {
+      const base = catalog.items.find((item) => item.id === id) || {};
+      const saved = overrides.get(id) || {};
+      return saved.nutritionBasis || base.nutritionBasis || "";
+    };
+    select.addEventListener("change", fill);
+    fill();
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      const split = (id) =>
+        panel
+          .querySelector(id)
+          .value.split(/\r?\n/)
+          .map((line) => line.trim())
+          .filter(Boolean);
+      try {
+        const result = await api("/api/admin/public-menu", {
+          method: "POST",
+          body: {
+            id: select.value,
+            description: panel.querySelector("#dishDescription").value,
+            ingredients: split("#dishIngredients"),
+            preparationMethod: panel.querySelector("#dishPreparation").value,
+            servingSize: panel.querySelector("#dishServing").value,
+            calories: panel.querySelector("#dishCalories").value,
+            protein: panel.querySelector("#dishProtein").value,
+            carbohydrates: panel.querySelector("#dishCarbs").value,
+            fats: panel.querySelector("#dishFats").value,
+            fibre: panel.querySelector("#dishFibre").value,
+            nutritionVerificationStatus: panel.querySelector("#dishStatus").value,
+            allergens: split("#dishAllergens"),
+            allergenNote: panel.querySelector("#dishAllergenNote").value,
+            dietaryTags: split("#dishTags"),
+            dietaryBenefits: panel.querySelector("#dishBenefits").value,
+            nutritionBasis: itemBasis(select.value),
+            missingInfo: [],
+          },
+        });
+        overrides.set(result.profile.id, result.profile);
+        setStatus(result.message, "success");
+      } catch (error) {
+        setStatus(error.message, "error");
+      }
+    });
+  }
+
   document.getElementById("staffForm").addEventListener("submit", async (event) => {
     event.preventDefault();
     try {

@@ -1,0 +1,1120 @@
+{
+  "schemaVersion": 1,
+  "disclaimer": "Nutritional values are approximate per serving and may vary depending on ingredients, portion sizes and preparation methods.",
+  "labellingNote": "Figures are approximate per serving and are not an official nutrition label. Please mention allergies when you order. Meals are prepared where common allergens are also handled.",
+  "labelPolicy": {
+    "highProtein": "Estimated protein of at least 30g for the assumed serving.",
+    "balancedMeal": "Estimated protein, carbohydrate and fat each provide roughly 20–45% of calories.",
+    "calorieConscious": "A clearly small side, under about 100 kcal on the stated assumption. Not a weight-loss claim.",
+    "muscleGainFriendly": "Estimated protein of at least 40g. The meal does not guarantee muscle gain.",
+    "plantBased": "No animal ingredient is named in the published recipe.",
+    "vegetarian": "No meat, poultry, fish or shellfish is named. Eggs, dairy and honey may be included.",
+    "freshlyPrepared": "Nature Fit states that dishes are prepared fresh. This is not a nutrition claim.",
+    "notUsedUnlessVerified": [
+      "gluten-free",
+      "sugar-free",
+      "low-fat",
+      "fat-free",
+      "dairy-free",
+      "vegan"
+    ]
+  },
+  "items": [
+    {
+      "id": "muscle-man",
+      "name": "Muscle Man",
+      "categories": [
+        "picks",
+        "main"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-12 190515.png",
+      "imageAlt": "Muscle Man",
+      "description": "Grilled beef with two slices of dark wholegrain bread, roasted sweet potato, and charred broccoli and cauliflower. Herbs and a little red cabbage finish the plate.",
+      "ingredients": [
+        "Grilled beef steak",
+        "Dark wholegrain bread",
+        "Roasted sweet potato",
+        "Broccoli",
+        "Cauliflower",
+        "Red cabbage",
+        "Fresh herbs"
+      ],
+      "preparationMethod": "The beef is grilled and sliced. Sweet potato is roasted, and the broccoli and cauliflower are grilled until lightly charred. The bread is served on the side.",
+      "servingSize": "One plate: about 160g grilled beef, two slices of dark bread, roasted sweet potato and a side of grilled greens.",
+      "calories": 700,
+      "protein": 53,
+      "carbohydrates": 62,
+      "fats": 26,
+      "fibre": 9,
+      "publishedCalories": null,
+      "nutritionBasis": "Close plate reading: 160g grilled beef, 70g dark bread, 110g roasted sweet potato with a little oil, and about 80g grilled broccoli and cauliflower.",
+      "allergens": [
+        "Cereals containing gluten"
+      ],
+      "allergenNote": "Contains gluten from the dark bread.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "High Protein",
+        "Balanced Meal",
+        "Muscle Gain Friendly"
+      ],
+      "dietaryBenefits": "Most of the plate is grilled beef, with bread and sweet potato for carbohydrate and greens for fibre. It can suit an active day. It does not guarantee muscle gain.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "omega",
+      "name": "Omega",
+      "categories": [
+        "picks",
+        "main"
+      ],
+      "priceAed": null,
+      "image": "./images/image.png",
+      "imageAlt": "Omega",
+      "description": "Omega pairs grilled salmon with avocado, cucumber and turmeric rice, then finishes the bowl with chia, flax and a cilantro lemon sauce. The salmon brings a rich, savoury bite, the avocado adds smoothness, and the turmeric rice keeps the plate fragrant rather than heavy.",
+      "ingredients": [
+        "Grilled salmon",
+        "Avocado",
+        "Cucumber",
+        "Turmeric rice",
+        "Chia seeds",
+        "Flax seeds",
+        "Cilantro lemon sauce"
+      ],
+      "preparationMethod": "Salmon is grilled and served with turmeric rice, avocado and cucumber, then finished with chia, flax and a cilantro lemon sauce.",
+      "servingSize": "About 120g cooked salmon, 40g avocado, 40g cucumber, 130g turmeric rice, chia, flax and a spoon of cilantro lemon sauce.",
+      "calories": 608,
+      "protein": 32,
+      "carbohydrates": 45,
+      "fats": 32,
+      "fibre": 6,
+      "publishedCalories": null,
+      "nutritionBasis": "Estimate from standard composition values for the named foods at the weights above. Sauce oil is assumed at 8g because the sauce is named but not specified. Rice is counted as plain cooked rice plus turmeric, without extra oil.",
+      "allergens": [
+        "Fish"
+      ],
+      "allergenNote": "Contains fish (salmon). Also contains chia and flax seeds.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "High Protein"
+      ],
+      "dietaryBenefits": "Salmon, chia and flax are foods people choose for unsaturated fats, alongside a useful portion of protein and rice. This plate does not guarantee a health result, and the menu's 'balanced' line is not repeated as a verified label because the estimate is relatively rich in fat.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "european-bowl",
+      "name": "European Bowl",
+      "categories": [
+        "picks",
+        "bowls"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-12 190931.png",
+      "imageAlt": "European Bowl",
+      "description": "The European Bowl sets chicken breast and Angus beef tenderloin over basmati rice with broccoli and baby asparagus. It is a straightforward two-protein bowl: char from the grill, sweetness from the rice, and a clean green finish from the vegetables.",
+      "ingredients": [
+        "Chicken breast",
+        "Angus beef tenderloin",
+        "Broccoli",
+        "Baby asparagus",
+        "Basmati rice"
+      ],
+      "preparationMethod": "Chicken breast and beef tenderloin are cooked and served over basmati rice with broccoli and baby asparagus.",
+      "servingSize": "About 90g chicken breast, 80g beef tenderloin, broccoli, baby asparagus and a serving of basmati rice.",
+      "calories": 579,
+      "protein": 57,
+      "carbohydrates": 53,
+      "fats": 15,
+      "fibre": 3,
+      "publishedCalories": null,
+      "nutritionBasis": "Standard composition values for skinless chicken breast, lean cooked tenderloin, boiled broccoli, asparagus and cooked basmati, plus 5g oil. No sauce is named, so none is included.",
+      "allergens": [],
+      "allergenNote": "No major allergen is named for this bowl.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "High Protein",
+        "Balanced Meal",
+        "Muscle Gain Friendly"
+      ],
+      "dietaryBenefits": "Two lean proteins, rice and green vegetables make this a higher-protein bowl that can sit in an active day. It does not guarantee muscle gain.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "steamed-broccoli",
+      "name": "Steamed Broccoli",
+      "categories": [
+        "picks",
+        "main"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-12 191158.png",
+      "imageAlt": "Steamed Broccoli",
+      "description": "Steamed broccoli is the simple side on the menu: fresh broccoli, lightly steamed, with nothing else named. It tastes green and clean, and it works beside any of the protein plates.",
+      "ingredients": [
+        "Broccoli"
+      ],
+      "preparationMethod": "Broccoli is steamed and served plain as a simple side.",
+      "servingSize": "One side, about 160g steamed broccoli.",
+      "calories": 55,
+      "protein": 4,
+      "carbohydrates": 11,
+      "fats": 1,
+      "fibre": 4,
+      "publishedCalories": null,
+      "nutritionBasis": "Standard values for steamed broccoli, about 34 kcal per 100g, scaled to 160g. If the kitchen finishes it with oil or butter, the fat and calories will be higher.",
+      "allergens": [],
+      "allergenNote": "No major allergen is named.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "Vegetarian",
+        "Plant-Based",
+        "Calorie Conscious"
+      ],
+      "dietaryBenefits": "A vegetable side with fibre and very little fat when it is steamed as described. Calorie conscious here only describes this small side. It is not a weight-loss promise.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "greek-yogurt-bowl",
+      "name": "Greek Yogurt Bowl",
+      "categories": [
+        "breakfast"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-12 191232.png",
+      "imageAlt": "Greek Yogurt Bowl",
+      "description": "A chilled breakfast bowl of homemade Greek yogurt with kiwi, strawberry, mango, granola, coconut flakes and honey. The yogurt is tangy, the fruit is fresh, and the granola and coconut add a light crunch.",
+      "ingredients": [
+        "Homemade Greek yogurt",
+        "Kiwi",
+        "Strawberry",
+        "Mango",
+        "Granola",
+        "Coconut flakes",
+        "Honey"
+      ],
+      "preparationMethod": "Homemade Greek yogurt is served cold with kiwi, strawberry, mango, granola, coconut flakes and honey.",
+      "servingSize": "One bowl: Greek yogurt with kiwi, strawberry, mango, granola, coconut flakes and honey.",
+      "calories": 419,
+      "protein": 22,
+      "carbohydrates": 56,
+      "fats": 13,
+      "fibre": 6,
+      "publishedCalories": null,
+      "nutritionBasis": "Standard values for 2% Greek yogurt, the named fruits, a typical granola, dried coconut and honey. Homemade yogurt may be richer or leaner than 2%. Granola recipes vary widely.",
+      "allergens": [
+        "Milk"
+      ],
+      "allergenNote": "Contains milk from the yogurt, and coconut. Granola may also contain oats, wheat or nuts.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "Vegetarian"
+      ],
+      "dietaryBenefits": "Protein from the yogurt with fruit, fibre from the granola and fruit, and honey for sweetness. It is a vegetarian breakfast, not a sugar-free one.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "herb-omelette",
+      "name": "Herb Omelette",
+      "categories": [
+        "breakfast"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-18 202359.png",
+      "imageAlt": "Herb Omelette",
+      "description": "A herb omelette served with fresh arugula and cherry tomatoes. The herbs lift the eggs, the arugula stays peppery, and the tomatoes add a juicy, bright side.",
+      "ingredients": [
+        "Eggs",
+        "Mixed herbs",
+        "Arugula",
+        "Cherry tomatoes"
+      ],
+      "preparationMethod": "Eggs are cooked into a herb omelette and served with arugula and cherry tomatoes.",
+      "servingSize": "One plate: about three eggs with arugula and cherry tomatoes.",
+      "calories": 317,
+      "protein": 20,
+      "carbohydrates": 4,
+      "fats": 24,
+      "fibre": 1,
+      "publishedCalories": 360,
+      "nutritionBasis": "Standard values for whole eggs, oil, arugula and cherry tomatoes. The menu card prints 360 kcal. This estimate is lower. Cheese, extra egg or more oil would close that gap and is not listed.",
+      "allergens": [
+        "Eggs"
+      ],
+      "allergenNote": "Contains egg.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "Vegetarian"
+      ],
+      "dietaryBenefits": "Eggs provide the protein, and the greens add freshness with very little carbohydrate. A useful breakfast when you want something savoury.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "chia-pudding-strawberry",
+      "name": "Chia Pudding Strawberry",
+      "categories": [
+        "breakfast"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-12 191327.png",
+      "imageAlt": "Chia Pudding Strawberry",
+      "description": "Chia seeds are soaked overnight with coconut milk and honey, then finished with fresh tropical fruit. The pudding sets softly, with a cool coconut note and the brightness of strawberry.",
+      "ingredients": [
+        "Chia seeds",
+        "Coconut milk",
+        "Honey",
+        "Strawberries",
+        "Mango"
+      ],
+      "preparationMethod": "Chia seeds are soaked with coconut milk and honey, then topped with strawberry and mango.",
+      "servingSize": "One cup: soaked chia with coconut milk, honey, strawberries and mango.",
+      "calories": 263,
+      "protein": 5,
+      "carbohydrates": 38,
+      "fats": 11,
+      "fibre": 12,
+      "publishedCalories": null,
+      "nutritionBasis": "Standard values for the weights above. Carton coconut milk is much lighter than canned coconut milk. If the kitchen uses canned full-fat coconut milk, calories and fat rise sharply. The extra fruit is assumed to be mango because the recipe only says tropical fruit.",
+      "allergens": [],
+      "allergenNote": "Contains coconut. Honey is included, so this is vegetarian rather than fully plant-based.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "Vegetarian"
+      ],
+      "dietaryBenefits": "Chia contributes fibre and unsaturated fat, with fruit and a little honey for sweetness. It is a lighter-protein breakfast than the yogurt or egg plates.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "berries-loaded-oatmeal",
+      "name": "Berries Loaded Oatmeal",
+      "categories": [
+        "breakfast"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-12 191354.png",
+      "imageAlt": "Berries Loaded Oatmeal",
+      "description": "Warm oats cooked with skimmed milk and topped with banana, cranberries, blueberries, flax and chia. It is a soft, gently sweet bowl with a seedy finish and plenty of fruit.",
+      "ingredients": [
+        "Oats",
+        "Banana",
+        "Cranberries",
+        "Flax seeds",
+        "Chia seeds",
+        "Skimmed milk",
+        "Blueberries"
+      ],
+      "preparationMethod": "Oats are cooked with skimmed milk and served with banana, cranberries, blueberries, flax and chia.",
+      "servingSize": "One bowl: oats, skimmed milk, banana, cranberries, blueberries, flax and chia.",
+      "calories": 440,
+      "protein": 17,
+      "carbohydrates": 75,
+      "fats": 10,
+      "fibre": 15,
+      "publishedCalories": 466,
+      "nutritionBasis": "Standard values for rolled oats, skimmed milk, banana, fresh cranberries, blueberries, flax and chia. Dried sweetened cranberries would add calories and bring the estimate closer to the 466 kcal printed on the menu card. No extra sugar is named, so none is included.",
+      "allergens": [
+        "Milk"
+      ],
+      "allergenNote": "Contains milk. Oats are included.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "Vegetarian"
+      ],
+      "dietaryBenefits": "Oats, fruit, chia and flax give this bowl its fibre, with protein from the milk and oats. It is a carbohydrate-forward breakfast, suited to a morning when you want something warm and filling.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "nature-granola",
+      "name": "Nature Granola",
+      "categories": [
+        "breakfast"
+      ],
+      "priceAed": 40,
+      "image": "./images/Screenshot 2026-08-12 191421.png",
+      "imageAlt": "Nature Granola",
+      "description": "Fresh yogurt with hazelnut praline, mixed berries and crunchy granola. The praline adds a toasted nut sweetness, the berries keep it bright, and the granola gives the cup its crunch.",
+      "ingredients": [
+        "Yogurt",
+        "Hazelnut praline",
+        "Mixed berries",
+        "Granola"
+      ],
+      "preparationMethod": "Yogurt is served with hazelnut praline, mixed berries and crunchy granola.",
+      "servingSize": "One cup: yogurt, granola, hazelnut praline and mixed berries.",
+      "calories": 392,
+      "protein": 20,
+      "carbohydrates": 46,
+      "fats": 13,
+      "fibre": 5,
+      "publishedCalories": 217,
+      "nutritionBasis": "Standard values for a realistic cup, not a half-portion forced to equal 217 kcal. Yogurt is assumed at 2% fat. Praline is estimated as hazelnut and sugar. If the published 217 kcal is the portion actually served, this estimate is too high and should be replaced after the kitchen weighs the cup.",
+      "allergens": [
+        "Milk",
+        "Tree nuts (hazelnut)"
+      ],
+      "allergenNote": "Contains milk and hazelnut. The granola may also contain other nuts or oats.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "Vegetarian"
+      ],
+      "dietaryBenefits": "Yogurt and hazelnut give this cup protein as well as sweetness, with fibre from the berries and granola.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "chicken-caesar-salad",
+      "name": "Chicken Caesar Salad",
+      "categories": [
+        "salads"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-18 195716.png",
+      "imageAlt": "Chicken Caesar Salad",
+      "description": "Chicken breast with lettuce, parmesan, sunflower seeds, cherry tomatoes and bread croutons, dressed in Caesar dressing. It is a familiar Caesar, with seeds for extra crunch and tomatoes for freshness.",
+      "ingredients": [
+        "Chicken breast",
+        "Lettuce",
+        "Parmesan",
+        "Sunflower seeds",
+        "Cherry tomatoes",
+        "Bread croutons",
+        "Caesar dressing"
+      ],
+      "preparationMethod": "Chicken is served over lettuce with parmesan, sunflower seeds, cherry tomatoes, bread croutons and Caesar dressing.",
+      "servingSize": "One plate: grilled chicken, lettuce, parmesan, sunflower seeds, cherry tomatoes, croutons and Caesar dressing.",
+      "calories": 555,
+      "protein": 47,
+      "carbohydrates": 23,
+      "fats": 32,
+      "fibre": 4,
+      "publishedCalories": 550,
+      "nutritionBasis": "Standard values for the named foods. Dressing is estimated at 30g using a typical oil-based Caesar composition, because the house recipe is not published. That assumption is what brings the estimate in line with the 550 kcal printed on the card.",
+      "allergens": [
+        "Milk",
+        "Cereals containing gluten"
+      ],
+      "allergenNote": "Contains milk from the parmesan and gluten from the bread croutons. Caesar dressing often includes egg.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "High Protein",
+        "Muscle Gain Friendly"
+      ],
+      "dietaryBenefits": "A high-protein chicken salad with vegetables and a richer dressing. The protein can suit an active day. It does not guarantee muscle gain, and it is not described as low-fat.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "steak-mix-salad",
+      "name": "Steak Mix Salad",
+      "categories": [
+        "salads"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-18 200007.png",
+      "imageAlt": "Steak Mix Salad",
+      "description": "Beef tenderloin with quinoa, peas, avocado, mushrooms and greens, finished with pine nuts and a brown dressing on the side. The steak and quinoa make it filling, and the avocado keeps it rich.",
+      "ingredients": [
+        "Beef tenderloin",
+        "Quinoa",
+        "Peas",
+        "Avocado",
+        "Mushrooms",
+        "Cherry tomatoes",
+        "Mixed leaves",
+        "Pine nuts",
+        "Brown dressing"
+      ],
+      "preparationMethod": "Steak is grilled and sliced over quinoa, peas, avocado, mushrooms and leaves, with pine nuts and a brown dressing served beside the bowl.",
+      "servingSize": "One bowl: sliced steak, quinoa, peas, avocado, mushrooms, greens, pine nuts and a small cup of dressing.",
+      "calories": 640,
+      "protein": 44,
+      "carbohydrates": 39,
+      "fats": 34,
+      "fibre": 12,
+      "publishedCalories": 660,
+      "nutritionBasis": "Listed salad foods plus about 8g pine nuts and 20g of an oil-based brown dressing, which brings the plate near the 660 kcal printed on the card.",
+      "allergens": [
+        "Tree nuts"
+      ],
+      "allergenNote": "Contains pine nuts. The dressing is an oil-based brown sauce.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "High Protein",
+        "Muscle Gain Friendly"
+      ],
+      "dietaryBenefits": "Steak, quinoa and peas give this bowl protein, carbohydrate and fibre together. It can suit an active day. It does not guarantee muscle gain.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "shrimp-salad",
+      "name": "Shrimp Salad",
+      "categories": [
+        "salads"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-18 195939.png",
+      "imageAlt": "Shrimp Salad",
+      "description": "Shrimp with mixed leaves, bean sprouts, edamame, cherry tomatoes, sweet corn and avocado, with lime and a pale yellow dressing on the side.",
+      "ingredients": [
+        "Shrimp",
+        "Mixed lettuce",
+        "Bean sprouts",
+        "Edamame",
+        "Cherry tomatoes",
+        "Sweet corn",
+        "Avocado",
+        "Lime",
+        "Citrus dressing"
+      ],
+      "preparationMethod": "Shrimp is cooked and arranged over the salad with avocado, corn and sprouts. Lime and a yellow dressing are served on the side.",
+      "servingSize": "One bowl: shrimp, leaves, sprouts, edamame, tomato, corn, avocado, lime and a small cup of dressing.",
+      "calories": 600,
+      "protein": 38,
+      "carbohydrates": 28,
+      "fats": 36,
+      "fibre": 9,
+      "publishedCalories": 625,
+      "nutritionBasis": "The salad ingredients plus about 40g of an oil-based yellow dressing, which accounts for most of the difference from a bare salad and sits near the 625 kcal on the card.",
+      "allergens": [
+        "Crustaceans",
+        "Soy"
+      ],
+      "allergenNote": "Contains crustaceans (shrimp) and soy (edamame).",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "High Protein"
+      ],
+      "dietaryBenefits": "Shrimp and edamame make this a higher-protein salad, with vegetables, avocado and a citrus-style dressing.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "amazon-salad",
+      "name": "Amazon Salad",
+      "categories": [
+        "salads"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-18 195956.png",
+      "imageAlt": "Amazon Salad",
+      "description": "Grilled chicken with lettuce, cucumber, spring onion, strawberries, tomatoes, feta and dried cranberries, with a brown dressing on the side.",
+      "ingredients": [
+        "Chicken breast",
+        "Lettuce",
+        "Cucumber",
+        "Spring onion",
+        "Strawberry",
+        "Tomato",
+        "Dried cranberries",
+        "Feta",
+        "Brown dressing"
+      ],
+      "preparationMethod": "Chicken is grilled and served over greens with cucumber, spring onion, strawberries, tomato, feta and dried cranberries. A brown dressing comes on the side.",
+      "servingSize": "One bowl: grilled chicken, greens, cucumber, berries, feta, dried cranberries and a small cup of dressing.",
+      "calories": 390,
+      "protein": 37,
+      "carbohydrates": 24,
+      "fats": 16,
+      "fibre": 5,
+      "publishedCalories": 395,
+      "nutritionBasis": "Chicken, vegetables, berries and feta, plus a small portion of dried cranberries and about 15g of dressing, close to the 395 kcal printed on the card.",
+      "allergens": [
+        "Milk"
+      ],
+      "allergenNote": "Contains milk from the feta.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "High Protein"
+      ],
+      "dietaryBenefits": "Grilled chicken and feta make this a higher-protein salad, with fruit and a light dressing on the side.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "nature-steak-wrap",
+      "name": "Nature Steak Wrap",
+      "categories": [
+        "burgers"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-18 200042.png",
+      "imageAlt": "Nature Steak Wrap",
+      "description": "Angus tenderloin with baby spinach, tomato and onion in a wheat tortilla, served with sweet potato fries. The wrap is savoury and simple, with the fries adding a gently sweet side.",
+      "ingredients": [
+        "Angus beef tenderloin",
+        "Baby spinach",
+        "Tomato",
+        "Onion",
+        "Wheat tortilla",
+        "Sweet potato fries"
+      ],
+      "preparationMethod": "Steak, spinach, tomato and onion are wrapped in a wheat tortilla and served with sweet potato fries.",
+      "servingSize": "One wheat wrap with steak and vegetables, plus a side of sweet potato fries.",
+      "calories": 556,
+      "protein": 36,
+      "carbohydrates": 59,
+      "fats": 20,
+      "fibre": 5,
+      "publishedCalories": 617,
+      "nutritionBasis": "Standard values for the fillings and a 60g wheat tortilla. Fries are estimated as a restaurant portion of about 170 kcal per 80g, not a specific fryer recipe. The menu card prints 617 kcal. A larger tortilla, more steak or more fry oil would close the gap.",
+      "allergens": [
+        "Cereals containing gluten"
+      ],
+      "allergenNote": "Contains wheat (tortilla). Fries may be cooked in a shared fryer. No sauce allergen is named.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "High Protein",
+        "Balanced Meal"
+      ],
+      "dietaryBenefits": "Steak, a wheat wrap and sweet potato fries give protein and carbohydrate together. It is a full meal, not a light snack, and the fry oil is only estimated.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "beef-burger",
+      "name": "Beef Burger",
+      "categories": [
+        "burgers"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-18 200052.png",
+      "imageAlt": "Beef Burger",
+      "description": "An Angus beef burger in a soft bun with Mac sauce, rocca, caramelized mushrooms and onions, served with sweet potato fries and two dipping sauces.",
+      "ingredients": [
+        "Angus beef",
+        "Burger bun",
+        "Mac sauce",
+        "Rocca (arugula)",
+        "Mushrooms",
+        "Onions",
+        "Sweet potato fries",
+        "Herb dipping sauce"
+      ],
+      "preparationMethod": "The beef is cooked and stacked in a bun with Mac sauce, rocca, caramelized mushrooms and onions. Sweet potato fries and a second herb sauce are served beside it.",
+      "servingSize": "One burger with bun, patty and toppings, plus sweet potato fries and two small sauces.",
+      "calories": 700,
+      "protein": 36,
+      "carbohydrates": 60,
+      "fats": 34,
+      "fibre": 4,
+      "publishedCalories": 479,
+      "nutritionBasis": "A bun, a cooked beef patty, Mac sauce, a herb sauce, caramelized vegetables and a side of sweet potato fries, read from the served plate.",
+      "allergens": [
+        "Cereals containing gluten",
+        "Eggs"
+      ],
+      "allergenNote": "Contains gluten from the bun. The creamy sauces are typically made with egg.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "High Protein"
+      ],
+      "dietaryBenefits": "Beef, the bun and sweet potato fries make this a full plate. The sauces add richness, so it is not a light salad.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "special-burrito-wrap",
+      "name": "Special Burrito Wrap",
+      "categories": [
+        "burgers"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-18 200106.png",
+      "imageAlt": "Special Burrito Wrap",
+      "description": "Angus beef tenderloin with egg, avocado and cheddar in a flour tortilla, served with sweet potato fries and two dipping sauces.",
+      "ingredients": [
+        "Angus beef tenderloin",
+        "Egg",
+        "Avocado",
+        "Cheddar cheese",
+        "Flour tortilla",
+        "Sweet potato fries",
+        "Dipping sauces"
+      ],
+      "preparationMethod": "Beef, egg, avocado and cheddar are rolled in a flour tortilla. The plate also includes sweet potato fries and two sauces.",
+      "servingSize": "One flour wrap with steak, egg, avocado and cheddar, plus sweet potato fries and two small sauces.",
+      "calories": 780,
+      "protein": 45,
+      "carbohydrates": 58,
+      "fats": 40,
+      "fibre": 6,
+      "publishedCalories": 564,
+      "nutritionBasis": "The wrap filling and a wheat tortilla, plus a side of sweet potato fries and about 30g of the two creamy sauces shown with the plate.",
+      "allergens": [
+        "Cereals containing gluten",
+        "Eggs",
+        "Milk"
+      ],
+      "allergenNote": "Contains gluten from the flour tortilla, egg, and milk from the cheddar.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "High Protein",
+        "Muscle Gain Friendly"
+      ],
+      "dietaryBenefits": "Steak, egg and cheddar give this plate a high protein portion, with carbohydrate from the tortilla and fries. It does not guarantee muscle gain.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "grilled-chicken-burger",
+      "name": "Grilled Chicken Burger",
+      "categories": [
+        "burgers"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-18 200131.png",
+      "imageAlt": "Grilled Chicken Burger",
+      "description": "Grilled chicken in a soft bun with cheddar, lettuce and tomato, served with sweet potato fries.",
+      "ingredients": [
+        "Grilled chicken breast",
+        "Burger bun",
+        "Cheddar",
+        "Lettuce",
+        "Tomato",
+        "Turkey strips",
+        "Sweet potato fries"
+      ],
+      "preparationMethod": "Chicken is grilled and served in a bun with cheddar, lettuce and tomato. Sweet potato fries come on the side.",
+      "servingSize": "One chicken burger with bun and cheese, plus a side of sweet potato fries.",
+      "calories": 650,
+      "protein": 51,
+      "carbohydrates": 52,
+      "fats": 24,
+      "fibre": 4,
+      "publishedCalories": 445,
+      "nutritionBasis": "A bun, grilled chicken, a slice of cheddar, salad leaves and a side of sweet potato fries, read from the served plate.",
+      "allergens": [
+        "Cereals containing gluten",
+        "Milk"
+      ],
+      "allergenNote": "Contains gluten from the bun and milk from the cheddar.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "High Protein",
+        "Balanced Meal",
+        "Muscle Gain Friendly"
+      ],
+      "dietaryBenefits": "Grilled chicken and cheese provide the protein, with the bun and fries for carbohydrate. It can suit an active day. It does not guarantee muscle gain.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "chicken-caesar-wrap",
+      "name": "Chicken Caesar Wrap",
+      "categories": [
+        "burgers"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-18 200157.png",
+      "imageAlt": "Chicken Caesar Wrap",
+      "description": "Chicken breast, lettuce, parmesan and Caesar dressing wrapped in a wheat tortilla. It is the Caesar salad in a warmer, more portable form, with the same savoury dressing.",
+      "ingredients": [
+        "Chicken breast",
+        "Lettuce",
+        "Parmesan",
+        "Caesar dressing",
+        "Wheat tortilla"
+      ],
+      "preparationMethod": "Chicken, lettuce, parmesan and Caesar dressing are wrapped in a wheat tortilla.",
+      "servingSize": "One wheat wrap with chicken, lettuce, parmesan and Caesar dressing.",
+      "calories": 473,
+      "protein": 36,
+      "carbohydrates": 33,
+      "fats": 22,
+      "fibre": 2,
+      "publishedCalories": 445,
+      "nutritionBasis": "Standard values for the named foods. Dressing is estimated at 20g of a typical Caesar. That is slightly above the 445 kcal printed on the card. A lighter house dressing would bring it down.",
+      "allergens": [
+        "Cereals containing gluten",
+        "Milk"
+      ],
+      "allergenNote": "Contains wheat and milk from the parmesan. Caesar dressing often includes egg.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "High Protein",
+        "Balanced Meal"
+      ],
+      "dietaryBenefits": "Chicken and parmesan provide the protein, with the tortilla as the main carbohydrate. The dressing adds richness, so this is not presented as a low-fat wrap.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "grilled-chicken-with-rice",
+      "name": "Grilled Chicken With Rice",
+      "categories": [
+        "main"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-18 203611.png",
+      "imageAlt": "Grilled Chicken With Rice",
+      "description": "Chicken breast with mushroom, onion and peppers, served with vegetable pilaf rice. The peppers and onion sweeten the chicken, and the pilaf makes it a complete plate rather than a lone fillet.",
+      "ingredients": [
+        "Chicken breast",
+        "Mushroom",
+        "Onion",
+        "Peppers",
+        "Vegetable pilaf rice"
+      ],
+      "preparationMethod": "Chicken is grilled and served with mushroom, onion, peppers and vegetable pilaf rice.",
+      "servingSize": "One plate: grilled chicken breast with vegetables and a serving of pilaf rice.",
+      "calories": 553,
+      "protein": 46,
+      "carbohydrates": 59,
+      "fats": 13,
+      "fibre": 2,
+      "publishedCalories": null,
+      "nutritionBasis": "Standard values for grilled skinless chicken, the named vegetables and cooked rice, plus 8g oil because pilaf is usually cooked with some fat. The oil amount is an assumption.",
+      "allergens": [],
+      "allergenNote": "No major allergen is named for this plate.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "High Protein",
+        "Balanced Meal",
+        "Muscle Gain Friendly"
+      ],
+      "dietaryBenefits": "A familiar grilled-chicken plate with rice and vegetables, and enough protein to be useful on an active day. It does not guarantee muscle gain.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "grilled-tenderloin",
+      "name": "Grilled Tenderloin",
+      "categories": [
+        "main"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-18 203633.png",
+      "imageAlt": "Grilled Tenderloin",
+      "description": "Angus beef tenderloin with steamed vegetables and mushroom sauce. The beef is the centre of the plate, the vegetables stay light, and the mushroom sauce adds a savoury finish.",
+      "ingredients": [
+        "Angus beef tenderloin",
+        "Steamed vegetables",
+        "Mushroom sauce"
+      ],
+      "preparationMethod": "Tenderloin is grilled and served with steamed vegetables and a mushroom sauce.",
+      "servingSize": "One plate: grilled tenderloin, steamed vegetables and mushroom sauce.",
+      "calories": 508,
+      "protein": 55,
+      "carbohydrates": 14,
+      "fats": 26,
+      "fibre": 4,
+      "publishedCalories": 530,
+      "nutritionBasis": "Lean cooked tenderloin, mixed boiled vegetables, 5g oil, and 60g of a light cream-style mushroom sauce at about 70 kcal. The sauce recipe is not the kitchen's recipe. The total sits near the 530 kcal printed on the card.",
+      "allergens": [
+        "Milk"
+      ],
+      "allergenNote": "The mushroom sauce is a light cream-style sauce and contains milk.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "High Protein",
+        "Muscle Gain Friendly"
+      ],
+      "dietaryBenefits": "A higher-protein beef plate with vegetables and a creamy mushroom sauce. It can suit an active day. It does not guarantee muscle gain.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "grilled-salmon",
+      "name": "Grilled Salmon",
+      "categories": [
+        "main"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-18 203652.png",
+      "imageAlt": "Grilled Salmon",
+      "description": "Herb-marinated grilled salmon with mashed potato and a fresh side salad. The herbs season the fish, the mash is comforting, and the salad keeps the plate fresh.",
+      "ingredients": [
+        "Salmon",
+        "Herbs",
+        "Mashed potato",
+        "Butter",
+        "Milk",
+        "Side salad"
+      ],
+      "preparationMethod": "Salmon is herb-marinated and grilled, then served with mashed potato and a green side salad.",
+      "servingSize": "One plate: grilled salmon, mashed potato and a small side salad.",
+      "calories": 564,
+      "protein": 34,
+      "carbohydrates": 32,
+      "fats": 31,
+      "fibre": 4,
+      "publishedCalories": null,
+      "nutritionBasis": "Standard values for Atlantic salmon, potato, a modest amount of butter and milk, salad leaves and 5g marinade oil. Butter and milk are assumed because mash usually includes them. They are not written on the menu.",
+      "allergens": [
+        "Fish",
+        "Milk"
+      ],
+      "allergenNote": "Contains fish. The mash is finished with butter and milk.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "High Protein"
+      ],
+      "dietaryBenefits": "Grilled salmon provides protein and unsaturated fat, with potato and a fresh salad beside it.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "grilled-sea-bass",
+      "name": "Grilled Sea Bass",
+      "categories": [
+        "main"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-18 203717.png",
+      "imageAlt": "Grilled Sea Bass",
+      "description": "Herb-marinated sea bass with sweet mashed potato, salad and lemon butter sauce. The fish stays delicate, the lemon butter sharpens it, and the mash rounds the plate.",
+      "ingredients": [
+        "Sea bass",
+        "Herbs",
+        "Sweet potato",
+        "Butter",
+        "Lemon",
+        "Side salad"
+      ],
+      "preparationMethod": "Sea bass is herb-marinated and grilled, then served with sweet potato mash, salad and lemon butter sauce.",
+      "servingSize": "One plate: grilled sea bass, sweet potato mash, salad and lemon butter sauce.",
+      "calories": 518,
+      "protein": 37,
+      "carbohydrates": 34,
+      "fats": 24,
+      "fibre": 5,
+      "publishedCalories": 545,
+      "nutritionBasis": "Standard values treating the mash as sweet potato plus 10g butter, and the sauce as 15g butter with lemon. The menu card prints 545 kcal. More butter or a larger fillet would explain the difference. If 'sweet mash' means white potato with sugar, the carbohydrate source changes.",
+      "allergens": [
+        "Fish",
+        "Milk"
+      ],
+      "allergenNote": "Contains fish and milk from the butter.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "High Protein",
+        "Balanced Meal"
+      ],
+      "dietaryBenefits": "A fish plate with potato, salad and butter. Protein comes from the sea bass. The butter is part of the flavour, so the dish is not described as low-fat.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "sauteed-beef",
+      "name": "Sauteed Beef",
+      "categories": [
+        "main"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-18 203904.png",
+      "imageAlt": "Sauteed Beef",
+      "description": "Angus beef tenderloin sautéed with garlic and onion, served with vegetables and mushroom sauce. The garlic and onion perfume the beef, and the sauce brings the plate together.",
+      "ingredients": [
+        "Angus beef tenderloin",
+        "Garlic",
+        "Onion",
+        "Mixed vegetables",
+        "Mushroom sauce"
+      ],
+      "preparationMethod": "Tenderloin is sautéed with garlic and onion, then served with vegetables and mushroom sauce.",
+      "servingSize": "One plate: sautéed tenderloin, garlic, onion, vegetables and mushroom sauce.",
+      "calories": 476,
+      "protein": 46,
+      "carbohydrates": 12,
+      "fats": 26,
+      "fibre": 3,
+      "publishedCalories": null,
+      "nutritionBasis": "Standard values for lean tenderloin, oil, garlic, onion and mixed vegetables, plus 50g of a light mushroom sauce at about 60 kcal. The sauce is not the kitchen's unpublished recipe.",
+      "allergens": [
+        "Milk"
+      ],
+      "allergenNote": "The mushroom sauce is a light cream-style sauce and contains milk.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "High Protein",
+        "Muscle Gain Friendly"
+      ],
+      "dietaryBenefits": "A garlic-and-onion beef plate with plenty of protein and fewer carbohydrates than the rice dishes. It does not guarantee muscle gain.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "spaghetti-with-salmon",
+      "name": "Spaghetti With Salmon",
+      "categories": [
+        "main"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-18 203919.png",
+      "imageAlt": "Spaghetti With Salmon",
+      "description": "Spaghetti with salmon pieces and a creamy sauce, finished with parmesan and fresh basil. The sauce coats the pasta, the salmon stays the main flavour, and the basil keeps it fragrant.",
+      "ingredients": [
+        "Spaghetti",
+        "Salmon",
+        "Creamy sauce",
+        "Parmesan",
+        "Basil"
+      ],
+      "preparationMethod": "Spaghetti is tossed with salmon, a cream sauce, parmesan and fresh basil.",
+      "servingSize": "One plate: spaghetti, salmon, cream sauce, parmesan and basil.",
+      "calories": 418,
+      "protein": 25,
+      "carbohydrates": 30,
+      "fats": 20,
+      "fibre": 2,
+      "publishedCalories": 425,
+      "nutritionBasis": "Standard values for wheat spaghetti, salmon, parmesan and a light cream sauce of about 90 kcal per 40g. The sauce recipe is not published. The total is close to the 425 kcal on the menu card. A larger restaurant pasta portion would be higher.",
+      "allergens": [
+        "Cereals containing gluten",
+        "Fish",
+        "Milk"
+      ],
+      "allergenNote": "Contains wheat pasta, fish and milk from the parmesan and cream sauce.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "Balanced Meal"
+      ],
+      "dietaryBenefits": "A smaller pasta portion with salmon and parmesan, so the plate has protein as well as carbohydrate. The creamy sauce means it is not presented as a low-fat dish.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "ginger-carrot-orange",
+      "name": "Ginger, Carrot & Orange",
+      "categories": [
+        "juice"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-18 200228.png",
+      "imageAlt": "Ginger Carrot Orange Juice",
+      "description": "Fresh ginger, carrot and orange blended into a juice. It is bright and slightly spicy, with the sweetness coming from the carrot and orange themselves.",
+      "ingredients": [
+        "Ginger",
+        "Carrot",
+        "Orange"
+      ],
+      "preparationMethod": "Ginger, carrot and orange are juiced together and served fresh.",
+      "servingSize": "One glass, about 300ml.",
+      "calories": 126,
+      "protein": 3,
+      "carbohydrates": 28,
+      "fats": 0,
+      "fibre": 1,
+      "publishedCalories": null,
+      "nutritionBasis": "Standard juice composition for carrot and orange, plus a little ginger. Most fibre is removed if the drink is strained. No added sugar is included because none is named; the menu also does not promise that sugar is never added.",
+      "allergens": [],
+      "allergenNote": "No major allergen is named.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "Vegetarian",
+        "Plant-Based"
+      ],
+      "dietaryBenefits": "A fresh juice with natural sugars from carrot and orange, and very little fat or fibre once it is juiced. It is not described as sugar-free.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "carrot-juice",
+      "name": "Carrot Juice",
+      "categories": [
+        "juice"
+      ],
+      "priceAed": 29,
+      "image": "./images/Screenshot 2026-08-18 200244.png",
+      "imageAlt": "Carrot Juice",
+      "description": "The menu describes this as fresh carrot juice with no added sugar or ice. The sweetness is the carrot's own, and the juice is served without being watered down.",
+      "ingredients": [
+        "Carrot"
+      ],
+      "preparationMethod": "Carrots are juiced and served with no added sugar and no ice.",
+      "servingSize": "One glass, about 300ml.",
+      "calories": 120,
+      "protein": 3,
+      "carbohydrates": 28,
+      "fats": 0,
+      "fibre": 1,
+      "publishedCalories": null,
+      "nutritionBasis": "About 40 kcal per 100ml of carrot juice, scaled to 300ml. 'No added sugar' is taken from the menu text. The juice still contains the natural sugars of carrot, so it is not labelled sugar-free.",
+      "allergens": [],
+      "allergenNote": "No major allergen is named.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "Vegetarian",
+        "Plant-Based"
+      ],
+      "dietaryBenefits": "A single-ingredient carrot juice. The sweetness is from the carrot itself.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "orange-juice",
+      "name": "Orange Juice",
+      "categories": [
+        "juice"
+      ],
+      "priceAed": 24,
+      "image": "./images/Screenshot 2026-08-18 200312.png",
+      "imageAlt": "Orange Juice",
+      "description": "The menu describes this as fresh orange juice with no added sugar or ice. It tastes like the fruit: sharp, sweet and straightforward.",
+      "ingredients": [
+        "Orange"
+      ],
+      "preparationMethod": "Oranges are juiced and served with no added sugar and no ice.",
+      "servingSize": "One glass, about 300ml.",
+      "calories": 135,
+      "protein": 2,
+      "carbohydrates": 31,
+      "fats": 0,
+      "fibre": 1,
+      "publishedCalories": null,
+      "nutritionBasis": "About 45 kcal per 100ml of orange juice, scaled to 300ml. Natural fruit sugars are included. The drink is not labelled sugar-free.",
+      "allergens": [],
+      "allergenNote": "No major allergen is named.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "Vegetarian",
+        "Plant-Based"
+      ],
+      "dietaryBenefits": "Fresh orange juice as described on the menu, with no added sugar and no ice. It is still a source of natural sugars, and most of the fruit's fibre is lost in juicing.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    },
+    {
+      "id": "watermelon-juice",
+      "name": "Watermelon Juice",
+      "categories": [
+        "juice"
+      ],
+      "priceAed": null,
+      "image": "./images/Screenshot 2026-08-18 200320.png",
+      "imageAlt": "Watermelon Juice",
+      "description": "Fresh watermelon juice with no added sugar or ice. It is light and mildly sweet from the fruit itself.",
+      "ingredients": [
+        "Watermelon"
+      ],
+      "preparationMethod": "Watermelon is juiced and served with no added sugar and no ice.",
+      "servingSize": "One glass, about 300ml.",
+      "calories": 90,
+      "protein": 2,
+      "carbohydrates": 21,
+      "fats": 0,
+      "fibre": 1,
+      "publishedCalories": null,
+      "nutritionBasis": "About 300ml of watermelon juice, using standard values of roughly 30 kcal per 100ml. No added sugar is included.",
+      "allergens": [],
+      "allergenNote": "No major allergen is named.",
+      "dietaryTags": [
+        "Freshly Prepared",
+        "Vegetarian",
+        "Plant-Based"
+      ],
+      "dietaryBenefits": "A fresh fruit juice. The sweetness comes from the watermelon.",
+      "missingInfo": [],
+      "nutritionVerificationStatus": "estimated"
+    }
+  ]
+}

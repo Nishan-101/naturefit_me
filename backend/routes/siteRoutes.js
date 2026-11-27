@@ -2,8 +2,11 @@ const express = require("express");
 const { stripeMode } = require("../lib/stripe");
 const { ALLERGY_NOTE } = require("../controllers/inquiryController");
 const catalogModel = require("../models/catalogModel");
+const publicMenu = require("../controllers/publicMenuController");
 
 const router = express.Router();
+
+router.get("/menu/details", publicMenu.listPublic);
 
 router.get("/site", async (req, res, next) => {
   try {

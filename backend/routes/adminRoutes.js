@@ -4,6 +4,7 @@ const { requireAdmin } = require("../middleware/requireAuth");
 const { login, logout, listCustomers, listInquiries, setStatus } = require("../controllers/adminController");
 const { resendAdmin } = require("../controllers/inquiryController");
 const commerce = require("../controllers/adminCommerceController");
+const publicMenu = require("../controllers/publicMenuController");
 
 const router = express.Router();
 
@@ -33,6 +34,8 @@ router.post("/durations", requireAdmin, commerce.saveDuration);
 router.post("/calories", requireAdmin, commerce.saveCalorie);
 router.post("/slots", requireAdmin, commerce.saveSlot);
 router.post("/addons", requireAdmin, commerce.saveAddOn);
+router.get("/public-menu", requireAdmin, publicMenu.listAdmin);
+router.post("/public-menu", requireAdmin, publicMenu.saveAdmin);
 router.post("/menu", requireAdmin, commerce.saveMenu);
 router.post("/menu/:id/photo", requireAdmin, commerce.uploadMenuPhoto);
 router.delete("/menu/:id", requireAdmin, commerce.removeMenu);
