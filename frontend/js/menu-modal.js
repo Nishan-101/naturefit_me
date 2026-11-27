@@ -236,9 +236,10 @@
     return block;
   }
 
-  function openModal(id) {
+  function openModal(id, imageSrc) {
     const item = itemById(id);
     if (!item) return;
+    if (imageSrc) item.image = imageSrc;
     const root = ensureModal();
     render(item);
     lastFocus = document.activeElement;
@@ -301,17 +302,22 @@
     const grid = document.querySelector(".nf-menu-grid");
     if (!grid || grid.dataset.detailsBound === "true") return;
     grid.dataset.detailsBound = "true";
+    function cardImage(opener) {
+      const card = opener.closest(".nf-menu-card");
+      const image = card && card.querySelector("img");
+      return image ? image.getAttribute("src") : "";
+    }
     grid.addEventListener("click", (event) => {
       const opener = event.target.closest("[data-menu-open]");
       if (!opener || !grid.contains(opener)) return;
-      openModal(opener.dataset.menuOpen);
+      openModal(opener.dataset.menuOpen, cardImage(opener));
     });
     grid.addEventListener("keydown", (event) => {
       if (event.key !== "Enter" && event.key !== " ") return;
       const opener = event.target.closest("[data-menu-open]");
       if (!opener || !grid.contains(opener) || opener.tagName === "BUTTON") return;
       event.preventDefault();
-      openModal(opener.dataset.menuOpen);
+      openModal(opener.dataset.menuOpen, cardImage(opener));
     });
   }
 
