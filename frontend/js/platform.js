@@ -2,7 +2,7 @@
   function apiBase() {
     if (window.NATURE_FIT_API_URL) return String(window.NATURE_FIT_API_URL).replace(/\/$/, "");
     if (location.port === "5000") return "";
-    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") return "http://localhost:5000";
+    if (location.hostname === "localhost" || location.hostname === "127.0.0.1") return "https://naturefit-me.onrender.com";
     return "";
   }
 
@@ -333,15 +333,23 @@
       return "";
     }
 
-    function showThanks() {
+    function showThanks(message) {
       sessionStorage.removeItem("nf-plan-draft");
+      try {
+        localStorage.removeItem(PENDING_INQUIRY_KEY);
+      } catch {
+        /* the inquiry was already accepted */
+      }
       wizard.hidden = true;
+      wizard.style.display = "none";
       sent.hidden = false;
-      document.getElementById("sentMessage").textContent = "Our team will reach you soon.";
-      const top = sent.getBoundingClientRect().top + window.scrollY - 96;
-      window.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+      sent.style.display = "block";
+      document.getElementById("sentMessage").textContent =
+        message || "Thank you. Your inquiry was sent. Nature Fit will reply by email.";
+      sent.scrollIntoView({ behavior: "smooth", block: "start" });
     }
 
+    const payButton = document.getElementById("proceedPayment");
     const priceLine = document.getElementById("packagePrice");
     const openingPlan = readDraft();
     if (priceLine && openingPlan) {
@@ -360,6 +368,7 @@
           priceLine.textContent = "This selection has no published card price. You can still send an inquiry. Card payment is available for priced plans of 1 to 28 days.";
         });
     }
+    if (payButton) {
     api("/api/packages")
       .then((catalog) => {
         const start = document.getElementById("startDate");
@@ -369,7 +378,7 @@
         /* the payment request still reports a missing date */
       });
 
-    document.getElementById("proceedPayment").addEventListener("click", async () => {
+    payButton.addEventListener("click", async () => {
       const draft = readDraft();
       const notice = stepStatus(2);
       const button = document.getElementById("proceedPayment");
@@ -399,6 +408,7 @@
         button.disabled = false;
       }
     });
+    }
 
     document.getElementById("profileForm").addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -408,6 +418,7 @@
       const problem = detailError();
       if (problem) return setStatus(notice, problem, "error");
       saveBtn.disabled = true;
+      setStatus(notice, "Sending your inquiry…", "pending");
       const callTime = selectedValue("callTime");
       const payload = {
         ...profileBody(draft),
@@ -425,8 +436,17 @@
         days: draft.days,
         duration: draft.duration,
       };
-      showThanks();
-      queueInquiry(payload);
+      try {
+        const result = await api("/api/inquiries", {
+          method: "POST",
+          credentials: "omit",
+          body: payload,
+        });
+        showThanks(result.message || "Thank you. Your inquiry was sent. Nature Fit will reply by email.");
+      } catch (error) {
+        saveBtn.disabled = false;
+        setStatus(notice, error.message || "The inquiry could not be sent. Please try again.", "error");
+      }
     });
 
     showStep(1, { scroll: false });

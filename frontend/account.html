@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <title>Send an inquiry | Nature Fit Restaurant</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +17,7 @@
     <nav class="main-nav simple-nav">
       <a href="index.html#plans">Plans</a>
       <a href="index.html#menu">Menu</a>
-      <a href="account.html" class="is-current">Inquiry</a>
+      <a href="account.html?v=3" class="is-current">Inquiry</a>
     </nav>
     <a href="index.html#plans" class="btn btn-primary btn-small">Build my plan</a>
   </div>
@@ -26,8 +27,8 @@
 
   <section class="app-card" id="wizard" hidden>
     <p class="ps-kicker" id="stepLabel">Step 1 of 2</p>
-    <h1>Your meal-plan details</h1>
-    <p class="app-lead">Two short steps. Then proceed to secure payment, or send an inquiry without paying.</p>
+    <h1>Send your meal-plan inquiry</h1>
+    <p class="app-lead">Two short steps. Tap the options that fit you, and our team will call or email you back.</p>
     <p class="field-note" id="draftSummary"></p>
     <form id="profileForm" novalidate>
       <div class="wizard-step" data-step="1">
@@ -173,17 +174,7 @@
           <input type="checkbox" id="allergyAck">
           <span>I understand meals are prepared in a kitchen that handles common allergens, and Nature Fit will confirm my choices before the plan starts.</span>
         </label>
-        <p class="field-note" id="packagePrice"></p>
-        <div class="form-group">
-          <label for="startDate">Delivery start date</label>
-          <input id="startDate" type="date">
-        </div>
-        <label class="ack">
-          <input type="checkbox" id="privacyConsent">
-          <span>I agree that Nature Fit can use these details to prepare and deliver this meal plan.</span>
-        </label>
         <p class="step-status" id="step2Status" role="status"></p>
-        <button type="button" class="ps-btn" id="proceedPayment">Proceed to Secure Payment</button>
         <div class="app-actions">
           <button type="button" class="btn btn-outline" id="backTo1">Back</button>
           <button type="submit" class="ps-btn" id="saveProfile">Send my inquiry</button>

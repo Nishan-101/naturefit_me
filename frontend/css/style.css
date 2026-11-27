@@ -1656,7 +1656,9 @@ body[data-page="account"] .app-actions{
   gap:10px;
 }
 body[data-page="account"] .app-actions .btn{min-height:52px;border-radius:999px;}
+body[data-page="account"] [hidden]{display:none !important;}
 body[data-page="account"] #sent .ps-btn{margin-top:8px;}
+body[data-page="account"] .step-status.error{display:block;margin:8px 0 12px;color:#9a3412;font-weight:800;}
 @media(min-width:760px){
   body[data-page="account"] .app-card{padding:36px 34px 30px;}
   body[data-page="account"] .choice-grid{grid-template-columns:repeat(3, minmax(0, 1fr));}
